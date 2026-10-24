@@ -8,7 +8,7 @@ const assert = require('node:assert/strict');
 const PNG = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(64)]);
 const SHOTS = path.join(__dirname, 'screens'); fs.mkdirSync(SHOTS, { recursive: true });
 const results = []; let browser;
-const step = async (name, fn) => { try { await fn(); results.push(['ok', name]); console.log('✔', name); } catch (e) { results.push(['KO', name, e.message]); console.log('✖', name, '\n   ', e.message.split('\n')[0]); } };
+const step = async (name, fn) => { try { await fn(); results.push(['ok', name]); console.log('✔', name); } catch (e) { results.push(['KO', name, e.message]); console.log('✖', name, '\n   ', e.message.split('\n').slice(0, 6).join(' / ')); } };
 
 (async () => {
   const { createApp } = await import('../server.js');
@@ -146,18 +146,18 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
   });
 
   await step('Exemples documentaires : lecture seule, duplicables, non présentés comme analyse', async () => {
-    await page.goto(base + '/#/dossiers'); await page.click('text=25 septembre 2026 : jour chômé et payé');
+    await page.goto(base + '/#/dossiers'); await page.click('text=25 septembre : chômé, travaillé');
     await page.waitForSelector('.claim');
     const t = await page.locator('main').innerText();
     assert.match(t, /EXEMPLE DOCUMENTAIRE · LECTURE SEULE/); assert.match(t, /non produit par l’analyse automatique/);
-    assert.match(t, /Explication attribuée au ministre/); assert.match(t, /divergent sur la date du décret/);
+    assert.match(t, /aucune expertise technique indépendante/); assert.match(t, /dates différentes pour le décret/); assert.match(t, /15 h 43/); assert.match(t, /Message contraire sur la page ministérielle/);
     assert.equal(await page.locator('#rv-ok').count(), 0);
     assert.ok(await page.locator('a[href*="studiosifaka.org"]').count() >= 1 && await page.locator('a[href*="midi-madagasikara.mg"]').count() >= 1);
     await shot('06-exemple');
     await page.click('button:has-text("Dupliquer pour modifier")'); await page.waitForSelector('#rv-ok');
     assert.match(await page.inputValue('#ttl'), /^Copie —/);
     await page.goto(base + '/#/dossier/ex-moscou-2025'); await page.waitForSelector('.claim');
-    assert.match(await page.locator('main').innerText(), /octobre 2025/); assert.match(await page.locator('main').innerText(), /ne préjuge/i);
+    assert.match(await page.locator('main').innerText(), /octobre 2025/); assert.match(await page.locator('main').innerText(), /ne préjuge d'aucun déplacement ultérieur/i);
   });
 
   await step('Dossiers : recherche, filtre, export, import, persistance au rechargement', async () => {
@@ -184,6 +184,56 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
     await page.goto(base + '/#/dossier/evil1'); await page.waitForSelector('.claim');
     assert.equal(await page.evaluate(() => window.__pwn), undefined);
     assert.equal(await page.locator('main a[href^="javascript"]').count(), 0);
+  });
+
+
+  await step('Saisie manuelle (V1) : dossier, source, affirmation (règle source obligatoire), chronologie, relecture', async () => {
+    await page.goto(base + '/#/dossiers'); await page.waitForSelector('.item');
+    await page.click('button:has-text("+ Dossier manuel")');
+    await page.fill('#title', 'Dossier manuel de test'); await page.fill('#text', 'Texte initial à vérifier manuellement pour le test.');
+    await page.click('dialog button:has-text("Créer le dossier")');
+    await page.waitForURL(/#\/dossier\//); await page.waitForSelector('text=Dossier saisi à la main');
+    // affirmation Étayé sans source → refusée
+    await page.click('button:has-text("+ Ajouter une affirmation")');
+    await page.fill('#text', 'Une affirmation de test.'); await page.selectOption('#status', 'etaye'); await page.fill('#rationale', 'Parce que.');
+    await page.click('dialog button:has-text("Enregistrer")');
+    await page.waitForSelector('#toast:has-text("exige une source liée")');
+    await page.keyboard.press('Escape');
+    // source puis affirmation Étayé liée
+    await page.click('button:has-text("+ Ajouter une source")');
+    await page.fill('#title', 'Journal officiel (test)'); await page.fill('#url', 'https://example.mg/jo'); await page.fill('#note', 'Établit la déclaration, pas les faits.'); await page.fill('#origin', 'Communiqué initial');
+    await page.click('dialog button:has-text("Ajouter au dossier")'); await page.waitForSelector('text=Communiqué initial');
+    await page.click('button:has-text("+ Ajouter une affirmation")');
+    await page.fill('#text', 'Une affirmation de test.'); await page.selectOption('#status', 'etaye'); await page.fill('#rationale', 'Source officielle.'); await page.check('input[name=src]');
+    await page.click('dialog button:has-text("Enregistrer")'); await page.waitForSelector('.claim:has-text("Étayé")');
+    // chronologie : ajout puis suppression
+    await page.click('button:has-text("+ Ajouter une étape")'); await page.fill('#date', '24 septembre 2026 · 15 h 43'); await page.fill('#text', 'Confirmation du maintien.');
+    await page.click('dialog button:has-text("Ajouter l’étape")'); await page.waitForSelector('.tl:has-text("15 h 43")');
+    await page.click('[data-act="del-event"]'); await page.waitForSelector('text=Aucune étape renseignée');
+    // modification d'une affirmation manuelle + relecture
+    await page.click('button:has-text("Modifier cette affirmation")'); await page.selectOption('#status', 'hors_contexte'); await page.click('dialog button:has-text("Enregistrer")');
+    await page.waitForSelector('.claim:has-text("Hors contexte ou trompeur")');
+    await page.fill('#rv-by', 'Rédac'); await page.check('#rv-ok'); await page.click('button:has-text("Enregistrer la relecture")'); await page.waitForSelector('.banner.ok');
+    await shot('11-dossier-manuel');
+  });
+
+  await step('Sauvegarde V1 (schema recroise-v1) importable ; migration automatique du localStorage V1', async () => {
+    const v1d = { id: 'abc', title: 'Dossier V1 importé', topic: 'Justice', date: '2026-01-02', summary: 'Résumé V1', text: 'Texte V1', url: '', note: 'Limite V1',
+      claims: [{ text: 'Affirmation V1', status: 'Contredit', reason: 'Raison V1', sourceIds: ['s1'] }], sources: [{ id: 's1', title: 'Source V1', url: 'https://example.mg/v1', date: '2026-01-01', kind: 'Vérification publiée', origin: 'Origine V1', note: 'Note V1' }],
+      timeline: [{ date: '1 janvier', text: 'Étape V1' }], history: [{ date: 'x', text: 'Créé' }], validated: null, sample: false };
+    const f = path.join(SHOTS, 'v1.json'); fs.writeFileSync(f, JSON.stringify({ schema: 'recroise-v1', dossiers: [v1d] }));
+    await page.goto(base + '/#/dossiers'); await page.setInputFiles('#imp', f); await page.waitForSelector('#toast:has-text("importé")');
+    await page.click('text=Dossier V1 importé'); await page.waitForSelector('.claim');
+    const t = await page.locator('main').innerText();
+    assert.match(t, /Contredit/); assert.match(t, /Raison V1/); assert.match(t, /Origine de l’information : Origine V1/); assert.match(t, /Étape V1/); assert.match(t, /Dossier saisi à la main/);
+    // migration du stockage V1 dans un contexte neuf
+    const c2 = await browser.newContext({ locale: 'fr-FR' });
+    await c2.addInitScript((d) => { if (!localStorage.getItem('recroise_v1_migrated')) localStorage.setItem('recroise-v1', JSON.stringify([d, { ...d, id: 'seed', title: 'Exemple V1', sample: true }])); }, v1d);
+    const p4 = await c2.newPage(); await p4.goto(base + '/#/dossiers'); await p4.waitForSelector('.item');
+    assert.ok(await p4.locator('text=Dossier V1 importé').count() === 1);
+    assert.equal(await p4.locator('text=Exemple V1').count(), 0);
+    await p4.reload(); await p4.waitForSelector('.item'); assert.equal(await p4.locator('text=Dossier V1 importé').count(), 1, 'pas de doublon au rechargement');
+    await c2.close();
   });
 
   await step('Pages Méthode, Moodboard, Pitch', async () => {
@@ -220,7 +270,7 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
     await p3.close();
   });
 
-  await step('Aucune erreur JavaScript dans la console', async () => assert.deepEqual(errors, []));
+  await step('Aucune erreur JavaScript dans la console', async () => assert.deepEqual(errors, [], JSON.stringify(errors)));
 
   await browser.close();
   for (const s of [web.srv, an.srv, br.srv, app.server, bare.server]) await H.close(s);
