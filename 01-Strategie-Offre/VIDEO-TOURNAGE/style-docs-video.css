@@ -56,3 +56,4 @@ td.k{width:34mm;font-weight:600;color:var(--primary)}
 .chip.v{background:var(--danger)}
 .brief{border:1.5px solid var(--primary);padding:4mm 6mm;margin-top:4mm}
 .q .t{padding-left:7mm;text-indent:-7mm}
+.q .t .num{text-indent:0}
