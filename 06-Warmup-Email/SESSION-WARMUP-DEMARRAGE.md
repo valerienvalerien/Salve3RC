@@ -9,7 +9,8 @@
 ## Contexte
 
 BPO Salverys (salverys-bpo.fr), basé à Antananarivo, ciblant des clients
-français. Priorité absolue : **télésecrétariat médical**.
+français. Offres (révision 2026-10-30) : **1) Helpdesk IT N1 pour ESN & MSP · 2) Support
+applicatif N1 pour éditeurs** — le télésecrétariat médical (ex-priorité absolue) est abandonné.
 Adresse d'envoi : **valerien@salverys-bpo.fr** (Google Workspace).
 
 ---
@@ -78,8 +79,8 @@ Objet : Petite question
 Salut [Prénom],
 
 Je lance officiellement Salverys cette semaine, une structure BPO
-basée à Mada. Tu penses que le principal frein des cabinets médicaux
-français pour externaliser leur secrétariat, c'est quoi ?
+basée à Mada. Tu penses que le principal frein des ESN et MSP
+françaises pour externaliser leur helpdesk N1, c'est quoi ?
 
 Curieux d'avoir ton avis.
 
@@ -92,8 +93,8 @@ Objet : Ton avis rapide
 
 Salut [Prénom],
 
-Je démarre Salverys — on fait du télésecrétariat médical depuis Madagascar.
-Si tu devais pitcher ça en une phrase à un médecin généraliste, tu dirais quoi ?
+Je démarre Salverys — on fait du helpdesk IT N1 depuis Madagascar.
+Si tu devais pitcher ça en une phrase à un dirigeant d'ESN, tu dirais quoi ?
 
 Valérien
 ```
@@ -105,8 +106,8 @@ Objet : Question pour toi
 Salut [Prénom],
 
 Je bosse sur la prospection de Salverys en ce moment. Toi qui connais
-le milieu médical / les pros français — tu penses que l'argument
-"40 % moins cher qu'un secrétariat en France" ça parle, ou c'est pas
+le milieu IT / les pros français — tu penses que l'argument
+"40 % moins cher qu'un helpdesk en France" ça parle, ou c'est pas
 le bon angle ?
 
 Valérien
@@ -120,7 +121,7 @@ Salut [Prénom],
 
 Je prépare mes premiers emails de prospection pour Salverys.
 Tu aurais 2 minutes pour me dire si ce pitch te parle :
-"Un secrétariat médical disponible, en français, à -40 % du coût habituel."
+"Un helpdesk N1 disponible, en français, à -40 % du coût habituel."
 
 Trop court ? Trop vague ?
 
@@ -157,8 +158,9 @@ Valérien
 
 ## Ce qui vient après le warm-up (semaine 5–6)
 
-Première campagne cold email → **cabinets médicaux** (niche priorité 1).
-Séquences prêtes dans `OUTREACH-cabinets-medicaux.md`.
+Première campagne cold email → **ESN & MSP** (Helpdesk IT N1 en marque blanche,
+offre principale — révision 2026-10-30, le médical est abandonné).
+Séquence prête dans `02-Prospection/OUTREACH-IT-N1-marque-blanche.md`.
 Volume de départ : 20–30 cold emails/jour, augmentation progressive.
 
 ---
@@ -168,7 +170,7 @@ Volume de départ : 20–30 cold emails/jour, augmentation progressive.
 | Fichier | Contenu |
 |---|---|
 | `WARMUP-MANUEL.md` | Fiche complète warm-up : mythes, leviers, règles de contenu |
-| `OUTREACH-cabinets-medicaux.md` | Séquence cold email niche médicale |
-| `OUTREACH-SEQUENCE.md` | Séquence générique |
+| `OUTREACH-IT-N1-marque-blanche.md` | Séquence cold email Helpdesk IT N1 (ESN & MSP) |
+| `OUTREACH-SEQUENCE.md` | Principes communs + séquence Support applicatif N1 |
 | `PRICING.md` | Source de vérité tarifaire (fait foi sur tous les autres fichiers) |
-| `CRM_Salverys.html` | CRM local (180 leads, clés localStorage préfixées `salverys_`) |
+| `CRM_Salverys.html` | CRM local (12 leads ESN/MSP depuis l'archivage du 2026-10-30, clés localStorage préfixées `salverys_`) |

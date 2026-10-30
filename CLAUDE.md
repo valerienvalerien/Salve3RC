@@ -11,30 +11,42 @@ Direction expérimentée qui repart de zéro avec une équipe de **10 personnes*
 > avant à la place : process documentés, cadrage qualité (script, double écoute,
 > reporting), pilote mesuré.
 
-### Niches cibles (par priorité)
-1. **Télésecrétariat médical** (priorité absolue)
-2. Support applicatif N1 pour éditeurs SaaS français
-3. Helpdesk IT N1 distant
+### Offres (par priorité) — décision Valérien, 2026-10-30
+1. **Helpdesk IT N1 pour ESN et MSP** (offre principale)
+2. **Support applicatif N1 pour éditeurs de logiciels et SaaS** (offre secondaire)
+
+> ⛔ **Télésecrétariat médical abandonné** (décision confirmée par Valérien le
+> 2026-10-30) : ne plus le proposer dans aucun livrable, email, page, devis, séquence ou
+> CRM. Tout le contenu médical est archivé dans `99-Archives-Medical/` (grilles tarifaires :
+> `PRICING.md §A`). Le segment **Bailleurs sociaux & grandes structures** (ex-priorité 3)
+> est archivé lui aussi : `99-Archives-Bailleurs/` et `PRICING.md §B`.
 
 ### Séquence de développement (toujours dans cet ordre)
 **Prospection → Équipe → Infrastructure**
 
-### Stratégie GTM (décision direction, 2026-06-10)
-**Objectif prioritaire : démarrer en MARQUE BLANCHE sur les 3 niches** (sous-traitance
-de donneurs d'ordre : télésecrétariats médicaux FR, éditeurs/prestataires support,
-ESN/MSP). Le direct (client final) vient en 2e temps. Toute priorisation de prospection,
-de copy ou de chiffrage doit refléter ce MB-first.
+### Stratégie GTM (décision direction, 2026-06-10 ; périmètre révisé 2026-10-30)
+**Objectif prioritaire : démarrer en MARQUE BLANCHE sur les 2 offres** (sous-traitance
+de donneurs d'ordre : **ESN/MSP** pour le helpdesk IT N1, **éditeurs / prestataires de
+support** pour le support applicatif N1). Le direct (client final) vient en 2e temps.
+Toute priorisation de prospection, de copy ou de chiffrage doit refléter ce MB-first.
 
-### Modèle d'équipe (décision direction, 2026-06-10)
-Démarrage **100 % freelances**, payés **1,8-2 M Ar/mois chacun** (~2,5× le marché local),
-y compris les **2 managers** (1 médical, 1 IT). Objectif : **zéro turnover**. Démarrage à
-4 agents + 2 managers, montée à 8+ au rythme des contrats. Rentabilité vérifiée :
-`01-Strategie-Offre/FINANCE-PREVISIONNEL.md` (v2).
+### Modèle d'équipe (décision 2026-10-30)
+Recrutement en **CDI** (et non plus en freelances). Remplace le modèle du 2026-06-10
+(« 100 % freelances à 1,8-2 M Ar/mois, 2 managers dont 1 médical »). Niveau de
+rémunération, effectif de démarrage et encadrement (le poste de manager médical disparaît)
+restent à préciser. L'objectif « zéro turnover » du modèle précédent reste la référence
+tant qu'il n'est pas redéfini.
+
+> ⚠️ `01-Strategie-Offre/FINANCE-PREVISIONNEL.md` (v2) et `tresorerie-salverys.html`
+> reposent encore sur l'**ancien modèle** (freelances, sans charges sociales, manager
+> médical, revenus médicaux) : à refaire avant toute décision chiffrée. Idem pour le
+> plancher « coût + 20 % ≈ 540 €/ETP » de `PRICING.md §3`, calculé sur le coût freelance.
 
 ### Avantage compétitif
 - Fuseau horaire compatible avec la France
 - Français langue maternelle
-- Coût ~40 % inférieur à un prestataire hexagonal
+- Coût ~40 % inférieur à un prestataire hexagonal (démonstration à revalider pour les
+  offres IT : `PRICING.md §5`)
 
 ## Marque
 
@@ -45,7 +57,9 @@ plus apparaître dans aucun livrable, séquence, CRM ou support client.
 > Note technique : depuis le 2026-05-29, les clés `localStorage` du CRM
 > (`CRM_Salverys.html`) sont préfixées `salverys_`. L'ancien stockage `vinlo_`/
 > `nesvalo_` a été abandonné ; les CRM ouverts après cette date repartent du
-> seed (180 leads + décideurs vérifiés sont définis dans le code).
+> seed. Depuis le 2026-10-30, le seed ne contient plus que les **12 leads ESN/MSP** :
+> les leads médicaux et Bailleurs sont archivés (`99-Archives-*/crm/`) et, dans un CRM
+> déjà utilisé, déplacés au premier chargement vers la clé `salverys_archive_2026_10_v1`.
 
 ## Outils retenus
 - **Cold mailing : Emelia** (outil de prospection email retenu)
@@ -55,10 +69,12 @@ plus apparaître dans aucun livrable, séquence, CRM ou support client.
 Tous les prix, grilles, benchmarks et conditions (essai/offre de lancement) sont
 définis dans **`PRICING.md`** — c'est la **source unique de vérité**. Toute copy
 (emails `OUTREACH-*`, CRM, simulateurs, `index.html`) doit s'aligner dessus ; en cas
-de divergence, `PRICING.md` fait foi. Réflexion détaillée : `RAPPORT-PRIX.html`.
+de divergence, `PRICING.md` fait foi. Réflexion détaillée : `RAPPORT-PRIX.html`
+(antérieur à l'abandon du médical).
 
-Rappels clés : priorités niches = **1) médical · 2) Support N1 SaaS & Helpdesk IT ·
-3) Bailleurs** ; offre de lancement = **1er mois à -50 %** (et non plus essai gratuit) ;
+Rappels clés : priorités = **1) Helpdesk IT N1 (ESN/MSP) · 2) Support applicatif N1
+(éditeurs de logiciels & SaaS)** — médical et Bailleurs archivés (`PRICING.md §A / §B`) ;
+offre de lancement = **1er mois à -50 %** (et non plus essai gratuit) ;
 modèles de tarification = **ETP par position > à l'heure > à l'interaction**.
 
 ## Règle d'arbitrage : SaaS-first avant tout code maison
@@ -83,4 +99,4 @@ dépendance du SaaS dépasse clairement le coût de maintenance.
 ## Style de travail attendu
 - Toujours répondre en **français**.
 - Être **direct et opérationnel**.
-- Partir des niches, canaux et stratégies déjà définis ci-dessus.
+- Partir des offres, canaux et stratégies déjà définis ci-dessus.

@@ -1,12 +1,15 @@
 # MODELE-CONTRAT-PRESTATION.md — Contrat de prestation de services Salverys
 
-> Gabarit modulaire : **tronc commun** (art. 1 à 14) + **annexe de niche** (A = médical
-> direct · B = MB partenaire). Compléter les placeholders `[...]`. Ce contrat renvoie à
+> Gabarit modulaire : **tronc commun** (art. 1 à 14) + **annexe B = MB partenaire**
+> (Helpdesk IT N1, Support applicatif N1). L'annexe A « médical direct » et les clauses
+> médicales sont archivées depuis le 2026-10-30 (offre abandonnée) :
+> `99-Archives-Medical/04-Closing/MODELE-CONTRAT-annexe-medicale.md`.
+> Compléter les placeholders `[...]`. Ce contrat renvoie à
 > l'**annexe RGPD/DPA** (`MODELE-DPA-RGPD.md`), qui en fait partie intégrante.
 >
-> **Prix : `PRICING.md` fait foi.** Garde-fous : SLA décroché **90 %** (jamais 95 %) ·
-> avoir **20 %** automatique · offre de lancement **1er mois à −50 %** (jamais essai
-> gratuit). Côté médical : « forfait », jamais « abonnement ».
+> **Prix : `PRICING.md` fait foi.** Garde-fous : SLA figé au cadrage · avoir **20 %**
+> automatique (max 1 mois/12) · offre de lancement **1er mois à −50 %** (jamais essai
+> gratuit) · « forfait » / « contrat de service », jamais « abonnement ».
 >
 > ⚠️ Ce gabarit est un support opérationnel, **pas un avis juridique** : faire valider par
 > un conseil avant signature d'un premier contrat.
@@ -26,33 +29,30 @@ représentée par [nom — fonction] (« **le Client** »).
 
 ## Article 1 — Objet
 
-Salverys fournit au Client une prestation de [télésecrétariat médical / support N1 /
-helpdesk IT N1] opérée à distance depuis Antananarivo (Madagascar), **sous marque blanche**
-(les agents répondent sous le nom du Client / du cabinet). Le périmètre détaillé figure à
-l'**Annexe [A/B]** et est **figé lors du cadrage** initial.
+Salverys fournit au Client une prestation de [helpdesk IT N1 / support applicatif N1]
+opérée à distance depuis Antananarivo (Madagascar), **sous marque blanche** (les agents
+répondent sous le nom du Client). Le périmètre détaillé figure à l'**Annexe B** et est
+**figé lors du cadrage** initial.
 
 ## Article 2 — Périmètre & cadrage
 
 - Le périmètre (créneaux couverts, volumes, scripts, KPI, seuils) est arrêté lors d'un
-  **RDV de cadrage** et consigné dans l'Annexe de niche, qui prévaut sur toute estimation
+  **RDV de cadrage** et consigné dans l'Annexe B, qui prévaut sur toute estimation
   commerciale antérieure (devis, échanges).
 - Toute extension du périmètre fait l'objet d'un avenant ou d'un nouveau devis.
 
 ## Article 3 — Durée, renouvellement, préavis
 
-- **Variante médical direct** : **sans engagement**. Résiliable à tout moment moyennant un
-  préavis de **[__ jours]**.
-- **Variante MB / support / IT** : engagement initial de **3 mois (mois pilote inclus)**,
+- Engagement initial de **3 mois (mois pilote inclus)**,
   puis reconduction par périodes de **12 mois**, sauf dénonciation par l'une des parties
   avec un préavis de **[__ jours]** avant l'échéance. (24-36 mois réservés aux grands
   comptes, avec dégressif négocié.)
 
 ## Article 4 — Conditions financières
 
-- Prix et modalités définis au **devis accepté** et à l'**Annexe de niche**, conformes à
+- Prix et modalités définis au **devis accepté** et à l'**Annexe B**, conformes à
   `PRICING.md`.
-- **Mise en service / cadrage : offerts** (affichés à leur valeur — 490 € côté médical —
-  puis ramenés à 0 €).
+- **Mise en service / cadrage : offerts** (affichés sur la proposition, facturés 0 €).
 - **Offre de lancement** : 1er mois à **−50 %**, sans engagement (le cas échéant, programme
   « clients fondateurs » dégressif sur 3 mois avec contreparties — cf. devis).
 - **Révision** : les prix peuvent être révisés à chaque renouvellement annuel, sur
@@ -68,9 +68,9 @@ l'**Annexe [A/B]** et est **figé lors du cadrage** initial.
 
 ## Article 6 — Engagement de service (SLA) & remède
 
-- Salverys s'engage sur le **KPI de la niche** (Annexe) : médical → **≥ 90 % d'appels
-  décrochés** sur les plages couvertes ; support N1 → **SLA de première réponse** ;
-  helpdesk IT → **SLA de prise en charge**. Seuil exact **figé au cadrage**.
+- Salverys s'engage sur le **KPI de l'offre** (Annexe) : helpdesk IT N1 → **SLA de prise
+  en charge** ; support applicatif N1 → **SLA de première réponse**. Seuil exact **figé au
+  cadrage**.
 - **Remède** : si le seuil n'est pas atteint sur un **mois civil** en régime, Salverys
   émet un **avoir de 20 %** sur la facture du **mois suivant**, **automatiquement**, **dans
   la limite d'un mois sur douze**. **Pas de remboursement en numéraire.**
@@ -89,7 +89,7 @@ l'**Annexe [A/B]** et est **figé lors du cadrage** initial.
 
 ## Article 8 — Obligations du Client
 
-- Fournir les **accès** aux outils nécessaires (agenda/ticketing), les **scripts** et
+- Fournir les **accès** aux outils nécessaires (ticketing, ITSM), les **scripts** et
   consignes, et un interlocuteur pour le cadrage et le suivi.
 - Garantir la disponibilité de ses propres systèmes (ligne, logiciels) ; leurs
   indisponibilités sont exclues du périmètre de l'engagement de service (art. 6).
@@ -97,8 +97,9 @@ l'**Annexe [A/B]** et est **figé lors du cadrage** initial.
 ## Article 9 — Confidentialité & secret professionnel
 
 - Chaque partie garde confidentielles les informations échangées.
-- Côté médical : les agents sont **formés au secret médical** et y sont tenus. Salverys
-  ne procède à **aucun enregistrement** des appels patients.
+- Les agents sont tenus à la confidentialité sur toutes les informations du Client et de
+  ses utilisateurs. **Aucun enregistrement** des appels par défaut ; disponible sur demande
+  du Client (`PRICING.md §10`).
 
 ## Article 10 — Propriété & marque blanche
 
@@ -134,30 +135,17 @@ règlement amiable, compétence des tribunaux de **[ressort à préciser]**.
 
 ---
 
-# ANNEXE A — Médical direct (télésecrétariat)
-
-- **Périmètre** : décroché des appels patients sous le nom du cabinet, **8h-20h, 5j/7**
-  (+ options d'amplitude souscrites : samedi matin +90 € / soirée +120 € / samedi complet
-  +150 €). Intégration **Doctolib / Maiia / Médistory / Cegedim**.
-- **Forfait souscrit** : [Essentiel 350 € / Confort 590 € / Intensif 950 € / sur-mesure].
-  Dépassement = bascule au palier supérieur.
-- **KPI engagé** : **taux de décroché ≥ 90 %** sur 8h-20h, dans la limite du forfait.
-- **Reporting** : mensuel (décroché, délai de réponse, volume) — cf.
-  `MODELE-REPORTING-CLIENT.md`.
-
 # ANNEXE B — MB partenaire (sous-traitance)
 
-Garder le(s) bloc(s) de niche concerné(s).
+Garder le(s) bloc(s) d'offre concerné(s).
 
 - **Marque blanche totale** : scripts, outils, SLA et **nom du partenaire**.
-- **Télésecrétariat médical FR** : facturation à l'appel traité par créneau (jour
-  0,90-1,10 € · soir/samedi 1,20-1,40 € · pics réservés +15-20 %). KPI : **taux de décroché**.
-- **Support N1 SaaS** : ETP/position dégressif (1 ETP 1 700 € · 3 ETP 1 500 € · 5+ 1 350 €).
-  KPI : **SLA de première réponse**.
-- **Helpdesk IT N1 (ITIL)** : ETP/position dégressif (1 ETP 2 000 € · 3 ETP 1 750 € · 5+ 1 550 €).
-  KPI : **SLA de prise en charge**.
+- **Helpdesk IT N1 (ITIL)** — offre principale : ETP/position dégressif (1 ETP 2 000 € ·
+  3 ETP 1 750 € · 5+ 1 550 €). KPI : **SLA de prise en charge**.
+- **Support applicatif N1** — offre secondaire : ETP/position dégressif (1 ETP 1 700 € ·
+  3 ETP 1 500 € · 5+ 1 350 €). KPI : **SLA de première réponse**.
 - Option **Priority** (capacité réservée non mutualisée + backup intégré) le cas échéant.
-- **Reporting** : hebdomadaire par niche — cf. `MODELE-REPORTING-CLIENT.md`.
+- **Reporting** : hebdomadaire par offre — cf. `MODELE-REPORTING-CLIENT.md`.
 
 ---
 
@@ -170,4 +158,4 @@ Garder le(s) bloc(s) de niche concerné(s).
 | Date : [JJ/MM/AAAA] | Date : [JJ/MM/AAAA] |
 | Signature : | Signature : |
 
-*Annexes : Annexe [A/B] de niche · Annexe RGPD/DPA (`MODELE-DPA-RGPD.md`) · Devis accepté.*
+*Annexes : Annexe B (MB partenaire) · Annexe RGPD/DPA (`MODELE-DPA-RGPD.md`) · Devis accepté.*

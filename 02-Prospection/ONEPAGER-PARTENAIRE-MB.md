@@ -1,10 +1,11 @@
 # ONE-PAGER — Partenaires marque blanche (donneurs d'ordre)
 
 > Document de vente autonome pour la **cible GTM n°1** (MB-first, décision direction
-> 2026-06-10) : télésecrétariats médicaux FR, éditeurs SaaS / prestataires de support,
-> ESN/MSP. Pendant du `ONEPAGER-CHAINES-MEDICAL.md` (qui couvre le direct).
+> 2026-06-10) : **ESN/MSP** (Helpdesk IT N1, offre principale) puis **éditeurs de
+> logiciels & SaaS / prestataires de support** (Support applicatif N1, offre secondaire).
+> Bloc télésecrétariat médical retiré le 2026-10-30 (offre abandonnée).
 > **Aucun prix dans ce document** (règle `PRICING.md §0/§9` : toute MB jamais publique) —
-> la rate card par créneau (`§1.b`) ou par ETP (`§3`) se remet **au cadrage, sous NDA**.
+> la rate card par ETP (`§3`) se remet **au cadrage, sous NDA**.
 > À adapter au segment du prospect (garder le bloc « déclinaison » correspondant).
 
 ---
@@ -12,8 +13,8 @@
 ## Pour qui
 
 Acteurs français établis qui vendent déjà de la relation client ou du support — et dont
-la croissance bute sur la **capacité** : télésecrétariats médicaux, éditeurs SaaS,
-prestataires de support, ESN et MSP.
+la croissance bute sur la **capacité** : ESN et MSP, éditeurs de logiciels & SaaS,
+prestataires de support.
 
 ---
 
@@ -47,7 +48,7 @@ minimum local et tourne en 6 mois — votre qualité part avec lui.
 
 - **Nos agents sont payés ~2,5× le marché local** : zéro turnover visé, les mêmes voix
   sur votre compte dans la durée.
-- **Engagement de service contractuel** : taux de décroché ou SLA convenu au cadrage ;
+- **Engagement de service contractuel** : SLA convenu au cadrage ;
   en deçà sur un mois, **20 % d'avoir automatique** — on met notre argent sur le résultat.
 - **Plan de continuité écrit**, remis avant tout démarrage : agents équipés en double
   connexion (fibre + 4G) et hub de repli alimenté (groupe électrogène, onduleurs).
@@ -75,17 +76,14 @@ minimum local et tourne en 6 mois — votre qualité part avec lui.
 
 ## Déclinaisons par segment (garder le bloc pertinent)
 
-**Télésecrétariat médical FR** — on absorbe ce que votre plateau ne couvre pas
-rentablement : soir, samedi, pics, congés, nouveaux clients en attente de staffing.
-Agents formés au secret médical, à l'aise sur Doctolib/Maiia/Médistory. KPI engagé :
-**taux de décroché**.
+**ESN / MSP** (offre principale) — soupape helpdesk N1 ITIL : le 7h-9h avant l'arrivée
+de vos équipes (pleine heure de bureau chez nous, sans prime de nuit), l'overflow, les
+pics. Vos outils ITSM (ServiceNow, Jira SM, Freshservice). KPI engagé : **SLA de prise en
+charge**.
 
-**Éditeur SaaS / prestataire support** — ETP N1 dédiés sous votre marque, dans votre
-outil de ticketing, vos macros, votre ton. KPI engagé : **SLA de première réponse**.
-
-**ESN / MSP** — soupape helpdesk N1 ITIL : le 7h-9h avant l'arrivée de vos équipes
-(pleine heure de bureau chez nous, sans prime de nuit), l'overflow, les pics. Vos outils
-ITSM (ServiceNow, Jira SM, Freshservice). KPI engagé : **SLA de prise en charge**.
+**Éditeur de logiciels / SaaS, prestataire support** (offre secondaire) — ETP N1 dédiés
+sous votre marque, dans votre outil de ticketing, vos macros, votre ton. KPI engagé :
+**SLA de première réponse**.
 
 ---
 

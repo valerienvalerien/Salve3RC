@@ -1,7 +1,8 @@
 # ONBOARDING-CLIENT.md — Process d'onboarding client Salverys
 
-> Du « oui » au régime stabilisé. S'applique au **médical direct** et au **MB partenaire**
-> (adapter l'outil et le KPI). Objectif : tenir la promesse du one-pager — **« QA, double
+> Du « oui » au régime stabilisé. S'applique au **MB partenaire** (Helpdesk IT N1, Support
+> applicatif N1) et au direct (adapter l'outil et le KPI). Volet médical retiré le 2026-10-30
+> (offre abandonnée). Objectif : tenir la promesse du one-pager — **« QA, double
 > écoute, reporting, escalades documentés avant le premier appel/ticket »** — et faire
 > basculer proprement le mois pilote −50 % vers le régime avec engagement de service.
 >
@@ -30,20 +31,20 @@ Objectif : **figer le périmètre** (il devient l'Annexe de niche du contrat et 
 l'engagement de service).
 
 - [ ] Périmètre : créneaux couverts, volumes attendus, forfait/ETP retenu.
-- [ ] **Scripts & consignes** d'accueil (sous le nom du client/cabinet).
-- [ ] **KPI & seuil** engagés : médical → décroché ≥ 90 % · support → SLA 1re réponse ·
-  helpdesk → SLA prise en charge. **Figés ici.**
+- [ ] **Scripts & consignes** d'accueil (sous le nom du client).
+- [ ] **KPI & seuil** engagés : helpdesk IT → SLA prise en charge · support applicatif →
+  SLA 1re réponse. **Figés ici.**
 - [ ] Procédure d'**escalade** (qui, quand, vers qui côté client).
 - [ ] Outils à intégrer + modalités d'accès (comptes nominatifs).
 - [ ] **Signature** : devis + contrat de prestation + **DPA**.
 - [ ] Choix offre de lancement : mois pilote −50 % ou programme fondateurs.
 
-## Phase 1 — Mise en service (~2-3 semaines, **490 € offerts**)
+## Phase 1 — Mise en service (~2-3 semaines, **cadrage & mise en place offerts**)
 
-- [ ] **Intégration outils par Salverys** : Doctolib / Maiia / Médistory / Cegedim (médical)
-  ou ticketing/ITSM (support/IT) — **comptes nominatifs + MFA**, droits au strict nécessaire.
-- [ ] Paramétrage agenda / files / macros selon les consignes.
-- [ ] **Formation des agents** aux scripts, au secret médical/RGPD, aux process d'escalade.
+- [ ] **Intégration outils par Salverys** : ticketing / ITSM / back-office applicatif du
+  client — **comptes nominatifs + MFA**, droits au strict nécessaire.
+- [ ] Paramétrage des files / macros / catégories selon les consignes.
+- [ ] **Formation des agents** aux scripts, à la confidentialité/RGPD, aux process d'escalade.
 - [ ] **Armement QA** : grille de scoring prête, planning de double écoute, gabarit de
   reporting instancié (`PROCESS-QA-DOUBLE-ECOUTE.md`, `MODELE-REPORTING-CLIENT.md`).
 - [ ] Vérification **continuité** : double connexion (fibre+4G) + hub de repli, backup +1 agent.
@@ -67,7 +68,7 @@ l'engagement de service).
 - [ ] Passage au **plein tarif** (ou paliers fondateurs −30 % puis −15 %).
 - [ ] **Activation de l'engagement de service** (le KPI engagé court à partir du 1er mois
   plein en régime ; avoir 20 % si non tenu — cf. contrat art. 6 / `PRICING.md §7`).
-- [ ] Confirmation de la cadence de reporting (mensuel médical / hebdo MB).
+- [ ] Confirmation de la cadence de reporting (hebdo MB).
 
 ## Phase 5 — Jalon 60 jours
 
@@ -94,6 +95,6 @@ l'engagement de service).
 ## Garde-fous onboarding
 
 - Ne jamais démarrer J1 sans **QA armée et escalades documentées** (promesse one-pager).
-- Ne jamais facturer la mise en service (affichée 490 € → **offerte**).
+- Ne jamais facturer la mise en service (affichée → **offerte**).
 - Périmètre et seuil **figés au cadrage** — toute extension passe par avenant/devis.
-- Médical : parler de **« forfait »**, jamais d'« abonnement ».
+- Parler de **« forfait »** / « contrat de service », jamais d'« abonnement ».

@@ -2,8 +2,12 @@
 
 > Capitalisation de la réflexion menée le **2026-06-06** sur le design de l'offre Salverys.
 > Sert de référence durable : pourquoi l'offre est construite ainsi, et quelles décisions
-> ont été prises. Déclinaisons opérationnelles : `OFFRE-MEDICAL.md`,
-> `ONEPAGER-CHAINES-MEDICAL.md`, `PRICING.md §7`, séquences `OUTREACH-*`.
+> ont été prises. Déclinaisons opérationnelles : `PRICING.md §7`, séquences `OUTREACH-*`,
+> `02-Prospection/ONEPAGER-PARTENAIRE-MB.md`.
+>
+> ⚠️ **2026-10-30** : la réflexion a été menée sur l'offre médicale, depuis abandonnée.
+> Les principes restent valables ; les déclinaisons médicales (`OFFRE-MEDICAL.md`,
+> `ONEPAGER-CHAINES-MEDICAL.md`) sont archivées dans `99-Archives-Medical/`.
 
 ---
 

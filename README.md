@@ -16,14 +16,16 @@ business** (rangée par dossiers thématiques ci-dessous) et le **site/CRM** (fi
 
 | Dossier | Contenu |
 |---|---|
-| `01-Strategie-Offre/` | Offre médicale, offre irrésistible, éval. stratégique, prévisionnel, branding, narratif callbot, arguments Priority, conformité HDS/RGPD |
-| `02-Prospection/` | Séquences cold (`OUTREACH-*`) + one-pagers (chaînes médical, partenaire MB) |
-| `03-Cibles-Prospects/` | Analyses prospects (`PROSPECT-ANALYSIS-*`), décideurs, cibles ESN/télésec, ICP |
+| `01-Strategie-Offre/` | Offre irrésistible, éval. stratégique, prévisionnel, branding, arguments Priority |
+| `02-Prospection/` | Séquences cold (`OUTREACH-*`), scripts d'appel, one-pager partenaire MB |
+| `03-Cibles-Prospects/` | Analyses prospects (`PROSPECT-ANALYSIS-*`), décideurs, cibles ESN/MSP, ICP |
 | `04-Closing/` | Devis, contrat de prestation, DPA/RGPD, onboarding client |
 | `05-Process-Delivery/` | Grille QA + double écoute, modèles de reporting client |
 | `06-Warmup-Email/` | Warm-up email (démarrage, manuel) |
+| `99-Archives-Medical/` | **Archives — télésecrétariat médical, offre abandonnée le 2026-10-30** (docs, pages du site, leads et scripts CRM). Ne plus utiliser. |
+| `99-Archives-Bailleurs/` | **Archives — segment Bailleurs sociaux & grandes structures** (archivé le 2026-10-30 : séquence, ICP, leads CRM). Ne plus utiliser. |
 
 ## Site / CRM (racine — ne pas déplacer)
 
-`index.html`, `CRM_Salverys.html`, simulateurs, espaces client/candidat, chartes,
+`index.html`, `CRM_Salverys.html`, simulateurs (helpdesk IT, support applicatif), espaces client/candidat, chartes,
 `assets/`, `tools/`. Build : `tools/build-site.sh`.

@@ -7,10 +7,10 @@
 > Dernière révision : **2026-10-30 — abandon du télésecrétariat médical** (décision
 > Valérien). Offres actives : **1) Helpdesk IT N1 pour ESN & MSP (principale) · 2) Support
 > applicatif N1 pour éditeurs de logiciels & SaaS (secondaire)**. Grilles médicales retirées
-> des sections actives et archivées en **§A** ; prix Helpdesk IT et Support applicatif
-> **inchangés** · précédente 2026-06-12 (rate card partenaire MB §3, télésec MB par créneau,
-> add-ons amplitude + mise en service, pilote IT harmonisé) · 2026-06-06 (ajout §7
-> « engagement de décroché ») · base 2026-05-30
+> des sections actives et archivées en **§A** ; segment Bailleurs archivé en **§B** ; prix
+> Helpdesk IT et Support applicatif **inchangés** · précédente 2026-06-12 (rate card
+> partenaire MB §3, télésec MB par créneau, add-ons amplitude + mise en service, pilote IT
+> harmonisé) · 2026-06-06 (ajout §7 « engagement de décroché ») · base 2026-05-30
 > Rapport de réflexion détaillé : `RAPPORT-PRIX.html` (⚠️ antérieur à l'abandon du médical)
 
 ---
@@ -22,7 +22,7 @@
     ferme** : simulateur en **fourchette** + « devis sous 24 h » (capture lead). Pas de tarif
     ETP exact affiché.
   - **Toute marque blanche** (helpdesk, support) → **jamais publique** : le prix de gros est
-    l'input de marge du revendeur. Bailleurs → interne (§4).
+    l'input de marge du revendeur.
   - Le palier « grille ferme publique » ne servait qu'au médical (archivé, §A) : **plus
     aucune offre active n'affiche de prix ferme**.
 - **Forfait, pas à l'appel** côté client (prévisibilité). Le « à l'appel » ne sert
@@ -53,8 +53,8 @@
 - Les anciens renvois `PRICING.md §1`, `§1.a`, `§1.b`, `§1.c` et `§2` (tous médicaux)
   correspondent désormais à `§A.1`, `§A.1.a`, `§A.1.b`, `§A.1.c` et `§A.2`. Les numéros
   §3 à §10 sont conservés pour ne pas casser les renvois existants.
-- **Bailleurs sociaux** (§4) : hors des deux offres actées le 2026-10-30 — **statut à
-  confirmer**, grille conservée en l'état.
+- **Bailleurs sociaux & grandes structures** (ex-priorité 3) : **segment archivé** le
+  2026-10-30 — grille conservée pour mémoire en **§B** (ancien renvoi `§4` → `§B.4`).
 
 ## 2. *(section médicale archivée — voir §A.2)*
 
@@ -152,32 +152,7 @@ mutualisée**, **traitement prioritaire systématique**, **redondance intégrée
 
 ---
 
-## 4. Bailleurs sociaux & grandes structures (statut à confirmer) — **INTERNE**
-
-> ⚠️ Hors des deux offres actées le 2026-10-30 (ex-« priorité 3 ») : grille conservée en
-> l'état en attendant l'arbitrage de Valérien (maintenir, archiver ou retirer).
-
-> Ne pas publier. Positionnement = **capacité d'appoint** (débordement du CRC), pas
-> remplacement. Toujours présenté en sur-devis. Deux GTM : direct ou marque blanche.
-
-**Modèles de tarification retenus (même ordre de préférence)**
-1. **ETP par position** (mutualisé sur les pics).
-2. **À l'heure**.
-3. **À l'interaction** (par appel traité).
-
-**Références internes de chiffrage**
-
-| Modèle | En direct | En marque blanche (sous-traitant)* |
-|---|---|---|
-| ETP / capacité réservée (€/mois) | 1 800 - 3 500 € | 1 300 - 2 500 € |
-| À l'appel traité | 1,20 - 1,80 € | 0,90 - 1,40 € |
-
-\* Marge donneur d'ordre ~25-35 %. **Plancher** : coût chargé agent + ~20 %.
-
-- **Pilote** : sur **1 pic prévisible** (rentrée, hiver, période de charges), facturé
-  au forfait selon l'enveloppe — **pas de pilote gratuit** (volumes trop lourds pour
-  10 agents).
-- **KPI engagés** : taux de décroché, taux d'abandon, délai moyen, NPS.
+## 4. *(Bailleurs sociaux & grandes structures — segment archivé le 2026-10-30, voir §B)*
 
 ---
 
@@ -248,8 +223,7 @@ réassurance s'applique **une fois le service en régime** (intégration stabili
 remboursement cash** :
 
 - **KPI engagé par offre** : **Helpdesk IT N1 → SLA de prise en charge** ; **Support
-  applicatif N1 → SLA de première réponse** ; Bailleurs (débordement, statut à confirmer)
-  → taux de décroché sur le périmètre convenu. Le **seuil exact se fige au cadrage**.
+  applicatif N1 → SLA de première réponse**. Le **seuil exact se fige au cadrage**.
 - **Remède si le seuil n'est pas atteint sur un mois civil** : **avoir de 20 %** sur la
   facture du mois suivant, **automatique** (le client n'a pas à le réclamer), **dans la
   limite d'un mois sur douze** (plafond annuel — protège la marge si creux saisonnier
@@ -307,12 +281,12 @@ basculer sur le repli « 7 jours offerts, périmètre limité ».
 | Élément | Avant | Après |
 |---|---|---|
 | **Offre médicale (2026-10-30)** | priorité 1 (grille publique + MB télésec) | **abandonnée** : grilles archivées (§A), à retirer de toute copy |
-| **Priorités niches (2026-10-30)** | médical n°1 · SaaS/Helpdesk n°2 · Bailleurs n°3 | **1) Helpdesk IT N1 (ESN/MSP) · 2) Support applicatif N1 (éditeurs logiciels & SaaS)** · Bailleurs à confirmer |
+| **Priorités niches (2026-10-30)** | médical n°1 · SaaS/Helpdesk n°2 · Bailleurs n°3 | **1) Helpdesk IT N1 (ESN/MSP) · 2) Support applicatif N1 (éditeurs logiciels & SaaS)** · Bailleurs archivés (§B) |
 | Essai | « 15 jours gratuit » / « 7 jours » (incohérent) | **« 1er mois à -50 % »** (repli : 7j offerts cadrés) |
 | Amorçage | — | **Deal « clients fondateurs »** : 5 logos, dégressif −50/−30/−15 % sur 3 mois, engagement réciproque + témoignage 60 j + référral |
 | Téléconseiller CDI (benchmark) | 48-55 k€/an | **38-46 k€/an** |
 | Contrats helpdesk | « 12 à 36 mois » | **« dès 3 mois, puis 12 mois renouvelable »** |
-| Grilles bailleurs / SaaS-helpdesk | éparses en email | **centralisées ici (interne)** |
+| Grilles SaaS-helpdesk | éparses en email | **centralisées ici (interne)** |
 | Modèles de tarification | implicites | **ETP/position > à l'heure > à l'interaction** |
 | Go-to-market | direct uniquement | **direct + marque blanche (sous-traitance)** |
 | Affichage public | « hybride » (médical public, reste interne) | **paliers (§9)** : helpdesk/support **direct = estimation** · **toute MB jamais publique** (palier « grille ferme » sans offre active depuis 2026-10-30) |
@@ -525,3 +499,36 @@ médical où le gratuit peut signaler un manque de sérieux. Tarif dégressif su
   **marque blanche** (coût ~0) ; en **direct**, hébergeur HDS dédié (OVHcloud/Scaleway), **coût
   d'hébergement absorbé dans le forfait** (ordre de grandeur interne ~100-500 €/mois, **à absorber, pas
   un prix client**). Cadre conformité : `CONFORMITE-HDS-RGPD.md §2`.
+
+---
+
+## B. Archives — segment archivé : Bailleurs sociaux & grandes structures (2026-10-30)
+
+> ⛔ **Segment archivé le 2026-10-30 (décision Valérien)** : hors des deux offres actives.
+> Grille conservée **pour mémoire uniquement**, telle qu'à la révision 2026-06-12 (ex-§4,
+> ex-« priorité 3 »). Ne plus l'utiliser dans aucune copy ni devis. Séquence et leads
+> correspondants : `99-Archives-Bailleurs/`.
+
+### B.4 (ex-§4) Bailleurs sociaux & grandes structures — ex-interne
+
+> Ne pas publier. Positionnement = **capacité d'appoint** (débordement du CRC), pas
+> remplacement. Toujours présenté en sur-devis. Deux GTM : direct ou marque blanche.
+
+**Modèles de tarification retenus (même ordre de préférence)**
+1. **ETP par position** (mutualisé sur les pics).
+2. **À l'heure**.
+3. **À l'interaction** (par appel traité).
+
+**Références internes de chiffrage**
+
+| Modèle | En direct | En marque blanche (sous-traitant)* |
+|---|---|---|
+| ETP / capacité réservée (€/mois) | 1 800 - 3 500 € | 1 300 - 2 500 € |
+| À l'appel traité | 1,20 - 1,80 € | 0,90 - 1,40 € |
+
+\* Marge donneur d'ordre ~25-35 %. **Plancher** : coût chargé agent + ~20 %.
+
+- **Pilote** : sur **1 pic prévisible** (rentrée, hiver, période de charges), facturé
+  au forfait selon l'enveloppe — **pas de pilote gratuit** (volumes trop lourds pour
+  10 agents).
+- **KPI engagés** : taux de décroché, taux d'abandon, délai moyen, NPS.

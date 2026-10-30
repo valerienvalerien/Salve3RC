@@ -1,20 +1,23 @@
 # SCRIPTS-APPEL.md — Scripts d'appel à froid Salverys
 
 > **Source lisible et éditable** des scripts de cold calling Salverys.
-> Miroir de l'objet `CALL_SCRIPTS` du CRM (`CRM_Salverys.html`, ~l. 2636-2832).
+> Miroir de l'objet `CALL_SCRIPTS` du CRM (`CRM_Salverys.html`, section COLD CALLING).
 > Les séquences `OUTREACH-SEQUENCE.md` référencent ces scripts par leur clé
-> (`CALL_SCRIPTS.telemed.opening`, `CALL_SCRIPTS.helpdesk-n1.qualif`, etc.) —
+> (`CALL_SCRIPTS.helpdesk-n1.qualif`, `CALL_SCRIPTS.support-n1.opening`, etc.) —
 > les ancres ci-dessous reprennent exactement cette nomenclature.
 >
 > ⚠️ **Synchronisation** : ce fichier et le CRM doivent rester alignés. Toute
 > modification de fond ici doit être répercutée dans `CRM_Salverys.html` (et
 > inversement).
 >
-> **Sources de vérité** : prix/SLA/durées = `PRICING.md` · conformité médicale =
-> `CONFORMITE-HDS-RGPD.md` · garde-fous marque/discours = `CLAUDE.md`.
+> **Sources de vérité** : prix/SLA/durées = `PRICING.md` · garde-fous marque/discours =
+> `CLAUDE.md`.
+>
+> Scripts **télésecrétariat médical** (`CALL_SCRIPTS.telemed`) archivés le 2026-10-30 :
+> `99-Archives-Medical/02-Prospection/SCRIPTS-APPEL-telemed.md`.
 >
 > **Placeholders** : `{prenom}` = prénom de l'interlocuteur · `{structure}` =
-> nom du cabinet / de l'éditeur / de la DSI.
+> nom de l'ESN / de l'éditeur / de la DSI.
 
 ---
 
@@ -30,212 +33,10 @@
 
 ---
 
-# 1. Télésecrétariat médical — `CALL_SCRIPTS.telemed`
+# 1. Helpdesk IT N1 — `CALL_SCRIPTS.helpdesk-n1` (offre principale)
 
-> Niche **priorité absolue**. Côté médical, on parle toujours de **forfait**
-> (jamais « abonnement »).
-
-### `CALL_SCRIPTS.telemed.opening` — Ouverture
-
-**Script**
-
-> Bonjour, **{prenom}** ? Je m'appelle Valérien, je suis directeur chez Salverys, on travaille avec des cabinets médicaux comme le vôtre sur la gestion des appels patients.
->
-> **Vous avez 2 minutes ?** Je vous appelle parce qu'on aide les cabinets à ne plus rater d'appels pendant les consultations — je voulais vous demander : ça vous parle, ou c'est déjà résolu chez vous ?
-
-💡 **Tip** — Ne dis JAMAIS « je sais que vous êtes occupé ». Affirme la valeur en 1 phrase, puis demande la permission de continuer.
-
-⛔ **Danger** — Ne pitche pas. La 1re phrase doit être courte et ouvrir une question.
-
-### `CALL_SCRIPTS.telemed.qualif` — Qualification
-
-**Script**
-
-> Concrètement chez {structure} :
->
-> - Combien d'appels patients par jour environ ?
-> - Sur ces appels, combien finissent en répondeur ou sans réponse pendant les consultations ?
-> - Vous utilisez Doctolib, Maiia, Médistory… ?
-> - La secrétaire qui gère les appels aujourd'hui, c'est en interne, en libéral, ou personne ?
-
-💡 **Tip** — Pose UNE question à la fois. Note les réponses. Reformule avant de continuer : « Si je comprends bien, vous perdez environ X appels par jour, c'est ça ? »
-
-### `CALL_SCRIPTS.telemed.pitch` — Pitch valeur
-
-**Script**
-
-> Ce qu'on propose c'est simple : **une télésecrétaire médicale francophone dédiée à {structure}**, formée à votre logiciel, qui prend vos appels de 8h à 20h, sans congés, sans arrêt maladie.
->
-> La différence avec une secrétaire classique : on est à Madagascar, donc le tarif est environ 40 % inférieur à un prestataire en France — sans perte de qualité, le français est langue maternelle ici.
->
-> Forfait à partir de 350€/mois, **1er mois à -50 %** pour qu'on prouve la valeur avant que vous vous engagiez. Et une fois en régime, on s'engage sur le décroché : sous 90 % d'appels pris sur un mois, vous avez 20 % d'avoir le mois suivant.
-
-💡 **Tip** — Termine TOUJOURS par une question fermée : « Est-ce que cet ordre de grandeur vous semble cohérent par rapport à ce que vous payez aujourd'hui ? »
-
-### `CALL_SCRIPTS.telemed.objection` — Objections
-
-→ Voir l'**arbre d'objections télémed** ci-dessous (`OBJECTIONS_TELEMED`).
-
-### `CALL_SCRIPTS.telemed.closing` — Closing
-
-**Script**
-
-> Très bien {prenom}. Je vous propose qu'on fasse les choses dans l'ordre :
->
-> **Étape 1** — je vous envoie aujourd'hui un mémo de 2 pages : ce qu'on fait exactement, prix, conditions, contrat type.
->
-> **Étape 2** — on se reparle **jeudi à 14h ou vendredi à 11h** pour décider de lancer l'offre 1er mois à -50 %. Lequel des deux vous arrange ?
-
-💡 **Tip** — Donne TOUJOURS deux options fermées de RDV. Jamais « quand êtes-vous dispo ? » → c'est une porte de sortie.
-
-### Arbre d'objections — `OBJECTIONS_TELEMED`
-
-#### Objection 1 — « On a déjà une secrétaire physique au cabinet. »
-
-**Réponse** — **Parfait, ce n'est pas l'un ou l'autre.** La plupart de nos cabinets gardent leur secrétaire physique et nous délèguent uniquement les pics d'appels et les heures creuses où elle est en consultation avec vous. Combien d'appels votre secrétaire ne peut pas prendre aujourd'hui pendant les rendez-vous ?
-
-- Si « presque aucun » → « OK très bien. Et le midi entre 12h et 14h ? » — creuse pour trouver un trou.
-- Si « pas mal en fait » → « C'est exactement notre cas d'usage. On prend le relais uniquement sur ces moments-là, avec un forfait mensuel calé sur votre volume. »
-
-#### Objection 2 — « Vous êtes à Madagascar, l'accent ça va poser problème aux patients âgés. »
-
-**Réponse** — **C'est la question qu'on entend le plus.** Le français est ma langue maternelle, comme pour toutes nos télésecrétaires. **Je vous propose le 1er mois à -50 %** : vos patients appellent, et vous jugez en direct — écoute en double ligne quand vous voulez, ou un appel test de 5 min avec la télésecrétaire avant même de démarrer. Par défaut on n'enregistre pas les appels patients (conformité RGPD), donc tout se vérifie en temps réel. Si un seul patient se plaint de l'accent, on arrête, sans engagement.
-
-- Si « OK pour tester » → Passe au closing → fixe RDV pour démarrer le pilote.
-- Si « même comme ça non » → « Je comprends. Acceptez juste un appel téléphonique avec une de nos secrétaires pour vous faire votre opinion. 5 minutes. »
-
-> 🔒 **Garde-fou conformité** (`CONFORMITE-HDS-RGPD.md §2`) : **par défaut, zéro
-> enregistrement des appels patients**. La preuve qualité se fait en **double écoute /
-> double ligne** ou par **appel test** — ne pas proposer « vous écoutez les
-> enregistrements ». Ne pas non plus promettre « jamais d'enregistrement possible » :
-> c'est une **option sur demande**, portée par la stack / le HDS du client (jamais sur le
-> poste de l'agent), **à ne pas improviser** → escalade direction.
-
-#### Objection 3 — « C'est trop cher pour un cabinet de notre taille. »
-
-**Réponse** — **Vous payez aujourd'hui combien pour gérer vos appels — y compris le coût des rendez-vous manqués ?** Un patient qui ne peut pas vous joindre, en moyenne, c'est 30€ de consultation perdue. Si on évite 15 appels manqués par mois, on est déjà à 450€. Notre forfait commence à 350€.
-
-- Si silence ou « je n'ai jamais calculé » → « Je vous propose de regarder ça ensemble. Sur le mois pilote à -50 %, on chiffre exactement. »
-- Si « pas tant de manqués que ça » → « Alors le plus petit forfait suffit largement — et le 1er mois à -50 % vous le confirme sans engagement. »
-
-#### Objection 4 — « Envoyez-moi un email, je regarderai. »
-
-**Réponse** — **Bien sûr je l'envoie aujourd'hui.** Pour qu'il vous soit utile : je vous le fais sur-mesure pour votre cas, mais j'ai besoin de 5 minutes maintenant pour comprendre votre volume. Sinon je vais vous envoyer un truc générique que vous allez supprimer en 30 secondes. **5 minutes là, ça marche ?**
-
-- Si OK → Repasse en qualif rapide → 3 questions max → puis closing.
-- Si toujours « envoyez quand même » → « OK je vous envoie. Je vous rappelle vendredi à 11h pour en discuter ? » — bloque le RDV maintenant.
-
-#### Objection 5 — « Ce n'est pas moi qui décide, c'est mon associé. »
-
-**Réponse** — **Très bien, c'est important qu'il soit dans la boucle.** Du coup je vous propose qu'on fixe directement une visio à 3 — vous, lui et moi — 20 minutes maximum. Plutôt jeudi ou vendredi cette semaine ?
-
-- Si OK → Pose immédiatement les 2 créneaux.
-- Si « je vais lui en parler d'abord » → « OK je vous laisse mes coordonnées. Je vous relance lundi à 10h, ça vous va ? »
-
----
-
-# 2. Support N1 SaaS — `CALL_SCRIPTS.support-n1`
-
-> Support applicatif N1 pour éditeurs SaaS français.
-
-### `CALL_SCRIPTS.support-n1.opening` — Ouverture
-
-**Script**
-
-> Bonjour {prenom}, Valérien de Salverys. Je m'occupe d'équipes support N1 pour des éditeurs SaaS français — on est basés à Madagascar mais l'équipe est francophone native.
->
-> **Vous avez 2 minutes ?** Je vous appelle parce que je vois que {structure} grandit côté produit — et c'est en général là que la file d'attente sur le N1 explose. C'est encore gérable chez vous, ou ça commence à tirer ?
-
-💡 **Tip** — Pour les SaaS, mentionne la croissance produit comme déclencheur de pain. C'est un signal qui résonne avec les Heads of CS.
-
-### `CALL_SCRIPTS.support-n1.qualif` — Qualification
-
-**Script**
-
-> Pour me caler sur votre réalité :
->
-> - Combien de tickets N1 par semaine en ce moment ?
-> - Quel est votre First Response Time moyen — réaliste, pas l'objectif SLA ?
-> - Vous êtes sur Zendesk, Freshdesk, Intercom ?
-> - L'équipe N1, c'est en CDI interne, freelances, autre prestataire ?
-> - Quelle est la prochaine étape qui vous bloque — plus de tickets, plus de langues, horaires étendus ?
-
-💡 **Tip** — Note le KPI exact (FRT, CSAT) — tu t'en serviras pour chiffrer le ROI au pitch.
-
-### `CALL_SCRIPTS.support-n1.pitch` — Pitch valeur
-
-**Script**
-
-> Ce qu'on fait : **une équipe N1 dédiée à {structure}**, sur vos outils (Zendesk/Freshdesk/Intercom), formée à votre produit en 2 semaines, KPI documentés chaque semaine — FRT, CSAT, taux de résolution.
->
-> Le levier économique : ~**40 % de coût en moins qu'un CDI en France**, sans charges RH côté Salverys, démarrage en 2 semaines.
->
-> On commence par un **1er mois à -50 %** — vous comparez nos KPI aux vôtres avant de signer. Et on engage le service : si le SLA de première réponse convenu n'est pas tenu sur un mois, 20 % d'avoir le mois suivant.
->
-> Ça correspond au type de scaling que vous cherchez ?
-
-💡 **Tip** — Toujours chiffrer le pilote : « 1er mois à -50 %, périmètre 200-400 tickets, demi-tarif. »
-
-### `CALL_SCRIPTS.support-n1.objection` — Objections
-
-→ Voir l'**arbre d'objections support** ci-dessous (`OBJECTIONS_SUPPORT`).
-
-### `CALL_SCRIPTS.support-n1.closing` — Closing
-
-**Script**
-
-> OK {prenom}. Mon process habituel :
->
-> **1.** Je vous envoie un one-pager + 2 références anonymisées.
-> **2.** On bloque **mardi 11h ou mercredi 15h** une visio de 30 min avec un de vos lead techs pour qu'ils valident l'approche.
-> **3.** Si OK on lance le pilote (1er mois à -50 %) lundi suivant.
->
-> Mardi 11h ou mercredi 15h ?
-
-💡 **Tip** — Implique le lead tech dans le 2e RDV — ça raccourcit le cycle de validation interne.
-
-### Arbre d'objections — `OBJECTIONS_SUPPORT`
-
-#### Objection 1 — « On préfère garder le N1 en interne, c'est stratégique. »
-
-**Réponse** — **Je l'entends souvent et c'est juste : 50 % du temps c'est la bonne réponse.** Notre proposition : on prend uniquement le débordement et les horaires étendus — vous gardez les tickets stratégiques et la culture produit en interne. Vous avez combien de tickets aujourd'hui qui dorment > 24h ?
-
-- Si « beaucoup » → « C'est exactement la zone qu'on couvre — pas votre cœur, juste le surplus. »
-- Si « très peu » → « OK, vous êtes peut-être pas mûrs encore. Je vous recontacte dans 6 mois quand le volume aura grossi. »
-
-#### Objection 2 — « L'offshore, on a essayé, ça s'est mal passé. »
-
-**Réponse** — **C'est le réflexe normal — la plupart des SaaS qu'on signe ont eu une mauvaise expérience avant.** 3 différences chez nous : **(1)** français langue maternelle, pas LV1 ; **(2)** KPI hebdomadaires partagés en transparence — vous voyez tout ; **(3)** 1er mois à -50 %, pas d'engagement. Qu'est-ce qui s'était mal passé exactement la dernière fois ?
-
-- Si « qualité de langue » → « Faites le test : on vous met en relation avec un de nos agents demain, vous évaluez. »
-- Si « tickets jamais résolus » → « Notre KPI clé c'est le taux de résolution N1 — on l'engage par contrat, avec 20 % d'avoir si le seuil convenu n'est pas tenu. »
-
-#### Objection 3 — « On utilise [outil obscur] comme support, pas Zendesk. »
-
-**Réponse** — **Pas un problème.** Nos agents sont formés à 4-5 outils en moyenne et apprennent un nouvel outil en moins d'une semaine. C'est plus une question de votre **process** que de l'outil. Vous pouvez me décrire un ticket type — de la création à la résolution ?
-
-- Process simple → « OK on est dans notre zone, on s'adapte sans souci. »
-- Process complexe / outil très spécifique → « Très bien, on planifie 2 semaines de formation au lieu d'1 dans le contrat. »
-
-#### Objection 4 — « Je n'ai pas le budget en ce moment. »
-
-**Réponse** — **OK, mais le budget n'est pas la vraie question.** Si je vous montre que sur 6 mois vous économisez 30 % par rapport à votre solution actuelle, vous trouvez le budget ou pas ? Sinon ça veut dire qu'on n'est pas le bon prestataire à ce stade.
-
-- Si « oui si ROI prouvé » → « Parfait. Le 1er mois est à -50 %, vous mesurez vous-même. »
-- Si « non c'est gelé » → « OK, je vous recontacte au prochain trimestre fiscal. C'est quand ? »
-
-#### Objection 5 — « Il faut que j'en parle à mon CTO / Head of Eng. »
-
-**Réponse** — **Excellent, c'est lui le décideur opérationnel.** Je vous propose qu'on bloque une visio à 3 directement — 30 minutes, je présente, il challenge. C'est beaucoup plus efficace que vous transmettiez un document. **Mardi prochain 14h ?**
-
-- Si OK → Bloque le créneau, envoie l'invite calendrier dans la foulée.
-- Si « je préfère lui transmettre » → « OK, je vous envoie un one-pager spécial CTO — focus archi/sécurité. »
-
----
-
-# 3. Helpdesk IT N1 — `CALL_SCRIPTS.helpdesk-n1`
-
-> Helpdesk IT N1 distant pour DSI et ESN françaises.
+> Helpdesk IT N1 distant pour DSI et ESN françaises. Cible prioritaire : ESN & MSP
+> (marque blanche) — séquence `OUTREACH-IT-N1-marque-blanche.md`.
 
 ### `CALL_SCRIPTS.helpdesk-n1.opening` — Ouverture
 
@@ -337,23 +138,122 @@
 
 ---
 
+---
+
+# 2. Support applicatif N1 — `CALL_SCRIPTS.support-n1` (offre secondaire)
+
+> Support applicatif N1 pour éditeurs de logiciels & SaaS français.
+
+### `CALL_SCRIPTS.support-n1.opening` — Ouverture
+
+**Script**
+
+> Bonjour {prenom}, Valérien de Salverys. Je m'occupe d'équipes support N1 pour des éditeurs SaaS français — on est basés à Madagascar mais l'équipe est francophone native.
+>
+> **Vous avez 2 minutes ?** Je vous appelle parce que je vois que {structure} grandit côté produit — et c'est en général là que la file d'attente sur le N1 explose. C'est encore gérable chez vous, ou ça commence à tirer ?
+
+💡 **Tip** — Pour les SaaS, mentionne la croissance produit comme déclencheur de pain. C'est un signal qui résonne avec les Heads of CS.
+
+### `CALL_SCRIPTS.support-n1.qualif` — Qualification
+
+**Script**
+
+> Pour me caler sur votre réalité :
+>
+> - Combien de tickets N1 par semaine en ce moment ?
+> - Quel est votre First Response Time moyen — réaliste, pas l'objectif SLA ?
+> - Vous êtes sur Zendesk, Freshdesk, Intercom ?
+> - L'équipe N1, c'est en CDI interne, freelances, autre prestataire ?
+> - Quelle est la prochaine étape qui vous bloque — plus de tickets, plus de langues, horaires étendus ?
+
+💡 **Tip** — Note le KPI exact (FRT, CSAT) — tu t'en serviras pour chiffrer le ROI au pitch.
+
+### `CALL_SCRIPTS.support-n1.pitch` — Pitch valeur
+
+**Script**
+
+> Ce qu'on fait : **une équipe N1 dédiée à {structure}**, sur vos outils (Zendesk/Freshdesk/Intercom), formée à votre produit en 2 semaines, KPI documentés chaque semaine — FRT, CSAT, taux de résolution.
+>
+> Le levier économique : ~**40 % de coût en moins qu'un CDI en France**, sans charges RH côté Salverys, démarrage en 2 semaines.
+>
+> On commence par un **1er mois à -50 %** — vous comparez nos KPI aux vôtres avant de signer. Et on engage le service : si le SLA de première réponse convenu n'est pas tenu sur un mois, 20 % d'avoir le mois suivant.
+>
+> Ça correspond au type de scaling que vous cherchez ?
+
+💡 **Tip** — Toujours chiffrer le pilote : « 1er mois à -50 %, périmètre 200-400 tickets, demi-tarif. »
+
+### `CALL_SCRIPTS.support-n1.objection` — Objections
+
+→ Voir l'**arbre d'objections support** ci-dessous (`OBJECTIONS_SUPPORT`).
+
+### `CALL_SCRIPTS.support-n1.closing` — Closing
+
+**Script**
+
+> OK {prenom}. Mon process habituel :
+>
+> **1.** Je vous envoie un one-pager + 2 références anonymisées.
+> **2.** On bloque **mardi 11h ou mercredi 15h** une visio de 30 min avec un de vos lead techs pour qu'ils valident l'approche.
+> **3.** Si OK on lance le pilote (1er mois à -50 %) lundi suivant.
+>
+> Mardi 11h ou mercredi 15h ?
+
+💡 **Tip** — Implique le lead tech dans le 2e RDV — ça raccourcit le cycle de validation interne.
+
+### Arbre d'objections — `OBJECTIONS_SUPPORT`
+
+#### Objection 1 — « On préfère garder le N1 en interne, c'est stratégique. »
+
+**Réponse** — **Je l'entends souvent et c'est juste : 50 % du temps c'est la bonne réponse.** Notre proposition : on prend uniquement le débordement et les horaires étendus — vous gardez les tickets stratégiques et la culture produit en interne. Vous avez combien de tickets aujourd'hui qui dorment > 24h ?
+
+- Si « beaucoup » → « C'est exactement la zone qu'on couvre — pas votre cœur, juste le surplus. »
+- Si « très peu » → « OK, vous êtes peut-être pas mûrs encore. Je vous recontacte dans 6 mois quand le volume aura grossi. »
+
+#### Objection 2 — « L'offshore, on a essayé, ça s'est mal passé. »
+
+**Réponse** — **C'est le réflexe normal — la plupart des SaaS qu'on signe ont eu une mauvaise expérience avant.** 3 différences chez nous : **(1)** français langue maternelle, pas LV1 ; **(2)** KPI hebdomadaires partagés en transparence — vous voyez tout ; **(3)** 1er mois à -50 %, pas d'engagement. Qu'est-ce qui s'était mal passé exactement la dernière fois ?
+
+- Si « qualité de langue » → « Faites le test : on vous met en relation avec un de nos agents demain, vous évaluez. »
+- Si « tickets jamais résolus » → « Notre KPI clé c'est le taux de résolution N1 — on l'engage par contrat, avec 20 % d'avoir si le seuil convenu n'est pas tenu. »
+
+#### Objection 3 — « On utilise [outil obscur] comme support, pas Zendesk. »
+
+**Réponse** — **Pas un problème.** Nos agents sont formés à 4-5 outils en moyenne et apprennent un nouvel outil en moins d'une semaine. C'est plus une question de votre **process** que de l'outil. Vous pouvez me décrire un ticket type — de la création à la résolution ?
+
+- Process simple → « OK on est dans notre zone, on s'adapte sans souci. »
+- Process complexe / outil très spécifique → « Très bien, on planifie 2 semaines de formation au lieu d'1 dans le contrat. »
+
+#### Objection 4 — « Je n'ai pas le budget en ce moment. »
+
+**Réponse** — **OK, mais le budget n'est pas la vraie question.** Si je vous montre que sur 6 mois vous économisez 30 % par rapport à votre solution actuelle, vous trouvez le budget ou pas ? Sinon ça veut dire qu'on n'est pas le bon prestataire à ce stade.
+
+- Si « oui si ROI prouvé » → « Parfait. Le 1er mois est à -50 %, vous mesurez vous-même. »
+- Si « non c'est gelé » → « OK, je vous recontacte au prochain trimestre fiscal. C'est quand ? »
+
+#### Objection 5 — « Il faut que j'en parle à mon CTO / Head of Eng. »
+
+**Réponse** — **Excellent, c'est lui le décideur opérationnel.** Je vous propose qu'on bloque une visio à 3 directement — 30 minutes, je présente, il challenge. C'est beaucoup plus efficace que vous transmettiez un document. **Mardi prochain 14h ?**
+
+- Si OK → Bloque le créneau, envoie l'invite calendrier dans la foulée.
+- Si « je préfère lui transmettre » → « OK, je vous envoie un one-pager spécial CTO — focus archi/sécurité. »
+
+---
+
 ## Garde-fous (rappel `CLAUDE.md`)
 
 - **Marque** : « Salverys » uniquement. Jamais Nesvalo / Vinlo.
-- **Médical** : on dit **forfait**, jamais « abonnement ».
+- On dit **forfait** / « contrat de service », jamais « abonnement » (`PRICING.md` §7).
 - **Aucun claim** « direction issue d'une structure de 1 000 collaborateurs ».
-- **Conformité médicale** (`CONFORMITE-HDS-RGPD.md §2`) : **par défaut, zéro
-  enregistrement des appels patients** — la preuve qualité se fait en double écoute /
-  appel test. L'enregistrement existe en **option sur demande** (stack/HDS du client).
-- **Tarifs MB** (marque blanche) : **jamais en clair côté public**. Les forfaits
-  cités ici (350/590/950) sont les prix **médical standard publics** (`PRICING.md`).
+- **Enregistrement des appels** : **zéro par défaut**, disponible sur demande
+  (`PRICING.md` §10) — la preuve qualité se fait en double écoute / appel test.
+- **Tarifs MB** (marque blanche) : **jamais en clair côté public** ni au téléphone en
+  cold — la rate card se remet au cadrage, sous NDA (`PRICING.md` §3).
 
 ## Chiffres & promesses — alignés `PRICING.md`
 
 | Élément | Valeur | Réf. |
 |---------|--------|------|
-| Forfaits médical | **350 / 590 / 950 €** | `PRICING.md` §1 |
-| SLA décroché médical | **≥ 90 %** sur le mois | `PRICING.md` §7 |
+| Engagement de service | SLA de prise en charge (helpdesk) / de première réponse (support), seuil figé au cadrage | `PRICING.md` §7 |
 | Remède si seuil non tenu | **20 % d'avoir** (mois suivant, max 1 mois/12) | `PRICING.md` §7 |
 | Offre de lancement | **1er mois à -50 %** (sans engagement) | `PRICING.md` §7 |
 | Pilote support / helpdesk | **200-400 tickets**, 1er mois à -50 % | `PRICING.md` §3 |

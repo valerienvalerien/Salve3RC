@@ -33,9 +33,10 @@ juridiquement portée par la société **VJUS**.
 BPO basé à Antananarivo (Madagascar) ciblant des clients **professionnels français**
 (B2B uniquement) :
 
-1. Télésecrétariat médical
-2. Support applicatif N1 pour éditeurs SaaS français
-3. Helpdesk IT N1 distant
+1. Helpdesk IT N1 pour ESN et MSP (offre principale)
+2. Support applicatif N1 pour éditeurs de logiciels et SaaS (offre secondaire)
+
+(Télésecrétariat médical abandonné le 2026-10-30.)
 
 GTM prioritaire : **marque blanche** (sous-traitance de donneurs d'ordre français) ;
 le direct (client final) vient en second temps.
@@ -75,7 +76,7 @@ Netlify, Inc. + adresse.)_
 ## Rappels de cohérence
 
 - Tarifs : `PRICING.md` reste la source de vérité tarifaire.
-- Conformité données de santé : `CONFORMITE-HDS-RGPD.md`.
+- Données personnelles : `04-Closing/MODELE-DPA-RGPD.md`.
 - Marque : « Salverys » uniquement côté public ; jamais Nesvalo / Vinlo.
 
 ---
@@ -88,8 +89,8 @@ contrat.
 
 ### Gabarit 1 — CGV standard (direct / petit contrat)
 
-À insérer dans les CGV vendues aux cabinets médicaux, petites structures, contrats au
-forfait mensuel.
+À insérer dans les CGV vendues aux petites structures en direct, contrats au forfait
+mensuel.
 
 > **Article [X] — Droit applicable et règlement des litiges**
 >
@@ -110,8 +111,8 @@ forfait mensuel.
 
 ### Gabarit 2 — Contrat-cadre marque blanche (gros contrat / donneur d'ordre)
 
-À insérer dans le contrat-cadre signé avec un donneur d'ordre français (télésecrétariat,
-éditeur SaaS, ESN/MSP). **Réservé aux engagements annuels significatifs** — ne pas
+À insérer dans le contrat-cadre signé avec un donneur d'ordre français (ESN/MSP,
+éditeur de logiciels ou SaaS). **Réservé aux engagements annuels significatifs** — ne pas
 appliquer aux petits contrats.
 
 > **Article [X] — Droit applicable et arbitrage**

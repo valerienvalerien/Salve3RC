@@ -4,46 +4,50 @@
 > intégrante** du contrat. Encadre le traitement de données à caractère personnel par
 > Salverys, **sous-traitant** opérant depuis Madagascar (hors UE/EEE).
 >
-> Fondé sur l'analyse `CONFORMITE-HDS-RGPD.md`. Principe directeur : **Salverys ne crée et
-> n'héberge aucune donnée de santé** — les agents travaillent **dans les outils HDS du
-> Client** (Doctolib/Maiia…), où la donnée reste. L'**accès** distant constitue un transfert
-> hors-UE à encadrer (≠ hébergement).
+> Principe directeur : **Salverys n'héberge aucune donnée du Client** — les agents
+> travaillent **dans les outils du Client** (ticketing, ITSM, back-office applicatif), où la
+> donnée reste. L'**accès** distant constitue un transfert hors-UE à encadrer (≠ hébergement).
+>
+> Révisé le 2026-10-30 : offre médicale abandonnée — clauses santé/HDS (données de santé,
+> clause de souveraineté HDS) retirées ; version précédente archivée dans
+> `99-Archives-Medical/04-Closing/MODELE-DPA-RGPD-version-medicale.md`. Art. 6 adapté au
+> recrutement en CDI.
 >
 > ⚠️ Support opérationnel, **pas un avis juridique** : faire valider par un conseil avant
-> signature, et tenir compte de la veille souveraineté (art. 9).
+> signature.
 
 ---
 
 ## Article 1 — Parties & rôles
 
-- **Responsable de traitement** : le Client (cabinet médical / donneur d'ordre).
+- **Responsable de traitement** : le Client (donneur d'ordre ou client final).
 - **Sous-traitant** : Salverys ([Salverys — raison sociale], Antananarivo, Madagascar),
   agissant **sur instruction documentée** du Client.
 
 ## Article 2 — Objet & finalité
 
 Salverys traite des données personnelles **pour le seul compte du Client**, aux fins
-d'exécuter la prestation (télésecrétariat médical / support / helpdesk). Aucun traitement
+d'exécuter la prestation (helpdesk IT N1 / support applicatif N1). Aucun traitement
 à d'autres fins, ni réutilisation, sans instruction écrite du Client.
 
 ## Article 3 — Nature des données & des traitements
 
-- **Catégories de personnes** : patients / utilisateurs finaux / appelants du Client.
+- **Catégories de personnes** : utilisateurs finaux / collaborateurs / appelants du Client.
 - **Catégories de données** : identité, coordonnées, motif d'appel/de ticket, données
-  d'agenda. Côté médical : **données de santé** (catégorie particulière, art. 9 RGPD) —
-  traitées uniquement **dans l'outil HDS du Client**.
+  techniques nécessaires au traitement de la demande (poste, compte, logiciel concerné).
+  **Pas de catégorie particulière (art. 9 RGPD)** dans le périmètre standard.
 - **Opérations** : consultation, saisie, mise à jour **directement dans l'outil du Client**.
 - Détail en **Annexe 1**.
 
 ## Article 4 — Zéro stockage / zéro hébergement côté Salverys
 
-- **Aucun enregistrement** des appels patients.
-- **Aucune donnée patient/utilisateur stockée** sur les postes des agents ni sur une
-  infrastructure Salverys : la donnée reste chez l'**hébergeur HDS du Client**
-  (Doctolib/Maiia/Ubicentrex…). La téléphonie ne fait que **router** l'appel.
+- **Aucun enregistrement** des appels par défaut (disponible sur demande écrite du Client).
+- **Aucune donnée utilisateur stockée** sur les postes des agents ni sur une
+  infrastructure Salverys : la donnée reste dans les **outils du Client** (ticketing, ITSM,
+  back-office). La téléphonie ne fait que **router** l'appel.
 - Le **CRM interne** de Salverys ne contient que des **données B2B** (contacts
-  professionnels), **jamais de donnée patient/utilisateur final**.
-- Salverys est donc **sous-traitant (art. 28), pas hébergeur** : aucune brique HDS à sa charge.
+  professionnels), **jamais de donnée d'utilisateur final**.
+- Salverys est donc **sous-traitant (art. 28), pas hébergeur**.
 
 ## Article 5 — Mesures techniques & organisationnelles
 
@@ -56,10 +60,12 @@ d'exécuter la prestation (télésecrétariat médical / support / helpdesk). Au
 
 ## Article 6 — Sous-traitants ultérieurs
 
-- Salverys recourt à des **freelances (Antananarivo)** comme sous-traitants ultérieurs.
-  Chacun signe un **DPA** et un engagement de **secret professionnel**.
-- **Autorisation générale** du Client, assortie d'une **information préalable** de tout
-  ajout/remplacement avec un préavis de **5 jours ouvrés**, ouvrant un **droit
+- Les agents sont **salariés de Salverys (CDI, Antananarivo)** et signent un engagement
+  de **confidentialité / secret professionnel** ; ils ne sont pas des sous-traitants
+  ultérieurs.
+- Sous-traitants ultérieurs : **[à lister — ex. prestataires techniques ayant accès aux
+  données]**. **Autorisation générale** du Client, assortie d'une **information préalable**
+  de tout ajout/remplacement avec un préavis de **5 jours ouvrés**, ouvrant un **droit
   d'opposition** motivé au Client.
 
 ## Article 7 — Transfert hors-UE (art. 46 RGPD)
@@ -80,23 +86,12 @@ d'exécuter la prestation (télésecrétariat médical / support / helpdesk). Au
 - **Notification de violation** de données à caractère personnel au Client **sans délai et
   au plus tard sous [24/48/72] heures** après en avoir pris connaissance.
 
-## Article 9 — Clause de souveraineté HDS (échéance sept. 2026)
-
-Compte tenu du **décret du 24 mars 2026** (obligations de souveraineté HDS applicables en
-**septembre 2026**) :
-
-- Les parties **réexaminent** le présent DPA **avant septembre 2026** (rappel de veille :
-  **août 2026**, cf. `CONFORMITE-HDS-RGPD.md §4`).
-- En cas d'incompatibilité avérée du modèle d'accès offshore : **renégociation sous 30 jours**,
-  **repli technique** vers un **VDI hébergé en UE** + clauses art. 46 renforcées, ou
-  **suspension/résiliation sans pénalité** pour le Client si aucune solution conforme.
-
-## Article 10 — Audit
+## Article 9 — Audit
 
 Le Client (ou un tiers mandaté, sous confidentialité) peut **auditer** le respect du présent
 DPA, sur préavis raisonnable de **[__ jours]**, sans perturber l'exploitation.
 
-## Article 11 — Sort des données en fin de contrat
+## Article 10 — Sort des données en fin de contrat
 
 À la fin de la prestation, et selon le choix du Client : **suppression** des accès et
 **destruction** de toute donnée résiduelle éventuelle côté Salverys (en principe nulle,
@@ -108,24 +103,24 @@ art. 4), avec **attestation** sur demande. Aucune conservation au-delà de l'obl
 
 | Élément | Contenu |
 |---|---|
-| Finalité | [télésecrétariat / support N1 / helpdesk IT — sous le nom du Client] |
-| Personnes concernées | [patients / utilisateurs finaux / appelants] |
-| Catégories de données | [identité, coordonnées, motif, agenda — santé le cas échéant] |
-| Données sensibles (art. 9) | [oui (médical) / non] — traitées dans l'outil HDS du Client |
+| Finalité | [helpdesk IT N1 / support applicatif N1 — sous le nom du Client] |
+| Personnes concernées | [utilisateurs finaux / collaborateurs / appelants] |
+| Catégories de données | [identité, coordonnées, motif, données techniques du ticket] |
+| Données sensibles (art. 9) | [non — à confirmer au cadrage] |
 | Durée du traitement | durée du contrat |
-| Outils du Client | [Doctolib / Maiia / Médistory / Cegedim / ticketing / ITSM] |
+| Outils du Client | [ticketing / ITSM / back-office applicatif] |
 
 ## Annexe 2 — Mesures de sécurité
 
 - Comptes nominatifs + MFA · zéro download · pas de cache local · chiffrement TLS ·
   formation RGPD + secret pro · révocation immédiate des accès · double connexion
-  (fibre+4G) + hub de repli alimenté (continuité) · aucun enregistrement d'appel.
+  (fibre+4G) + hub de repli alimenté (continuité) · aucun enregistrement d'appel par défaut.
 
 ## Annexe 3 — Localisation
 
 - **Traitement (accès)** : Antananarivo, Madagascar (pays tiers).
-- **Hébergement de la donnée** : chez l'**hébergeur HDS du Client** (UE/EEE) — la donnée
-  ne quitte pas cet hébergeur.
+- **Hébergement de la donnée** : dans les **outils du Client** ([localisation à préciser —
+  UE/EEE]) — la donnée ne quitte pas ces outils.
 
 ---
 

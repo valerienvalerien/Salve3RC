@@ -3,6 +3,11 @@
 > Document de référence interne. Toute décision visuelle ou de naming (site, CRM,
 > cold email Emelia, cartes de visite, signatures, propositions commerciales)
 > s'aligne sur ce document.
+>
+> **Révision 2026-10-30** : télésecrétariat médical **abandonné** (décision Valérien). Les
+> deux lignes de service deviennent **Helpdesk IT N1** (principale, ESN & MSP) et **Support
+> applicatif N1** (secondaire, éditeurs de logiciels & SaaS). Lockups et signatures
+> ci-dessous mis à jour en conséquence.
 
 ---
 
@@ -14,10 +19,10 @@ On retient l'**Option A — « maison mère + divisions »** : un logo Salverys
 unique, avec les deux métiers présentés comme des lignes de service, pas comme
 des marques autonomes.
 
-> **Salverys.** — Télésecrétariat Médical · Support IT & Applicatif
+> **Salverys.** — Helpdesk IT N1 · Support Applicatif
 
 **Écarté (Option B) :** créer deux sous-marques indépendantes (« Salverys
-Médical » / « Salverys IT ») avec sites, logos et supports séparés. Prématuré et
+Helpdesk » / « Salverys Support ») avec sites, logos et supports séparés. Prématuré et
 plus cher à gérer au stade actuel (équipe de 10, on repart de zéro).
 
 ---
@@ -44,16 +49,17 @@ une ampleur qui justifie sa propre identité (pas avant).
                               │
         ┌─────────────────────┴─────────────────────┐
         │                                            │
-  Télésecrétariat Médical                  Support IT & Applicatif
-  (priorité n°1 commerciale)               (Support applicatif N1 + Helpdesk IT N1)
+      Helpdesk IT N1                          Support Applicatif
+  (priorité n°1 — ESN & MSP)        (priorité n°2 — éditeurs logiciels & SaaS)
 ```
 
 - **Salverys** porte la marque, la promesse et la réputation.
 - Les deux lignes de service sont des **descripteurs**, jamais des marques :
-  on écrit « Salverys — Télésecrétariat Médical », pas « Salverys Médical » en
-  logo autonome.
-- Priorité commerciale inchangée : **télésecrétariat médical d'abord**, le
-  support IT en second métier.
+  on écrit « Salverys — Helpdesk IT N1 », pas « Salverys Helpdesk » en logo
+  autonome.
+- Priorité commerciale (2026-10-30) : **Helpdesk IT N1 d'abord**, le support
+  applicatif en second métier. (Le télésecrétariat médical, ex-priorité n°1, est
+  abandonné.)
 
 ---
 
@@ -61,52 +67,52 @@ une ampleur qui justifie sa propre identité (pas avant).
 
 **Forme longue (site, page d'accueil, signature institutionnelle) :**
 
-> **Salverys.** — Télésecrétariat Médical · Support IT & Applicatif
+> **Salverys.** — Helpdesk IT N1 · Support Applicatif
 
 **Forme courte par contexte** (quand la cible est connue, on ne montre qu'une
 ligne pour rester lisible) :
 
-- Cible santé → **Salverys.** — Télésecrétariat Médical
-- Cible éditeurs / IT → **Salverys.** — Support IT & Applicatif
+- Cible ESN / MSP → **Salverys.** — Helpdesk IT N1
+- Cible éditeurs de logiciels / SaaS → **Salverys.** — Support Applicatif
 
 **Règles :**
 - Le point final « **.** » fait partie du logotype, on le garde.
 - Le descripteur s'écrit toujours **après** le nom, jamais à la place.
-- Jamais de logo « Salverys Médical » ou « Salverys IT » isolé.
+- Jamais de logo « Salverys Helpdesk » ou « Salverys Support » isolé.
 
 ### Déclinaisons concrètes (prêtes à copier)
 
 **Footer du site** — ✅ appliqué : descripteur sous la marque (`.brand-desc`).
 - `index.html` → forme longue
-- `simulateur-salverys.html` → « Télésecrétariat Médical »
-- `simulateur-informatique.html` → « Support IT & Applicatif »
+- `simulateur-helpdesk-it.html` → « Helpdesk IT N1 — Support utilisateurs »
+- `simulateur-informatique.html` → « Support N1 — Éditeurs SaaS FR »
 
-**Signature email (Emelia)** — bloc texte, cible **santé** :
+**Signature email (Emelia)** — bloc texte, cible **ESN / MSP** :
 
 ```
 Prénom NOM
-Salverys. — Télésecrétariat Médical
+Salverys. — Helpdesk IT N1
 contact@salverys.fr · salverys.fr
 Antananarivo → France · 8h–20h
 ```
 
-Cible **éditeurs / IT** : remplacer la 2ᵉ ligne par
-`Salverys. — Support IT & Applicatif`.
+Cible **éditeurs de logiciels / SaaS** : remplacer la 2ᵉ ligne par
+`Salverys. — Support Applicatif`.
 
 **Carte de visite** — recto :
 - Nom + fonction
 - Logotype `Salverys.` (logo `assets/logo-salverys.png`)
-- Sous le logo : `Télésecrétariat Médical · Support IT & Applicatif`
+- Sous le logo : `Helpdesk IT N1 · Support Applicatif`
 - Coordonnées : `contact@salverys.fr · salverys.fr`
 
 **En-tête de proposition commerciale** :
 
 ```
-Salverys. — Télésecrétariat Médical · Support IT & Applicatif
+Salverys. — Helpdesk IT N1 · Support Applicatif
 Proposition commerciale — [Nom du client] — [Date]
 ```
 
-> En contexte mono-cible (proposition uniquement santé ou uniquement IT),
+> En contexte mono-cible (proposition uniquement helpdesk ou uniquement support applicatif),
 > utiliser la **forme courte** correspondante.
 
 ---
@@ -120,9 +126,12 @@ Proposition commerciale — [Nom du client] — [Date]
 > appliqué aux pages IT. Aucun renversement de thème à coder.
 
 ### Logo principal de référence
-Le logo **médical** — pictogramme « caducée-casque » teinte **sauge/vert** —
-est la **référence visuelle maître** de la marque. Cohérent avec la priorité
-commerciale n°1 (télésecrétariat médical) et avec le thème par défaut du site.
+Le logo **sauge** — pictogramme « agent au casque » teinte **sauge/vert** (historiquement
+appelé « logo médical ») — est la **référence visuelle maître** de la marque et le thème
+par défaut du site. ⚠️ **À reconsidérer (2026-10-30)** : ce choix était justifié par la
+priorité médicale, abandonnée. Le pictogramme reste générique (pas de symbole santé) ;
+l'éventuel passage du logo Helpdesk / IT en référence maître est une décision de
+direction, non tranchée ici.
 
 ### Déclinaison secondaire
 Le logo **bleu marine foncé + points dorés/jaunes** (version Support IT &

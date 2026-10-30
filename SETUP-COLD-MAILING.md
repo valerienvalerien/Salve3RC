@@ -7,8 +7,8 @@
 ## 1. Règle d'or
 
 **Le domaine de cold mailing ≠ le domaine daily/marque.** On ne brûle JAMAIS le domaine
-des vrais mails clients (`salverys.fr`) avec de la prospection. Sur le médical, un mail
-client en spam = perte directe.
+des vrais mails clients (`salverys.fr`) avec de la prospection. Un mail client en spam
+= perte directe.
 
 ## 2. Architecture cible
 
