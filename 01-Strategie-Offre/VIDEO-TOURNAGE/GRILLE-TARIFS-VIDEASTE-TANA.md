@@ -27,37 +27,48 @@ prix affichés. Les seuls repères vérifiables :
 - Au tarif français : à peine une interview montée de 2 minutes. Le prix local étant
   2 à 4 fois inférieur, 3 M Ar doivent couvrir **nettement plus** qu'une seule vidéo.
 
-## 3. Panier raisonnable pour ~40 heures
+### Devis de référence d'un autre vidéaste (reçu par Valérien)
+
+**900 000 Ar par portrait**, soit 1 800 000 Ar pour deux. D'après Valérien, ce devis
+comprendrait tout **sauf les rushes et le montage** : à vérifier par écrit. Un portrait
+non monté n'est pas un livrable ; si le montage est en plus, le vrai prix dépasse
+900 000 Ar par portrait et la comparaison avec Lova devient encore plus favorable aux
+3 M Ar.
+
+## 3. Panier raisonnable pour ~40 heures (projet du 30/10/2026)
+
+Projet retenu : voir `BRIEF-VIDEO-PORTRAITS.pdf`.
 
 | Poste | Heures estimées |
 |---|---|
-| Préparation, repérage du lieu, lecture du guide et du script | 3 h |
-| **1 journée de tournage** (installation, interview 45-60 min, plans de coupe) | 9 h |
-| Dérushage + montage **portrait fondateur 2-3 min** | 10 h |
-| Montage **vidéo institutionnelle 1 min 30-2 min** (voix off + textes) | 8 h |
-| **5 clips courts verticaux** 30-60 s, tirés des mêmes rushes | 5 h |
+| Préparation, repérage des deux lieux, lecture du brief | 3 h |
+| **1 journée de tournage** (terrasse le matin, coworking l'après-midi) | 9 h |
+| Dérushage + montage des **2 portraits de 60-90 s** | 12 h |
+| **6 extraits courts** de 30-60 s, tirés des mêmes rushes | 6 h |
+| Déclinaison des formats 16:9, 1:1 et 9:16 | 3 h |
 | Sous-titres FR incrustés sur l'ensemble | 3 h |
+| **Une douzaine de photos** retouchées | 3 h |
 | 2 allers-retours de corrections | 3 h |
-| **Total** | **≈ 41 h** |
+| **Total** | **≈ 42 h** |
 
-→ Ce panier est **cohérent avec 3 M Ar au tarif local haut**. Ce n'est pas une demande
-excessive : c'est ce que le marché fournit pour ce montant.
+→ Ce panier est **cohérent avec 3 M Ar au tarif local haut**, et avec le devis de
+référence (1,8 M Ar pour les deux portraits seuls, hors montage et rushes).
 
 ## 4. Commande à formaliser par écrit (mail suffit)
 
 « Les 3 000 000 Ar déjà versés sont convertis en la prestation vidéo suivante,
 sans supplément » :
 
-1. 1 portrait fondateur, 2-3 min, format 16:9 **et** 1:1 ou 4:5 (LinkedIn).
-2. 1 vidéo institutionnelle Salverys, 1 min 30-2 min, 16:9 et 4:5.
-3. 5 clips courts verticaux 9:16 ou 4:5, 30-60 s chacun.
+1. 2 portraits de 60-90 s, en 16:9, 1:1 et 9:16.
+2. 6 extraits courts de 30-60 s, en 9:16 et 1:1.
+3. Une douzaine de photos portrait retouchées, en HD et en version web.
 4. Sous-titres français incrustés + fichiers .srt séparés.
 5. 2 allers-retours de corrections par vidéo.
 6. Remise de **tous les rushes** et des fichiers sources.
 7. **Droits d'utilisation cédés à Salverys**, tous supports, sans limite de durée.
 8. **Délais** : tournage avant le [date], livraison V1 sous 15 jours, version finale
    sous 7 jours après les retours.
-9. **Contenu fourni par Valérien** (guide d'interview, script) : aucun texte, slogan
+9. **Contenu fourni par Valérien** (brief vidéo : textes et questions) : aucun texte, slogan
    ou chiffre ajouté sans validation écrite.
 10. **Confidentialité** : l'accord déjà signé couvre les rushes ; aucune diffusion,
     extrait ou usage en portfolio sans accord écrit.
@@ -65,7 +76,7 @@ sans supplément » :
 ### Plancher de négociation
 
 Si Lova refuse le panier complet, le minimum acceptable pour 3 M Ar :
-portrait + institutionnelle + 3 clips + sous-titres + rushes + droits.
+2 portraits + 3 extraits + sous-titres + rushes + droits (les photos en moins).
 En dessous, demander un remboursement partiel plutôt que d'accepter moins.
 
 ## 5. À éviter

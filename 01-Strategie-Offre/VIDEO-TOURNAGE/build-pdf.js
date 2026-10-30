@@ -5,8 +5,7 @@ const path = require('path');
   const b = await chromium.launch();
   const p = await b.newPage();
   for (const [src, out, label] of [
-    ['GUIDE-INTERVIEW-PORTRAIT.html','GUIDE-INTERVIEW-PORTRAIT.pdf','Guide d\'interview — Portrait vidéo'],
-    ['SCRIPT-VIDEO-INSTITUTIONNELLE.html','SCRIPT-VIDEO-INSTITUTIONNELLE.pdf','Script — Vidéo institutionnelle']]) {
+    ['BRIEF-VIDEO-PORTRAITS.html','BRIEF-VIDEO-PORTRAITS.pdf','Brief vidéo — Portraits du fondateur']]) {
     await p.goto('file://' + path.resolve(src), { waitUntil: 'networkidle' });
     await p.evaluate(async () => { await document.fonts.load('600 12px Lora'); await document.fonts.load('700 12px Lora'); await document.fonts.load('500 12px Lora'); await document.fonts.ready; });
     await p.pdf({ path: out, format: 'A4', printBackground: true, preferCSSPageSize: true,

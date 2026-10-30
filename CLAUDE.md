@@ -2,8 +2,11 @@
 
 ## Contexte activité
 
-BPO basé à Antananarivo (Madagascar) ciblant des clients **français**.
-Direction expérimentée qui repart de zéro avec une équipe de **10 personnes**.
+Support IT et applicatif N1 en marque blanche, basé à Antananarivo (Madagascar), ciblant
+des clients **français** d'abord, puis Belgique, Suisse et Québec.
+**Fondateur seul au démarrage** (Valérien) : pas encore de salarié, de client ni de locaux.
+Ne jamais écrire « notre équipe », « nos agents », « nos clients » tant qu'ils n'existent pas.
+Référence à jour : dossier de contexte Salverys du 2026-10-02.
 
 > ⚠️ **Claim interdit (décision 2026-06-12)** : « direction issue d'une structure de
 > 1 000 collaborateurs » était une consigne de persona initiale, **pas la réalité**.
@@ -11,25 +14,28 @@ Direction expérimentée qui repart de zéro avec une équipe de **10 personnes*
 > avant à la place : process documentés, cadrage qualité (script, double écoute,
 > reporting), pilote mesuré.
 
-### Niches cibles (par priorité)
-1. **Télésecrétariat médical** (priorité absolue)
-2. Support applicatif N1 pour éditeurs SaaS français
-3. Helpdesk IT N1 distant
+### Offres (par priorité, confirmé 2026-10-30)
+1. **Helpdesk IT N1** pour ESN et MSP (offre principale), jusqu'à ~40-50 salariés
+2. **Support applicatif N1** pour éditeurs de logiciels et SaaS (offre secondaire)
+
+Le **télésecrétariat médical est abandonné** : ne plus le proposer ni le prioriser.
+`PRICING.md` et les pages médicales restent à aligner sur cette décision.
 
 ### Séquence de développement (toujours dans cet ordre)
 **Prospection → Équipe → Infrastructure**
 
 ### Stratégie GTM (décision direction, 2026-06-10)
-**Objectif prioritaire : démarrer en MARQUE BLANCHE sur les 3 niches** (sous-traitance
-de donneurs d'ordre : télésecrétariats médicaux FR, éditeurs/prestataires support,
-ESN/MSP). Le direct (client final) vient en 2e temps. Toute priorisation de prospection,
+**Objectif prioritaire : démarrer en MARQUE BLANCHE** (sous-traitance de donneurs
+d'ordre : ESN/MSP, éditeurs). Le direct (client final) vient en 2e temps. Toute priorisation de prospection,
 de copy ou de chiffrage doit refléter ce MB-first.
 
-### Modèle d'équipe (décision direction, 2026-06-10)
-Démarrage **100 % freelances**, payés **1,8-2 M Ar/mois chacun** (~2,5× le marché local),
-y compris les **2 managers** (1 médical, 1 IT). Objectif : **zéro turnover**. Démarrage à
-4 agents + 2 managers, montée à 8+ au rythme des contrats. Rentabilité vérifiée :
-`01-Strategie-Offre/FINANCE-PREVISIONNEL.md` (v2).
+### Modèle d'équipe (confirmé 2026-10-30)
+Recrutement en **CDI**, à la signature des contrats, sur les postes qu'ils financent, avec
+une grille de progression. Français testé à l'oral et à l'écrit. **Zéro turnover** :
+ambition forte et culture RH, jamais présentée comme une garantie.
+L'ancien modèle « 100 % freelances à 1,8-2 M Ar/mois, 2 managers dont 1 médical » est
+caduc ; `01-Strategie-Offre/FINANCE-PREVISIONNEL.md` (v2) repose encore dessus et reste à
+mettre à jour.
 
 ### Avantage compétitif
 - Fuseau horaire compatible avec la France
@@ -57,8 +63,8 @@ définis dans **`PRICING.md`** — c'est la **source unique de vérité**. Toute
 (emails `OUTREACH-*`, CRM, simulateurs, `index.html`) doit s'aligner dessus ; en cas
 de divergence, `PRICING.md` fait foi. Réflexion détaillée : `RAPPORT-PRIX.html`.
 
-Rappels clés : priorités niches = **1) médical · 2) Support N1 SaaS & Helpdesk IT ·
-3) Bailleurs** ; offre de lancement = **1er mois à -50 %** (et non plus essai gratuit) ;
+Rappels clés : priorités = **1) Helpdesk IT N1 ESN/MSP · 2) Support applicatif N1
+éditeurs** (le médical est abandonné ; les grilles médicales de `PRICING.md` sont caduques) ; offre de lancement = **1er mois à -50 %** (et non plus essai gratuit) ;
 modèles de tarification = **ETP par position > à l'heure > à l'interaction**.
 
 ## Règle d'arbitrage : SaaS-first avant tout code maison

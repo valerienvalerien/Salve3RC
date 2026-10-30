@@ -41,3 +41,18 @@ td.k{width:34mm;font-weight:600;color:var(--primary)}
 .end{margin-top:6mm;font-weight:700;color:var(--primary)}
 .read p{break-inside:avoid;font-family:Lora,Georgia,serif;font-size:11.5pt;line-height:1.75;margin-bottom:4mm}
 .read .mk{font-family:Inter,Arial,sans-serif;font-size:7.5pt;font-weight:700;letter-spacing:.12em;color:var(--sage);text-transform:uppercase;display:block}
+.pb{break-before:page}
+.fc{background:var(--cream);border-left:3px solid var(--gold);padding:3.5mm 5mm;margin:2mm 0 3mm;break-inside:avoid}
+.fc .mk{font-size:7.5pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1mm}
+.fc p{font-family:Lora,Georgia,serif;font-size:11pt;line-height:1.65;margin:0 0 2.5mm}
+.fc p:last-child{margin-bottom:0}
+.plan td,.plan th{font-size:8.4pt;padding:1.6mm 2mm}
+.plan td:first-child{white-space:nowrap;font-weight:700;color:var(--sage);width:13mm}
+.sw{display:flex;gap:4mm;margin:2mm 0 4mm}
+.sw div{flex:1;border:1px solid var(--line);border-radius:3px;overflow:hidden;font-size:8pt}
+.sw span{display:block;height:13mm}
+.sw b{display:block;padding:1.5mm 2mm 0}
+.sw i{display:block;padding:0 2mm 1.5mm;font-style:normal;color:var(--mute)}
+.chip.v{background:var(--danger)}
+.brief{border:1.5px solid var(--primary);padding:4mm 6mm;margin-top:4mm}
+.q .t{padding-left:7mm;text-indent:-7mm}
