@@ -439,11 +439,9 @@
                         <input type="text" class="search-input" id="search-leads" placeholder="🔍 Rechercher…" oninput="renderLeads()">
                         <select class="filter-sel" id="fil-niche" onchange="renderLeads()">
                             <option value="">Toutes niches</option>
-                            <option value="telemed">🏥 Télésecretariat médical</option>
-                            <option value="support-n1">💻 Support applicatif N1</option>
-                            <option value="helpdesk-n1">🖥️ Helpdesk IT N1</option>
                             <option value="helpdesk-it-esn">🤝 Helpdesk IT — ESN/MSP</option>
-                            <option value="telesec-mb">📞 Télésecrétariat — Marque Blanche</option>
+                            <option value="helpdesk-n1">🖥️ Helpdesk IT N1</option>
+                            <option value="support-n1">💻 Support applicatif N1</option>
                         </select>
                         <select class="filter-sel" id="fil-statut" onchange="renderLeads()">
                             <option value="">Tous statuts</option>
@@ -489,11 +487,9 @@
                             <div class="mail-field">
                                 <select id="mail-niche-fil" onchange="renderMailLeadList()">
                                     <option value="">Toutes niches</option>
-                                    <option value="telemed">🏥 Télésecretariat médical</option>
-                                    <option value="support-n1">💻 Support applicatif N1</option>
-                                    <option value="helpdesk-n1">🖥️ Helpdesk IT N1</option>
                                     <option value="helpdesk-it-esn">🤝 Helpdesk IT — ESN/MSP</option>
-                                    <option value="telesec-mb">📞 Télésecrétariat — Marque Blanche</option>
+                                    <option value="helpdesk-n1">🖥️ Helpdesk IT N1</option>
+                                    <option value="support-n1">💻 Support applicatif N1</option>
                                 </select>
                             </div>
                             <div class="mail-lead-pick" id="mail-lead-list"></div>
@@ -598,19 +594,17 @@
         <form id="lead-form" onsubmit="saveLead(event)">
             <input type="hidden" id="f-lid">
             <div class="form-row">
-                <div class="form-group"><label>Nom du contact *</label><input id="f-nom" required placeholder="Dr. Claire Fontaine"></div>
-                <div class="form-group"><label>Structure / Cabinet *</label><input id="f-struct" required placeholder="Cabinet Fontaine & Assoc."></div>
+                <div class="form-group"><label>Nom du contact *</label><input id="f-nom" required placeholder="Claire Fontaine"></div>
+                <div class="form-group"><label>Structure / Société *</label><input id="f-struct" required placeholder="Fontaine Infogérance"></div>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>Niche *</label>
                     <select id="f-niche" required>
                         <option value="">Choisir…</option>
-                        <option value="telemed">🏥 Télésecretariat médical</option>
-                        <option value="support-n1">💻 Support applicatif N1</option>
-                        <option value="helpdesk-n1">🖥️ Helpdesk IT N1</option>
                         <option value="helpdesk-it-esn">🤝 Helpdesk IT — ESN/MSP</option>
-                        <option value="telesec-mb">📞 Télésecrétariat — Marque Blanche</option>
+                        <option value="helpdesk-n1">🖥️ Helpdesk IT N1</option>
+                        <option value="support-n1">💻 Support applicatif N1</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -642,11 +636,11 @@
                 <div class="form-group"><label>Date 1er contact</label><input type="date" id="f-date"></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="jean@cabinet.fr"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="jean@societe.fr"></div>
                 <div class="form-group"><label>Téléphone</label><input id="f-tel" placeholder="+33 6 12 34 56 78"></div>
             </div>
             <div class="form-group">
-                <label>Opérateur actuel <span style="font-weight:400;color:#94A3B8;font-size:11px">— ex: Serenity, Médicalphone, BPO central Dentego…</span></label>
+                <label>Opérateur actuel <span style="font-weight:400;color:#94A3B8;font-size:11px">— ex: infogérant ou prestataire helpdesk actuel…</span></label>
                 <input id="f-operateur" placeholder="Laisser vide si inconnu">
             </div>
             <div id="f-score-display" style="font-size:12px;color:#64748B;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 12px;margin-bottom:4px"></div>
@@ -709,13 +703,6 @@ function calculateScore(lead) {
     let s = 0;
     if (lead.operateur && lead.operateur.trim()) s += 40;
     if (lead.multisite) s += 30;
-    if (lead.specialiteFlux) s += 20;
-    if ((lead.praticiens || 0) >= 5) s += 20;
-    else if ((lead.praticiens || 0) >= 3) s += 10;
-    if (lead.desertMedical) s += 15;
-    if (lead.accessibiliteNegative) s += 15;
-    if (lead.doctolibSansRDV) s += 10;
-    if (lead.secretariatInterneLimite) s += 5;
     return Math.min(s, 100);
 }
 
@@ -745,12 +732,11 @@ function scoreColor(score) {
 }
 
 // ─── CONSTANTS ────────────────────────────────────────────────
+// Niches télésecrétariat (telemed, telesec-mb) archivées le 2026-10-30 (offre abandonnée).
 const NICHES = {
-    'telemed':     { label: 'Télésecretariat médical', icon: '🏥', color: '#3B82F6' },
-    'support-n1':  { label: 'Support applicatif N1',   icon: '💻', color: '#8B5CF6' },
-    'helpdesk-n1':  { label: 'Helpdesk IT N1',          icon: '🖥️', color: '#10B981' },
     'helpdesk-it-esn': { label: 'Helpdesk IT — ESN/MSP', icon: '🤝', color: '#F59E0B' },
-    'telesec-mb':     { label: 'Télésecrétariat — Marque Blanche', icon: '📞', color: '#EC4899' }
+    'helpdesk-n1':  { label: 'Helpdesk IT N1',          icon: '🖥️', color: '#10B981' },
+    'support-n1':  { label: 'Support applicatif N1',   icon: '💻', color: '#8B5CF6' }
 };
 
 const STATUTS = {
@@ -800,487 +786,14 @@ function uid() { return Date.now().toString(36) + Math.random().toString(36).sli
 (function seedIfEmpty() {
     const d = load();
     if (d.leads.length > 0) return;
-    d.leads = [{"id":"l001","nom":"Cabinet Médical Bichat-Confluence (Dr Le Poder, Dr Caron)","structure":"Cabinet Médical Bichat-Confluence (Dr Le Poder, Dr Caron)","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"drlepoder@gmail.com","tel":"","score":4,"notes":"Lyon (Rhône (69)) | Secteur 1, 2 médecins, RDV Doctolib | Cabinet 2 médecins, RDV Doctolib + tel direct ; pas de mention secrétariat dédié → probable autogestion"},{"id":"l002","nom":"Centre Mediksanté Lyon","structure":"Centre Mediksanté Lyon","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"secretariat-lyon@mediksante.com","tel":"","score":7,"notes":"Lyon (Rhône (69)) | Secrétariat dédié | Centre pluridisciplinaire avec email 'secretariat@' → secrétariat structuré probable (interne ou BPO)"},{"id":"l003","nom":"MSP Fréland","structure":"MSP Fréland","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"secretariat@msp-freland.fr","tel":"","score":6,"notes":"Fréland (Haut-Rhin (68)) | Secrétariat 8h-20h L-V | MSP rurale avec secrétariat large amplitude → probable permanence téléphonique locale FR"},{"id":"l004","nom":"Maison de Santé Mathagon","structure":"Maison de Santé Mathagon","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"mathagonmsp@gmail.com","tel":"","score":6,"notes":"Paris 18 (Paris (75)) | Maison de santé participative | 10 médecins + paramed, accueillantes mentionnées → infrastructure interne, BPO possible en débordement"},{"id":"l005","nom":"Cabinet IMRO - Imagerie Médicale Rennes Ouest","structure":"Cabinet IMRO - Imagerie Médicale Rennes Ouest","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"contact@imro-radiologie-rennes.fr","tel":"","score":8,"notes":"Rennes (Ille-et-Vilaine (35)) | 2 sites - secteur radiologie | Centre radiologie multi-sites - secteur très standardisé, BPO/télésecrétariat quasi-systématique"},{"id":"l006","nom":"Centre de Santé La Roseraie - Anjou Accompagnement","structure":"Centre de Santé La Roseraie - Anjou Accompagnement","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"accueil@anjouaccompagnement.fr","tel":"","score":7,"notes":"Angers (Maine-et-Loire (49)) | Centre santé pluri | Centre santé associatif - accueil dédié, probable permanence téléphonique externalisée"},{"id":"l007","nom":"MSPU Saint-Maur-des-Fossés","structure":"MSPU Saint-Maur-des-Fossés","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"mspustmaur@hotmail.com","tel":"","score":7,"notes":"Saint-Maur-des-Fossés (Val-de-Marne (94)) | 7 généralistes + paramed. | MSP universitaire, secrétariat 8h-19h - probable BPO ou permanence externe"},{"id":"l008","nom":"Dr Sylvie BOISSON","structure":"Dr Sylvie BOISSON","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"boisson_sylvie@yahoo.fr","tel":"","score":2,"notes":"Bonnelles (Yvelines (78)) | Médecin agréé solo | Solo libéral en zone rurale, email Yahoo personnel → probable répondeur + Doctolib, pas de BPO"},{"id":"l009","nom":"Dr Catherine BOSSE","structure":"Dr Catherine BOSSE","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"bossecath@orange.fr","tel":"","score":2,"notes":"Buc (Yvelines (78)) | Médecin agréé solo | Solo libéral, email Orange → autogestion classique"},{"id":"l010","nom":"Dr Nicolas RENAUD","structure":"Dr Nicolas RENAUD","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"nicolasrenaud78@gmail.com","tel":"","score":3,"notes":"Gargenville (Yvelines (78)) | DU Réparation Juridique | Solo libéral avec spécialité (expertise) → peut justifier un télésec ; à confirmer"},{"id":"l011","nom":"Dr Stéphane CROISILLE","structure":"Dr Stéphane CROISILLE","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"stephane.croisille@hotmail.fr","tel":"","score":2,"notes":"Guyancourt (Yvelines (78)) | Médecin agréé solo | Solo libéral, email Hotmail personnel"},{"id":"l012","nom":"Pr Frédéric URBAIN - MSP Jacques Prévert","structure":"Pr Frédéric URBAIN - MSP Jacques Prévert","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"docfrederic@gmail.com","tel":"","score":5,"notes":"Montigny-le-Bretonneux (Yvelines (78)) | MSPU - RDV Doctolib | MSP universitaire - secrétariat probable mais email perso → mixte interne/Doctolib"},{"id":"l013","nom":"Dr Jean BERTAUX","structure":"Dr Jean BERTAUX","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"jeanbertaux@free.fr","tel":"","score":2,"notes":"Les Mureaux (Yvelines (78)) | Médecin agréé | Solo, email Free"},{"id":"l014","nom":"Dr Michel COURTEAUD","structure":"Dr Michel COURTEAUD","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"michel.courteaud@hotmail.com","tel":"","score":3,"notes":"Oinville-sur-Montcient (Yvelines (78)) | Médecine tropicale | Solo avec spécialité - peut avoir un secrétariat partagé"},{"id":"l015","nom":"Dr Myriam ZUILI-BITBOL - Centre Médical Gabriel Péri","structure":"Dr Myriam ZUILI-BITBOL - Centre Médical Gabriel Péri","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"myriambitbol@wanadoo.fr","tel":"","score":5,"notes":"Saint-Cyr-l'École (Yvelines (78)) | Centre médical | Exerce dans un centre médical → secrétariat partagé probable"},{"id":"l016","nom":"Dr Olivier CAPPELE","structure":"Dr Olivier CAPPELE","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"olcappele@hotmail.com","tel":"","score":8,"notes":"Trappes (Yvelines (78)) | Hôpital Privé Ouest Parisien | Praticien en hôpital privé → secrétariat hospitalier (interne ou BPO)"},{"id":"l017","nom":"Dr Patrick LE BARS - CMP de l'Europe","structure":"Dr Patrick LE BARS - CMP de l'Europe","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"plebars@cmce-europe.fr","tel":"","score":7,"notes":"Le Port-Marly (Yvelines (78)) | Email cabinet (cmce-europe.fr) | Email cabinet dédié → centre médical privé avec secrétariat structuré"},{"id":"l018","nom":"Dr Roland MARDUEL","structure":"Dr Roland MARDUEL","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"roland.marduel@wanadoo.fr","tel":"","score":5,"notes":"Le Chesnay (Yvelines (78)) | Ophtalmologue spécialiste | Spécialiste solo - flux RDV élevé en ophtalmo → permanence téléphonique probable"},{"id":"l019","nom":"Dr Hervé SEBILLE - Centre Médical des Vignes","structure":"Dr Hervé SEBILLE - Centre Médical des Vignes","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"h.sebille@wanadoo.fr","tel":"","score":4,"notes":"Les Clayes-sous-Bois (Yvelines (78)) | Psychiatre | Centre médical mais email personnel → secrétariat probable mineur"},{"id":"l020","nom":"Dr Ali HAMDANE - CHI Meulan/Les Mureaux","structure":"Dr Ali HAMDANE - CHI Meulan/Les Mureaux","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"a.hamdane@noose.fr","tel":"","score":8,"notes":"Meulan-en-Yvelines (Yvelines (78)) | Téléconsultation | Pratique hospitalière publique → standard hôpital, BPO en débordement courant"},{"id":"l021","nom":"Cabinet Médical Caudéran République","structure":"Cabinet Médical Caudéran République","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"cabinetcauderan-republique@hotmail.com","tel":"","score":6,"notes":"Bordeaux (Gironde (33)) | Pluri-pro, secrétariat L-V 8-19h | Cabinet pluri-pro, mention 'fermeture secrétariat 12h45-14h' → secrétariat interne, BPO possible jeudi (fermé)"},{"id":"l022","nom":"Dr CHARTON Léa - Maison Urbaine Santé Neuhof","structure":"Dr CHARTON Léa - Maison Urbaine Santé Neuhof","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Strasbourg (Bas-Rhin (67)) | Membre MSP Neuhof | MSP avec page sante.pro - secrétariat partagé MSP"},{"id":"l023","nom":"Cabinet Médical Charlemagne-Suchet","structure":"Cabinet Médical Charlemagne-Suchet","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Lyon (Rhône (69)) | Cabinet groupé Lyon 2 | Cabinet groupé avec site officiel → secrétariat probable"},{"id":"l024","nom":"Dr FRANCHINO Xavier","structure":"Dr FRANCHINO Xavier","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Lyon (Rhône (69)) | Solo libéral Lyon 3 | Solo avec site personnalisé - Doctolib probable"},{"id":"l025","nom":"Cabinet Médical des Vosges (5 médecins)","structure":"Cabinet Médical des Vosges (5 médecins)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Strasbourg (Bas-Rhin (67)) | 5 généralistes, Clickdoc | 5 médecins, secrétariat sur RDV uniquement - cible idéale BPO"},{"id":"l026","nom":"Dr HAMZA-BAIBOU Nabila","structure":"Dr HAMZA-BAIBOU Nabila","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Strasbourg (Bas-Rhin (67)) | Solo libéral | Solo libéral - autogestion probable"},{"id":"l027","nom":"Maison Urbaine de Santé du Neuhof","structure":"Maison Urbaine de Santé du Neuhof","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Strasbourg (Bas-Rhin (67)) | MSP - 03 88 79 08 02 | MSP avec standard téléphonique - probable permanence externe"},{"id":"l028","nom":"Dr NGUYEN-PHAM Evelyne","structure":"Dr NGUYEN-PHAM Evelyne","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Strasbourg (Bas-Rhin (67)) | Spécialité acupuncture | Solo avec spécialité - peut justifier télésec partiel"},{"id":"l029","nom":"Dr SCHEVIN Jean-Marie - MSP Neuhof","structure":"Dr SCHEVIN Jean-Marie - MSP Neuhof","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Strasbourg (Bas-Rhin (67)) | MSP Neuhof | MSP Neuhof - secrétariat partagé"},{"id":"l030","nom":"Dr BERTHOU Anne - MSP Neuhof","structure":"Dr BERTHOU Anne - MSP Neuhof","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Strasbourg (Bas-Rhin (67)) | MSP Neuhof | MSP Neuhof - secrétariat partagé"},{"id":"l031","nom":"Cabinet Médical Toutes Joies (Dr Marine Guias)","structure":"Cabinet Médical Toutes Joies (Dr Marine Guias)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Nantes (Loire-Atlantique (44)) | Cabinet groupé Nantes | Cabinet groupé avec site - secrétariat probable"},{"id":"l032","nom":"Cabinet Médical Beauséjour (Dr DUROSOIR)","structure":"Cabinet Médical Beauséjour (Dr DUROSOIR)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Nantes (Loire-Atlantique (44)) | Site cabinet officiel | Solo avec site - autogestion probable"},{"id":"l033","nom":"Dr THURIEAU Hélène","structure":"Dr THURIEAU Hélène","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Nantes (Loire-Atlantique (44)) | Médecin de famille | Solo libéral"},{"id":"l034","nom":"Dr GUIAS Marine - Cabinet Toutes Joies","structure":"Dr GUIAS Marine - Cabinet Toutes Joies","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Nantes (Loire-Atlantique (44)) | Membre cabinet groupé | Membre cabinet groupé - secrétariat partagé"},{"id":"l035","nom":"Cabinet Médical Place de Bretagne (Dr DORIS)","structure":"Cabinet Médical Place de Bretagne (Dr DORIS)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Rennes (Ille-et-Vilaine (35)) | Cabinet 2 bis pl Bretagne | Cabinet groupé - secrétariat interne probable"},{"id":"l036","nom":"Centre Médical Dupuycare","structure":"Centre Médical Dupuycare","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Toulouse (Haute-Garonne (31)) | Place D. Martin Dupuy | Centre médical - secrétariat structuré probable"},{"id":"l037","nom":"MSP Toulouse Constellation","structure":"MSP Toulouse Constellation","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Toulouse (Haute-Garonne (31)) | Route de Bayonne | MSP - secrétariat partagé"},{"id":"l038","nom":"Cabinet Médical des Soupirs","structure":"Cabinet Médical des Soupirs","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Toulouse (Haute-Garonne (31)) | 31 allée des Soupirs | Cabinet groupé Toulouse - secrétariat probable"},{"id":"l039","nom":"Centre Médical Toulouse (4 médecins)","structure":"Centre Médical Toulouse (4 médecins)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Toulouse (Haute-Garonne (31)) | Bilfeld, Lartiguevieille, Martin, Thomas | Centre 4 médecins - infrastructure secrétariat probable"},{"id":"l040","nom":"Maison de Santé de Mauvezin","structure":"Maison de Santé de Mauvezin","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Mauvezin (Gers (32)) | 9 rue tourneuve | MSP rurale avec secrétariat L-V 8-19h - probable permanence locale"},{"id":"l041","nom":"Cabinet Médical de Polliat (MSP)","structure":"Cabinet Médical de Polliat (MSP)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Polliat (Ain (01)) | MSP rurale | MSP - secrétariat probable"},{"id":"l042","nom":"MSP Lapalisse","structure":"MSP Lapalisse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Lapalisse (Allier (03)) | 04 70 99 65 65 | MSP - permanence téléphonique probable"},{"id":"l043","nom":"Maison Santé Charonne","structure":"Maison Santé Charonne","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Paris 11 (Paris (75)) | 01 43 72 95 80 | MSP urbaine importante - probable BPO ou télésecrétariat"},{"id":"l044","nom":"Cabinet Médical de l'Avenue","structure":"Cabinet Médical de l'Avenue","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Paris 13 (Paris (75)) | 139 av de France | Cabinet Paris pluri - télésec probable"},{"id":"l045","nom":"Dr PICARD Ambre - Cabinet Clermont-Gaillard et Picard","structure":"Dr PICARD Ambre - Cabinet Clermont-Gaillard et Picard","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Amiens (Somme (80)) | 2 médecins associés | Cabinet 2 médecins - secrétariat probable mineur"},{"id":"l046","nom":"Dr DORIS Brigitte - Médecin de famille","structure":"Dr DORIS Brigitte - Médecin de famille","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Rennes (Ille-et-Vilaine (35)) | Cabinet Place de Bretagne | Solo dans cabinet groupé"},{"id":"l047","nom":"Cabinet Médical Allée Serr","structure":"Cabinet Médical Allée Serr","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Bordeaux (Gironde (33)) | 33 allée Serr | Cabinet local Bordeaux"},{"id":"l048","nom":"Dr BORDEAUX Samuel - Cabinet Saint-Georges-sur-Cher","structure":"Dr BORDEAUX Samuel - Cabinet Saint-Georges-sur-Cher","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":2,"notes":"Saint-Georges-sur-Cher (Loir-et-Cher (41)) | Zone rurale | Solo rural - autogestion"},{"id":"l049","nom":"Maison Médicale Aragon","structure":"Maison Médicale Aragon","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Angers (Maine-et-Loire (49)) | 46 av Yolande d'Aragon | Cabinet groupé Angers"},{"id":"l050","nom":"Maison Médicale Saint-Jacques","structure":"Maison Médicale Saint-Jacques","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Angers (Maine-et-Loire (49)) | 4 rue Saint Jacques | MSP Angers"},{"id":"l051","nom":"Centre Dentaire Dentego Lyon Lumière","structure":"Centre Dentaire Dentego Lyon Lumière","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"contact.lyon-lumieres@dentego.fr","tel":"","score":10,"notes":"Dentaire | Lyon (Rhône (69)) | Chaîne Dentego - 42 av Frères Lumière | Chaîne Dentego (80+ centres FR) - service central BPO certain"},{"id":"l052","nom":"Paris Dental Studios","structure":"Paris Dental Studios","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Paris (Paris/Lyon/Aix) | Multi-sites Paris-Lyon-Aix | Chaîne multi-sites - BPO/service centralisé certain"},{"id":"l053","nom":"Dentelia Victoire Bordeaux","structure":"Dentelia Victoire Bordeaux","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"victoire@dentelia.fr","tel":"","score":10,"notes":"Dentaire chaîne | Bordeaux (Gironde (33)) | Chaîne Dentelia | Chaîne Dentelia - BPO central"},{"id":"l054","nom":"Dentelia Fondaudège Bordeaux","structure":"Dentelia Fondaudège Bordeaux","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"fondaudege@dentelia.fr","tel":"","score":10,"notes":"Dentaire chaîne | Bordeaux (Gironde (33)) | Chaîne Dentelia | Chaîne Dentelia - BPO central"},{"id":"l055","nom":"Dentego Bordeaux Lac","structure":"Dentego Bordeaux Lac","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Bordeaux (Gironde (33)) | Chaîne Dentego | Chaîne Dentego - BPO central certain"},{"id":"l056","nom":"Dentego Strasbourg Broglie","structure":"Dentego Strasbourg Broglie","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Strasbourg (Bas-Rhin (67)) | Chaîne Dentego Strasbourg | Chaîne Dentego - BPO central"},{"id":"l057","nom":"Dentego Nantes","structure":"Dentego Nantes","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Nantes (Loire-Atlantique (44)) | Chaîne Dentego Nantes | Chaîne Dentego - BPO central"},{"id":"l058","nom":"Dentego Toulouse","structure":"Dentego Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Toulouse (Haute-Garonne (31)) | Chaîne Dentego Toulouse | Chaîne Dentego - BPO central"},{"id":"l059","nom":"Dentego Lille","structure":"Dentego Lille","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Lille (Nord (59)) | Chaîne Dentego Lille | Chaîne Dentego - BPO central"},{"id":"l060","nom":"Dentego Nice","structure":"Dentego Nice","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Nice (Alpes-Maritimes (06)) | Chaîne Dentego Nice | Chaîne Dentego - BPO central"},{"id":"l061","nom":"Dentego Montpellier","structure":"Dentego Montpellier","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Dentaire chaîne | Montpellier (Hérault (34)) | Chaîne Dentego Montpellier | Chaîne Dentego - BPO central"},{"id":"l062","nom":"Dentelia Mérignac","structure":"Dentelia Mérignac","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"merignac@dentelia.fr","tel":"","score":10,"notes":"Dentaire chaîne | Mérignac (Gironde (33)) | Chaîne Dentelia | Chaîne Dentelia - BPO central"},{"id":"l063","nom":"Institut de Kinésithérapie IK Paris 16 Trocadéro","structure":"Institut de Kinésithérapie IK Paris 16 Trocadéro","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 16 (Paris (75)) | Réseau IK Trocadéro | Réseau IK 30+ centres - BPO centralisé certain"},{"id":"l064","nom":"Institut de Kinésithérapie IK Paris 8 Saint Lazare","structure":"Institut de Kinésithérapie IK Paris 8 Saint Lazare","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 8 (Paris (75)) | Réseau IK Saint Lazare | Réseau IK - BPO central"},{"id":"l065","nom":"IK Paris 17 Villiers","structure":"IK Paris 17 Villiers","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 17 (Paris (75)) | Réseau IK Villiers | Réseau IK - BPO central"},{"id":"l066","nom":"IK Paris 6 Cassette","structure":"IK Paris 6 Cassette","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 6 (Paris (75)) | Réseau IK 6e | Réseau IK - BPO central"},{"id":"l067","nom":"IK Paris 15 Ségur","structure":"IK Paris 15 Ségur","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 15 (Paris (75)) | Réseau IK 15e | Réseau IK - BPO central"},{"id":"l068","nom":"IK Paris 7 Saint-Germain","structure":"IK Paris 7 Saint-Germain","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 7 (Paris (75)) | Réseau IK Saint-Germain | Réseau IK - BPO central"},{"id":"l069","nom":"IK Paris 11","structure":"IK Paris 11","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 11 (Paris (75)) | Réseau IK 11e | Réseau IK - BPO central"},{"id":"l070","nom":"IK Paris 9 Pétrelle","structure":"IK Paris 9 Pétrelle","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 9 (Paris (75)) | Réseau IK Pétrelle | Réseau IK - BPO central"},{"id":"l071","nom":"IK Paris 19","structure":"IK Paris 19","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Paris 19 (Paris (75)) | Réseau IK 19e | Réseau IK - BPO central"},{"id":"l072","nom":"IK Boulogne","structure":"IK Boulogne","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Boulogne-Billancourt (Hauts-de-Seine (92)) | Réseau IK Boulogne | Réseau IK - BPO central"},{"id":"l073","nom":"IK Châtenay-Malabry","structure":"IK Châtenay-Malabry","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Châtenay-Malabry (Hauts-de-Seine (92)) | Réseau IK Châtenay | Réseau IK - BPO central"},{"id":"l074","nom":"IK Vanves","structure":"IK Vanves","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Vanves (Hauts-de-Seine (92)) | Réseau IK Vanves | Réseau IK - BPO central"},{"id":"l075","nom":"IK Antony Olympe Santé","structure":"IK Antony Olympe Santé","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Antony (Hauts-de-Seine (92)) | Réseau IK Antony | Réseau IK - BPO central"},{"id":"l076","nom":"IK Meudon","structure":"IK Meudon","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Meudon (Hauts-de-Seine (92)) | Réseau IK Meudon | Réseau IK - BPO central"},{"id":"l077","nom":"IK Bois-Colombes","structure":"IK Bois-Colombes","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Bois-Colombes (Hauts-de-Seine (92)) | Réseau IK Bois-Colombes | Réseau IK - BPO central"},{"id":"l078","nom":"IK Morangis","structure":"IK Morangis","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Kiné chaîne | Morangis (Essonne (91)) | Réseau IK Morangis | Réseau IK - BPO central"},{"id":"l079","nom":"Dentylis - Centre Dentaire Lyon Terreaux","structure":"Dentylis - Centre Dentaire Lyon Terreaux","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Dentaire | Lyon (Rhône (69)) | 1 Place des Terreaux | Chaîne Dentylis - centralisation BPO quasi-certaine"},{"id":"l080","nom":"Centre Dentaire Lyon Moncey (Médident)","structure":"Centre Dentaire Lyon Moncey (Médident)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Dentaire | Lyon (Rhône (69)) | Chaîne Médident | Chaîne Médident - centralisation BPO probable"},{"id":"l081","nom":"Sana Oris Paris","structure":"Sana Oris Paris","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Dentaire premium | Paris 8 (Paris (75)) | Centre premium | Centre premium international - BPO certain"},{"id":"l082","nom":"Elone Clinic Paris 16","structure":"Elone Clinic Paris 16","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Dentaire premium | Paris 16 (Paris (75)) | Clinique haut de gamme | Clinique premium - BPO/concierge certain"},{"id":"l083","nom":"Cabinet Dentaire Bordeaux Nord (CDBN)","structure":"Cabinet Dentaire Bordeaux Nord (CDBN)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Dentaire multi-sites | Bordeaux (Gironde (33)) | Bordeaux, Mérignac, Cubzac | Multi-sites - secrétariat centralisé probable"},{"id":"l084","nom":"Cabinet du Grand Théâtre Bordeaux","structure":"Cabinet du Grand Théâtre Bordeaux","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"grandtheatre@parisdentalstudios.com","tel":"","score":9,"notes":"Dentaire premium | Bordeaux (Gironde (33)) | Esthétique dentaire | Groupe Paris Dental Studios - service central"},{"id":"l085","nom":"Centre Soins Dentaires CHU Lyon (HCL)","structure":"Centre Soins Dentaires CHU Lyon (HCL)","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"CSD.consultations@chu-lyon.fr","tel":"","score":9,"notes":"Dentaire hospitalier | Lyon (Rhône (69)) | CHU Hospices Civils Lyon | Hôpital - standard CHU, BPO en débordement courant"},{"id":"l086","nom":"Côté Kiné Toulouse (11 kinés - 3 pôles)","structure":"Côté Kiné Toulouse (11 kinés - 3 pôles)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Kiné chaîne locale | Toulouse (Haute-Garonne (31)) | 11 kinés - 3 pôles - balnéo | Très grand cabinet 11 kinés multi-sites - BPO/télésec quasi-certain"},{"id":"l087","nom":"Clinic Osteo (Paris/Lyon)","structure":"Clinic Osteo (Paris/Lyon)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Ostéopathie chaîne | Paris (Multi-villes) | Multi-sites Paris/Lyon | Chaîne multi-sites - BPO central probable"},{"id":"l088","nom":"Lyonosteo (4 centres : Lyon 1, 6, 7, Villeurbanne)","structure":"Lyonosteo (4 centres : Lyon 1, 6, 7, Villeurbanne)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":9,"notes":"Ostéopathie chaîne locale | Lyon (Rhône (69)) | 4 centres - 11 ostéos | Chaîne locale 4 sites, 11 ostéos - télésec quasi-certain"},{"id":"l089","nom":"Cabinet Dentaire Paris Monceau (Dr Mahdhaoui)","structure":"Cabinet Dentaire Paris Monceau (Dr Mahdhaoui)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":8,"notes":"Dentaire | Paris 8 (Paris (75)) | Centre 8e - haut de gamme | Cabinet Paris haut de gamme - télésec quasi-certain"},{"id":"l090","nom":"Clinique Esthétique Dentaire Bordeaux","structure":"Clinique Esthétique Dentaire Bordeaux","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":8,"notes":"Dentaire esthétique | Bordeaux (Gironde (33)) | 05 47 74 29 90 | Clinique privée esthétique - télésec quasi-certain"},{"id":"l091","nom":"Cabinet Ostéopathie des Arènes Toulouse (7h-21h)","structure":"Cabinet Ostéopathie des Arènes Toulouse (7h-21h)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":8,"notes":"Ostéopathie | Toulouse (Haute-Garonne (31)) | Amplitude 7h-21h | Amplitude horaire 7h-21h → permanence téléphonique externe quasi-certaine"},{"id":"l092","nom":"Cabinet Dentaire Tête d'Or","structure":"Cabinet Dentaire Tête d'Or","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire - implantologie | Lyon (Rhône (69)) | Implants + chirurgie sourire | Spécialité implants - flux RDV élevé, télésec quasi-systématique"},{"id":"l093","nom":"Cabinet Dentaire Helvetie","structure":"Cabinet Dentaire Helvetie","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire | Lyon (Rhône (69)) | Soins, implants, orthodontie | Cabinet pluriservices - télésec probable"},{"id":"l094","nom":"Centre Dentaire Paris 15 (Dr Revah)","structure":"Centre Dentaire Paris 15 (Dr Revah)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire | Paris 15 (Paris (75)) | 103 rue Abbé Groult | Centre Paris - télésec probable"},{"id":"l095","nom":"Implant Dentaire Bordeaux","structure":"Implant Dentaire Bordeaux","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire - implantologie | Bordeaux (Gironde (33)) | Spécialité implants | Spécialité implants - télésec probable"},{"id":"l096","nom":"Odontia Clinic Bordeaux","structure":"Odontia Clinic Bordeaux","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire - parodontologie | Bordeaux (Gironde (33)) | Parodontologie | Spécialité - télésec probable"},{"id":"l097","nom":"Centre Dentaire Strasbourg","structure":"Centre Dentaire Strasbourg","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire | Strasbourg (Bas-Rhin (67)) | 03 90 00 55 55 | Centre dentaire - télésec probable"},{"id":"l098","nom":"Centre Dentaire Strasbourg Rivetoile","structure":"Centre Dentaire Strasbourg Rivetoile","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Dentaire | Strasbourg (Bas-Rhin (67)) | Centre Rivetoile | Centre dentaire - télésec probable"},{"id":"l099","nom":"Cabinet Bellecour Sala Lyon 2","structure":"Cabinet Bellecour Sala Lyon 2","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Kiné + orthophonie + ostéo | Lyon (Rhône (69)) | Pluridisciplinaire | Cabinet pluridisciplinaire - secrétariat structuré"},{"id":"l100","nom":"Cabinet Méthode Busquet Pau","structure":"Cabinet Méthode Busquet Pau","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"secretariat@methode-busquet.com","tel":"","score":7,"notes":"Ostéopathie | Pau (Pyrénées-Atlantiques (64)) | 19 av d'Ossau - méthode reconnue | Cabinet enseignement - secrétariat dédié, BPO probable"},{"id":"l101","nom":"CEESO Cabinet Universitaire Ostéopathie Lyon 7","structure":"CEESO Cabinet Universitaire Ostéopathie Lyon 7","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Ostéopathie école | Lyon (Rhône (69)) | Cabinet école - étudiants encadrés | Cabinet école - secrétariat structuré"},{"id":"l102","nom":"Cabinet Capitole Toulouse (ostéo + psy + thérapies)","structure":"Cabinet Capitole Toulouse (ostéo + psy + thérapies)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Ostéopathie + psy | Toulouse (Haute-Garonne (31)) | 2 sites Toulouse - Rémusat + Mirepoix | Cabinet pluri 2 sites - secrétariat probable"},{"id":"l103","nom":"Académie d'Ostéopathie Montpellier","structure":"Académie d'Ostéopathie Montpellier","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"contact@academie-osteopathie.fr","tel":"","score":7,"notes":"Ostéopathie école | Montpellier (Hérault (34)) | École + cabinet | École + cabinet - secrétariat structuré"},{"id":"l104","nom":"Boisbouvier Ostéopathe Monaco/Nice","structure":"Boisbouvier Ostéopathe Monaco/Nice","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":7,"notes":"Ostéopathie premium | Nice (Alpes-Maritimes (06)) | Multi-sites Monaco-Nice | Cabinet international - télésec probable"},{"id":"l105","nom":"Cabinet Dentaire de La Major (4 dentistes)","structure":"Cabinet Dentaire de La Major (4 dentistes)","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"cabinetdentairelamajor@gmail.com","tel":"","score":6,"notes":"Dentaire | Marseille (Bouches-du-Rhône (13)) | 4 chirurgiens-dentistes - L-V 8h-19h | Cabinet groupé 4 praticiens, secrétariat dédié L-V - télésecrétariat possible"},{"id":"l106","nom":"Cabinet Dentaire de l'Avenue (Paris 13)","structure":"Cabinet Dentaire de l'Avenue (Paris 13)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Dentaire | Paris 13 (Paris (75)) | 01 88 33 49 40 | Cabinet Paris - secrétariat interne probable"},{"id":"l107","nom":"Kiné Europe Paris 17","structure":"Kiné Europe Paris 17","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Kiné sport | Paris 17 (Paris (75)) | Kiné sport + coaching | Cabinet structuré avec services premium - télésec probable"},{"id":"l108","nom":"Centre Kiné du Sport Saxe Lyon 3","structure":"Centre Kiné du Sport Saxe Lyon 3","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Kiné sport | Lyon (Rhône (69)) | 09 72 54 99 43 | Centre sport - flux RDV élevé"},{"id":"l109","nom":"Cabinet l'Okal Toulouse (Estoup, Prieur, Tixier)","structure":"Cabinet l'Okal Toulouse (Estoup, Prieur, Tixier)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":6,"notes":"Kiné sport + ostéo | Toulouse (Haute-Garonne (31)) | 3 praticiens - cabinet + domicile | Cabinet groupé 3 praticiens"},{"id":"l110","nom":"DISOS Hérault Montpellier","structure":"DISOS Hérault Montpellier","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"disos.secretariat@gmail.com","tel":"","score":6,"notes":"Ostéopathie associative | Montpellier (Hérault (34)) | Dispensaires ostéo solidaires | Réseau associatif - secrétariat dédié"},{"id":"l111","nom":"Dentalyon - Cabinet Dentaire Préfecture","structure":"Dentalyon - Cabinet Dentaire Préfecture","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Lyon (Rhône (69)) | Cabinet Lyon centre | Cabinet groupé Lyon - secrétariat probable interne"},{"id":"l112","nom":"Le Studio Dentaire (Dr Touati)","structure":"Le Studio Dentaire (Dr Touati)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Lyon (Rhône (69)) | Cabinet Dr Touati Hervé | Cabinet groupé Lyon 3"},{"id":"l113","nom":"Cabinet Dentaire (Paris 15)","structure":"Cabinet Dentaire (Paris 15)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Paris 15 (Paris (75)) | Cabinet Paris 15 | Cabinet local Paris"},{"id":"l114","nom":"Cabinet Dentaire Maubeuge (Paris 9)","structure":"Cabinet Dentaire Maubeuge (Paris 9)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Paris 9 (Paris (75)) | Dentiste 9e | Cabinet local"},{"id":"l115","nom":"Cabinet Dentaire Place du Commerce Paris 15 (Assous)","structure":"Cabinet Dentaire Place du Commerce Paris 15 (Assous)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Paris 15 (Paris (75)) | Cabinet Assous | Cabinet local"},{"id":"l116","nom":"GAD Cabinet Dentaire Bordeaux","structure":"GAD Cabinet Dentaire Bordeaux","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Bordeaux (Gironde (33)) | Cabinet local | Cabinet local"},{"id":"l117","nom":"Cabinet Dr Stadler & associés Rennes","structure":"Cabinet Dr Stadler & associés Rennes","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Dentaire | Rennes (Ille-et-Vilaine (35)) | Cabinet Rennes | Cabinet local Rennes"},{"id":"l118","nom":"Cabinet KB Kinés Paris 8","structure":"Cabinet KB Kinés Paris 8","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"kbkines.paris@gmail.com","tel":"","score":5,"notes":"Kiné sport | Paris 8 (Paris (75)) | Kiné du sport - 2 praticiennes | Petit cabinet 2 praticiens - secrétariat probable interne"},{"id":"l119","nom":"Kiné Nation Paris 12","structure":"Kiné Nation Paris 12","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Kiné | Paris 12 (Paris (75)) | 07 66 99 45 29 | Cabinet local Paris 12"},{"id":"l120","nom":"KPS Toulouse (Kiné Physio Sport)","structure":"KPS Toulouse (Kiné Physio Sport)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Kiné sport | Toulouse (Haute-Garonne (31)) | Biason + Alvarez Ruiz | Cabinet groupé spécialisé"},{"id":"l121","nom":"Cabinet du Boulevard des Minimes Toulouse","structure":"Cabinet du Boulevard des Minimes Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Kiné + ostéo | Toulouse (Haute-Garonne (31)) | Hamel + Saint-Venant | Cabinet groupé"},{"id":"l122","nom":"Cabinet Rosa Maria Peña Toulouse","structure":"Cabinet Rosa Maria Peña Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Kiné + ostéo | Toulouse (Haute-Garonne (31)) | Quartier Jeanne d'Arc - 8h30-20h | Cabinet local large amplitude"},{"id":"l123","nom":"Cabinet B - Ostéo + médecine douce Toulouse","structure":"Cabinet B - Ostéo + médecine douce Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":5,"notes":"Ostéopathie + médecine douce | Toulouse (Haute-Garonne (31)) | Cabinet pluri | Cabinet pluri - télésec possible"},{"id":"l124","nom":"CNEJMO (Cie Nationale Experts Judiciaires Ostéo)","structure":"CNEJMO (Cie Nationale Experts Judiciaires Ostéo)","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"secretariat@cnejmo.fr","tel":"","score":5,"notes":"Ostéopathie pro | Paris (France) | Organisation pro | Organisation pro - secrétariat dédié"},{"id":"l125","nom":"Cabinet Paramédical Phénix Lyon (Olivier Barberot)","structure":"Cabinet Paramédical Phénix Lyon (Olivier Barberot)","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"barberot.phenix@gmail.com","tel":"","score":4,"notes":"Kiné | Lyon (Rhône (69)) | Cabinet Lyon 3 | Cabinet local - autogestion probable"},{"id":"l126","nom":"Kiné Lyon 3","structure":"Kiné Lyon 3","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Kiné | Lyon (Rhône (69)) | Cabinet Lyon 3 | Cabinet local Lyon"},{"id":"l127","nom":"Kinésithérapie Croix Rousse Lyon 4","structure":"Kinésithérapie Croix Rousse Lyon 4","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Kiné | Lyon (Rhône (69)) | 04 78 69 06 43 | Cabinet local"},{"id":"l128","nom":"Cabinet PhysioZone Marseille","structure":"Cabinet PhysioZone Marseille","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Kiné | Marseille (Bouches-du-Rhône (13)) | 22 bd Verd | Cabinet local Marseille"},{"id":"l129","nom":"Cabinet Ostéopathe Lyon 6","structure":"Cabinet Ostéopathe Lyon 6","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Ostéopathie | Lyon (Rhône (69)) | Cabinet Lyon 6 | Cabinet local"},{"id":"l130","nom":"Ostéopathie Lyon 3","structure":"Ostéopathie Lyon 3","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Ostéopathie | Lyon (Rhône (69)) | 143 rue Baraban | Cabinet local"},{"id":"l131","nom":"Cabinet Ostéopathie D.O Toulouse (Provenzani)","structure":"Cabinet Ostéopathie D.O Toulouse (Provenzani)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Ostéopathie urgence/sport | Toulouse (Haute-Garonne (31)) | 06 77 84 66 90 | Cabinet spé urgence-sport"},{"id":"l132","nom":"Cabinet Dailland-Bonte Ostéo Toulouse","structure":"Cabinet Dailland-Bonte Ostéo Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":4,"notes":"Ostéopathie | Toulouse (Haute-Garonne (31)) | Cabinet groupé | Cabinet groupé"},{"id":"l133","nom":"Dr Julie Béranger Rennes","structure":"Dr Julie Béranger Rennes","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Dentaire | Rennes (Ille-et-Vilaine (35)) | 263 rue de Nantes | Solo dentiste"},{"id":"l134","nom":"Dr David Thomas Rennes","structure":"Dr David Thomas Rennes","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Dentaire | Rennes (Ille-et-Vilaine (35)) | 263 A rue de Nantes | Solo dentiste"},{"id":"l135","nom":"Dr Nicolas Joyard - Ostéo Lyon 6","structure":"Dr Nicolas Joyard - Ostéo Lyon 6","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Ostéopathie | Lyon (Rhône (69)) | 04 37 47 90 90 | Solo libéral"},{"id":"l136","nom":"Thomas Gronoff - Ostéopathe Toulouse / Saint-Orens","structure":"Thomas Gronoff - Ostéopathe Toulouse / Saint-Orens","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":3,"notes":"Ostéopathie | Toulouse (Haute-Garonne (31)) | 06 67 50 40 13 | Solo multi-sites"},{"id":"l137","nom":"Cabinet Ostéopathie Marine Barbier Lyon 6","structure":"Cabinet Ostéopathie Marine Barbier Lyon 6","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":2,"notes":"Ostéopathie | Lyon (Rhône (69)) | Solo Lyon 6 | Solo libéral"},{"id":"l138","nom":"Jean de Parscau - Ostéopathe Lyon","structure":"Jean de Parscau - Ostéopathe Lyon","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":2,"notes":"Ostéopathie | Lyon (Rhône (69)) | Solo Lyon | Solo libéral"},{"id":"l139","nom":"Marine Cymbor Ostéo Toulouse Minimes","structure":"Marine Cymbor Ostéo Toulouse Minimes","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"cymbor.marine@gmail.com","tel":"","score":2,"notes":"Ostéopathie | Toulouse (Haute-Garonne (31)) | Quartier Minimes | Solo libéral"},{"id":"l140","nom":"Thomas Mouries - Ostéopathe Toulouse","structure":"Thomas Mouries - Ostéopathe Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":2,"notes":"Ostéopathie | Toulouse (Haute-Garonne (31)) | 2 bis bd Arcole | Solo libéral"},{"id":"l141","nom":"Cabinet Hélène Mary Ostéo Toulouse","structure":"Cabinet Hélène Mary Ostéo Toulouse","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":2,"notes":"Ostéopathie | Toulouse (Haute-Garonne (31)) | Solo Toulouse | Solo libéral"},{"id":"l142","nom":"ONCD - Conseil National Ordre Chirurgiens-Dentistes","structure":"ONCD - Conseil National Ordre Chirurgiens-Dentistes","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Annuaire pro | Paris (France entière) | Annuaire institutionnel - source de prospection | Source de prospection - non scoré (organisation pro)"},{"id":"l143","nom":"Ordre Masseurs-Kinésithérapeutes Bouches-du-Rhône","structure":"Ordre Masseurs-Kinésithérapeutes Bouches-du-Rhône","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Ordre pro | Marseille (Bouches-du-Rhône (13)) | Conseil départemental | Organisation professionnelle - source"},{"id":"l144","nom":"Cabinet Kiné Doctolib Lyon (annuaire)","structure":"Cabinet Kiné Doctolib Lyon (annuaire)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Kiné annuaire | Lyon (Rhône (69)) | Annuaire pour prospection ciblée | Source d'annuaire - non scoré"},{"id":"l145","nom":"Kinésithérapeutes Lyon (Annuaire IPPP - 142 kinés)","structure":"Kinésithérapeutes Lyon (Annuaire IPPP - 142 kinés)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Kiné annuaire | Lyon (Rhône (69)) | Annuaire prospection | Source d'annuaire - non scoré"},{"id":"l146","nom":"Kinésithérapeutes Toulouse (Annuaire IPPP - 121 kinés)","structure":"Kinésithérapeutes Toulouse (Annuaire IPPP - 121 kinés)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Kiné annuaire | Toulouse (Haute-Garonne (31)) | Annuaire prospection | Source d'annuaire - non scoré"},{"id":"l147","nom":"Cabinet Kiné PagesJaunes Bordeaux","structure":"Cabinet Kiné PagesJaunes Bordeaux","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Kiné annuaire | Bordeaux (Gironde (33)) | Annuaire prospection | Source d'annuaire - non scoré"},{"id":"l148","nom":"Registre des Ostéopathes de France (ROF)","structure":"Registre des Ostéopathes de France (ROF)","niche":"telemed","canal":"Email","statut":"nouveau","dateContact":"","email":"contact@osteopathie.org","tel":"","score":0,"notes":"Annuaire pro | Paris (France entière) | Annuaire institutionnel | Source d'annuaire"},{"id":"l149","nom":"Annuaire Ostéopathe France Lyon (Rhône)","structure":"Annuaire Ostéopathe France Lyon (Rhône)","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Annuaire pro | Lyon (Rhône (69)) | Annuaire prospection Rhône | Source d'annuaire"},{"id":"l150","nom":"Annuaire Ostéopathes Loire-Atlantique","structure":"Annuaire Ostéopathes Loire-Atlantique","niche":"telemed","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":0,"notes":"Annuaire pro | Nantes (Loire-Atlantique (44)) | Annuaire prospection Loire-Atl. | Source d'annuaire"},{"id":"l151","nom":"Action Logement Services","structure":"Action Logement Services","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"0970 800 800","score":10,"notes":"Helpdesk N1 / Support applicatif | France entière | Acteur central 1% logement | Grand groupe public - centres de relation client multi-sites, BPO partiel certain"},{"id":"l152","nom":"in'li (filiale Action Logement IDF/Auvergne)","structure":"in'li (filiale Action Logement IDF/Auvergne)","niche":"helpdesk-n1","canal":"Email","statut":"nouveau","dateContact":"","email":"serviceclient@inli.fr","tel":"01 76 49 79 79","score":9,"notes":"Helpdesk locataires / support applicatif | Île-de-France + Auvergne | Tour Ariane La Défense | Bailleur structuré - centre relation client - BPO partiel courant"},{"id":"l153","nom":"AL'in (plateforme Action Logement)","structure":"AL'in (plateforme Action Logement)","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"0970 800 800","score":10,"notes":"Support applicatif N1 - cible idéale | France entière | Plateforme 100% digitale | Plateforme digitale = besoin support N1 / Helpdesk IT continu"},{"id":"l154","nom":"CDC Habitat (groupe Caisse des Dépôts)","structure":"CDC Habitat (groupe Caisse des Dépôts)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":10,"notes":"Helpdesk N1 / Support applicatif | France entière | Conseillers Dijon + Montpellier | Centres relation client Dijon+Montpellier - BPO en débordement classique"},{"id":"l155","nom":"Adoma (filiale CDC Habitat)","structure":"Adoma (filiale CDC Habitat)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 40 21 30 00","score":9,"notes":"Helpdesk N1 multilingue | France entière | Foyers travailleurs migrants | Population multilingue - télésecrétariat externalisé partiel probable"},{"id":"l156","nom":"1001 Vies Habitat","structure":"1001 Vies Habitat","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"0810 800 005","score":9,"notes":"Helpdesk locataires | France entière | Filiale Action Logement Immobilier | Centre relation locataire - BPO en débordement"},{"id":"l157","nom":"Plurial Novilia","structure":"Plurial Novilia","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"03 26 36 33 33","score":8,"notes":"Helpdesk locataires | Grand Est + IDF | Groupe Action Logement | Bailleur régional - centre relation client probable"},{"id":"l158","nom":"ICF Habitat (SNCF)","structure":"ICF Habitat (SNCF)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"Variable","score":9,"notes":"Helpdesk N1 | France entière | Filiale SNCF | Filiale SNCF - infrastructure centre d'appels existante"},{"id":"l159","nom":"Logement Français (groupe ALS)","structure":"Logement Français (groupe ALS)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"0810 015 040","score":8,"notes":"Helpdesk locataires | France entière | Groupe ALS | Grand bailleur - centre relation client"},{"id":"l160","nom":"Domofrance","structure":"Domofrance","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"05 56 11 64 64","score":8,"notes":"Helpdesk locataires | Nouvelle-Aquitaine | Action Logement Nouvelle-Aquitaine | Bailleur régional - service client structuré"},{"id":"l161","nom":"Vilogia","structure":"Vilogia","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"0 970 818 100","score":9,"notes":"Helpdesk locataires | Hauts-de-France + IDF | ESH - 75000 logements | ESH majeur - centre relation client multi-canal"},{"id":"l162","nom":"Erilia","structure":"Erilia","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"04 91 18 45 45","score":8,"notes":"Helpdesk locataires | PACA + Occitanie | Groupe Habitat en Région | Bailleur régional - relation client structurée"},{"id":"l163","nom":"Aiguillon Construction (groupe Procivis)","structure":"Aiguillon Construction (groupe Procivis)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"02 99 35 35 35","score":7,"notes":"Helpdesk locataires | Grand Ouest | Bretagne + Pays de Loire | Bailleur régional - centre relation client"},{"id":"l164","nom":"Solendi (Action Logement Grand Est)","structure":"Solendi (Action Logement Grand Est)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"0 970 800 800","score":8,"notes":"Helpdesk N1 | Grand Est | Filiale Action Logement | Filiale - support via standard groupe"},{"id":"l165","nom":"Habitat 76 (Seine-Maritime)","structure":"Habitat 76 (Seine-Maritime)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"02 35 03 60 00","score":7,"notes":"Helpdesk locataires | Seine-Maritime | OPH Seine-Maritime | OPH départemental - service client interne"},{"id":"l166","nom":"Caisse d'Allocations Familiales (CAF) - National","structure":"Caisse d'Allocations Familiales (CAF) - National","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"3230","score":10,"notes":"Helpdesk N1 / Support applicatif | France entière | 100 CAF départementales | Service public majeur - BPO/télé-conseillers nombreux"},{"id":"l167","nom":"France Travail (ex Pôle Emploi)","structure":"France Travail (ex Pôle Emploi)","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"3949","score":10,"notes":"Helpdesk N1 candidats | France entière | 900 agences | Standard 3949 - BPO en débordement systématique"},{"id":"l168","nom":"URSSAF Caisse Nationale","structure":"URSSAF Caisse Nationale","niche":"helpdesk-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"3957","score":9,"notes":"Helpdesk applicatif | France entière | URSSAF nationale | Service contact dédié - BPO possible"},{"id":"l169","nom":"Croix-Rouge française - Siège national","structure":"Croix-Rouge française - Siège national","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 44 43 11 00","score":9,"notes":"Support bénévoles + standard donateurs | France entière | 98 délégations dép. | Grande association - centre relation donateurs et bénéficiaires"},{"id":"l170","nom":"Secours Catholique - Caritas France","structure":"Secours Catholique - Caritas France","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 45 49 73 00","score":8,"notes":"Support donateurs | France entière | 75 délégations | Standard national - télésec partiel probable"},{"id":"l171","nom":"Secours Populaire Français","structure":"Secours Populaire Français","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 44 78 21 00","score":8,"notes":"Support donateurs + bénéficiaires | France entière | 98 fédérations | Grande association - relation donateurs"},{"id":"l172","nom":"Restos du Coeur","structure":"Restos du Coeur","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 53 32 23 23","score":7,"notes":"Standard national | France entière | 5000 centres | Standard téléphonique - télésec partiel"},{"id":"l173","nom":"Emmaüs France","structure":"Emmaüs France","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 41 58 25 00","score":7,"notes":"Support compagnons + donateurs | France entière | 291 groupes | Réseau national - centre relation classique"},{"id":"l174","nom":"Emmaüs Solidarité","structure":"Emmaüs Solidarité","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 44 82 78 00","score":8,"notes":"Standard accueil 24/7 | IDF + autres | Hébergement urgence | Hébergement urgence = standard 24/7 - BPO/télésec quasi-certain"},{"id":"l175","nom":"Aurore","structure":"Aurore","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 44 89 17 00","score":7,"notes":"Standard accueil | IDF + 5 régions | 10000 personnes accompagnées | Association d'envergure - relation client probable"},{"id":"l176","nom":"France Horizon","structure":"France Horizon","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 53 38 70 70","score":6,"notes":"Standard | France entière | Lutte contre exclusion | Association nationale - secrétariat probable"},{"id":"l177","nom":"Fondation Abbé Pierre","structure":"Fondation Abbé Pierre","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 55 56 37 00","score":8,"notes":"Standard donateurs | France entière | Plaidoyer + action | Grande fondation - centre donateurs structuré"},{"id":"l178","nom":"Habitat et Humanisme","structure":"Habitat et Humanisme","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"04 72 27 42 42","score":7,"notes":"Support locataires + bénévoles | France entière | 59 associations locales | Réseau national - télésec probable"},{"id":"l179","nom":"UNHAJ - Union Nationale Habitat Jeunes","structure":"UNHAJ - Union Nationale Habitat Jeunes","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 41 74 81 00","score":6,"notes":"Standard fédération | France entière | 400 résidences habitat jeunes | Fédération nationale"},{"id":"l180","nom":"Médecins du Monde France","structure":"Médecins du Monde France","niche":"support-n1","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"01 44 92 15 15","score":8,"notes":"Standard donateurs + bénévoles | France entière | Médecins humanitaires | ONG d'envergure - centre relation donateurs"},{"id":"l181","nom":"Metaline IT","structure":"Metaline IT (groupe Metaline Corp)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"a.sebban@metaline.fr","tel":"","score":78,"notes":"Nanterre (92) | ESN infogérance 850+ pers, ~60M€ CA | Décideur : Alexandre Sebban DG Ops (a.sebban@metaline.fr, 75%) + Samuel Amiet Président (LinkedIn confirmé) | Signal fort : 75+ offres helpdesk actives mai 2026 + 1,8M appels/an | Actionnaire PE LFPI depuis 2023 | Aucune filiale offshore | Fallback : alexandre.sebban@metaline.fr"},{"id":"l182","nom":"Oxxodata","structure":"Oxxodata","niche":"helpdesk-it-esn","canal":"LinkedIn","statut":"nouveau","dateContact":"","email":"contact@oxxodata.com","tel":"","score":71,"notes":"Meyzieu (69) | ESN micro-structure 2-10 pers | Décideur : Hichem Boulahbel Président-Fondateur (LinkedIn actif) | Signal unique : vend déjà infogérance helpdesk en marque blanche — propose une couche humaine BPO | LinkedIn-first recommandé (profil actif, posts infogérance) | Email basse confiance : hichem.boulahbel@oxxodata.com, fallback contact@oxxodata.com"},{"id":"l183","nom":"Infodis IT / Tenexa","structure":"Infodis IT (Tenexa)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"eric.forestier@tenexa.fr","tel":"","score":74,"notes":"Roissy-en-France (95) | ESN 1000 pers, ~100M€ CA | Décideur : Eric Forestier DG depuis fév. 2026 (fenêtre écoute favorable) | Signal : 18 offres helpdesk CDI IDF + Amiens actives | Modèle 'made in France' affiché, aucune filiale offshore | Fonds HLD actionnaire | Fallback : e.forestier@tenexa.fr — Backup : stephane.clement@tenexa.fr (Président)"},{"id":"l184","nom":"Cyllene","structure":"Groupe Cyllene (Cyllenco SAS)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"","tel":"","score":67,"notes":"Nanterre (92) | MSP 450 pers, ~80M€ CA | CIBLE n°1 = Directeur Delivery / Resp. Centre de Services À IDENTIFIER sur LinkedIn (pas le Président — 450 pers., décision opérationnelle) | Sponsor n°2 : Olivier Poelaert Président (olivier.poelaert@groupe-cyllene.com, valide le partenariat) | Allié n°3 : Aymar de Vaissière DGA Finances (TCO) | Signal : offre managée 24/7 sur 15 sites + recrutements helpdesk actifs | Actionnaire Amundi PE + SGCP + UI | 12 acquisitions = culture build | ACTION BLOQUANTE : trouver le Directeur Delivery avant tout E1 | Aucune filiale offshore"},{"id":"l185","nom":"Kincy","structure":"Kincy SAS (fusion Vokto + Kalyst)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"k.sani@kincy.fr","tel":"","score":75,"notes":"Paris + Marseille + Papeete | MSP 65 pers, ~6-8M€ CA | Décideur : Karim Sani Président (LinkedIn actif) | Signal fort : offre emploi 'technicien helpdesk profil expatrié' active mars 2026 | Modèle follow-the-sun Papeete UTC-10 = déjà à l'aise travail distant | Salverys UTC+3 couvre le créneau matin 7h-9h France non couvert par Papeete | Email confiance moyenne, vérifier avant envoi | Fallback : contact@kincy.com"},{"id":"l186","nom":"Izencia","structure":"Izencia (anciennement Quantic Support)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"r.idiart@izencia.com","tel":"01 85 33 01 30","score":68,"notes":"Ivry-sur-Seine (94) | ESN 92 pers, 7,3M€ CA | Décideur : Roger Idiart Président fondateur (r.idiart@izencia.com, haute confiance, LinkedIn +500 rel.) | Spécialiste mise à disposition techniciens support IT = même métier que Salverys | Signal : recrutement continu techniciens IDF + régions | Approche différenciée obligatoire : extension horaire (nuit/week-end), pas substitution | Filiale Izencia Insights + Coaching365 | Risque : concurrent indirect"},{"id":"l187","nom":"Callmed","structure":"Callmed (SARL, SIREN 808056550)","niche":"telesec-mb","canal":"Email","statut":"nouveau","dateContact":"","email":"david@callmed-france.com","tel":"","score":77,"notes":"Quincy-sous-Sénart (91) | Télésecrétariat médical 100% santé, 10-19 pers. | Décideur : David Laurent Alcalay gérant (prenom@callmed-france.com, confiance moyenne — à vérifier) | Signal fort : 1M+ appels/an avec équipe resserrée = tension capacitaire structurelle. Déménagement récent vers locaux plus grands = croissance. Recrutement actif. | ACTION : vérifier email via Hunter.io/ZeroBounce avant envoi E1 | Qualifier dès J1 : déjà un partenaire offshore ?"},{"id":"l188","nom":"Thelem","structure":"Thelem (SIREN 333633790)","niche":"telesec-mb","canal":"Email","statut":"nouveau","dateContact":"","email":"francois.buchet@thelem.fr","tel":"","score":76,"notes":"Tassin-la-Demi-Lune (69) | Leader télésecrétariat France, ~85 pers., ~3 000 clients (3 divisions) | Décideurs : François Buchet DG (stratégique, PE-backed) + Véronique Traverse DG co-fondatrice (opérationnel) | Signal : recrutement massif 75+ annonces juin 2026 = tension RH documentée | Cible 1 : François Buchet (stratégie/croissance) ; Cible 2 : Traverse si silence J+7 | Cycle long assumé — lancer après Callmed"},{"id":"l189","nom":"Vocallz","structure":"Vocallz (SIREN 881435424, marque telesecretariat.com)","niche":"telesec-mb","canal":"Email","statut":"nouveau","dateContact":"","email":"contact@vocallz.com","tel":"","score":72,"notes":"Chalon-sur-Saône (71) | Télésecrétariat médical 100% santé depuis 2004, 10-30 agents | Décideur : Vanessa Rodière présidente unique (prenom@vocallz.com probable, fallback contact@vocallz.com) | Signal : amplitude affichée 59h/sem (L-V 8h-19h, Sam 8h-12h) = trou de couverture explicite nuits/dimanches/fériés | Mettre prénom dans objet si email générique utilisé"},{"id":"l190","nom":"NowServiceDesk (groupe NowBrains)","structure":"NowServiceDesk — groupe NowBrains","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"","tel":"","score":80,"notes":"Filiale helpdesk autonome du groupe NowBrains (≠ NowTeam). VEND déjà du service desk en marque blanche aux partenaires. 17 agences FR/Suisse/Belgique. Recrute un Service Delivery Manager = tension capacité documentée. Angle : couche humaine francophone UTC+3 derrière NowServiceDesk — vous vendez, on opère. Double entrée : Maxime Chevalier (Resp. Opérationnel de Compte, linkedin.com/in/maxime-chevalier-b94a2b141) + Christophe A. DG filiale (noms complets à confirmer). Pattern email probable prenom.nom@nowbrains.com. [Session 2026-06-02]"},{"id":"l191","nom":"Apixit (groupe Bechtle)","structure":"Apixit — groupe Bechtle","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"olivier.deniau@apixit.fr","tel":"01 64 86 97 97","score":72,"notes":"ESN 345 pers, 9 sites, filiale Bechtle. Centre de services managés 24/7 (Les Ulis + Rennes, 100+ pers, ISO 27001). Recrute un SDM aux Ulis = tension capacité. Angle : couvrir le 7h-9h francophone UTC+3 vs astreinte FR +35%. DÉCIDEUR : Olivier Deniau — Responsable pôle Services Managés & Support (oct. 2021, theorg.com confirmé). NE PAS cibler Nicolas Servage (Président = piège DG). Backup : Nicolas Isoard (Dir. Services Clients). Fallback : information@apixit.fr. [Session 2026-06-02]"},{"id":"l192","nom":"ReeVo France","structure":"ReeVo Cloud & Cyber Security France","niche":"helpdesk-it-esn","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":65,"notes":"Cloud + cybersécu (groupe italien ReeVo, rachat ESN Abbana 2024). Stratégie 100% INDIRECTE FR : 20-25 partenaires MSP/MSSP visés. Angle PARTENARIAT : couche humaine francophone derrière la console MSP-Ready. 1 deal = 20 MSP ouverts. DÉCIDEUR : Arnaud Lefebvre (Dir. Commercial & Marketing France). Backup : Brice Leffe (Head of Channel). InMail LinkedIn en premier. [Session 2026-06-02]"},{"id":"l193","nom":"Partner Proximity","structure":"Partner Proximity","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"contact@partner-proximity.com","tel":"","score":55,"notes":"Centre Outsourcing de Services IT France — vend du helpdesk en marque blanche aux ESN/intégrateurs (ITIL, ITSM, monitoring). À QUALIFIER AVANT ENVOI : dirigeant non identifié publiquement. [Session 2026-06-02]"},{"id":"l194","nom":"Inforsud Technologies","structure":"Inforsud Technologies","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"","tel":"","score":50,"notes":"ESN régionale Bozouls/Rodez/Toulouse, ~70 pers. Clients PME/ETI/collectivités. Décideur à confirmer (Duprat ou Girmens — contradictoire). [Session 2026-06-02]"},{"id":"l195","nom":"Cheops Technology","structure":"Cheops Technology","niche":"helpdesk-it-esn","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":50,"notes":"ETI cloud + infogérance Bordeaux. RÉSERVE Q3 : aucun signal RH fort. Identifier décideur Delivery avant contact. [Session 2026-06-02]"}]];
-    // ── Enrichissement scoring v4 ──────────────────────────────
-    // Format: [id, score, operateur, multisite, praticiens, specialiteFlux, desertMedical, accessibiliteNegative, doctolibSansRDV, secretariatInterneLimite]
-    var _E=[
-['l001',0,'',false,2,false,false,false,false,false],
-['l002',15,'',false,3,false,false,false,false,true],
-['l003',30,'',false,3,false,true,false,false,true],
-['l004',25,'',false,10,false,false,false,false,true],
-['l005',100,'BPO présumé (radio multi-sites)',true,3,true,false,false,false,false],
-['l006',15,'',false,3,false,false,false,false,true],
-['l007',25,'',false,7,false,false,false,false,true],
-['l008',15,'',false,1,false,true,false,false,false],
-['l009',0,'',false,1,false,false,false,false,false],
-['l010',0,'',false,1,false,false,false,false,false],
-['l011',0,'',false,1,false,false,false,false,false],
-['l012',10,'',false,3,false,false,false,false,false],
-['l013',0,'',false,1,false,false,false,false,false],
-['l014',0,'',false,1,false,false,false,false,false],
-['l015',15,'',false,3,false,false,false,false,true],
-['l016',5,'',false,1,false,false,false,false,true],
-['l017',15,'',false,3,false,false,false,false,true],
-['l018',20,'',false,1,true,false,false,false,false],
-['l019',10,'',false,3,false,false,false,false,false],
-['l020',5,'',false,1,false,false,false,false,true],
-['l021',15,'',false,3,false,false,false,false,true],
-['l022',15,'',false,3,false,false,false,false,true],
-['l023',15,'',false,3,false,false,false,false,true],
-['l024',0,'',false,1,false,false,false,false,false],
-['l025',25,'',false,5,false,false,false,false,true],
-['l026',0,'',false,1,false,false,false,false,false],
-['l027',15,'',false,3,false,false,false,false,true],
-['l028',0,'',false,1,false,false,false,false,false],
-['l029',15,'',false,3,false,false,false,false,true],
-['l030',15,'',false,3,false,false,false,false,true],
-['l031',15,'',false,3,false,false,false,false,true],
-['l032',0,'',false,1,false,false,false,false,false],
-['l033',0,'',false,1,false,false,false,false,false],
-['l034',5,'',false,1,false,false,false,false,true],
-['l035',15,'',false,3,false,false,false,false,true],
-['l036',15,'',false,3,false,false,false,false,true],
-['l037',15,'',false,3,false,false,false,false,true],
-['l038',15,'',false,3,false,false,false,false,true],
-['l039',15,'',false,4,false,false,false,false,true],
-['l040',30,'',false,3,false,true,false,false,true],
-['l041',30,'',false,3,false,true,false,false,true],
-['l042',30,'',false,3,false,true,false,false,true],
-['l043',25,'',false,5,false,false,false,false,true],
-['l044',15,'',false,3,false,false,false,false,true],
-['l045',0,'',false,2,false,false,false,false,false],
-['l046',0,'',false,1,false,false,false,false,false],
-['l047',10,'',false,3,false,false,false,false,false],
-['l048',15,'',false,1,false,true,false,false,false],
-['l049',15,'',false,3,false,false,false,false,true],
-['l050',15,'',false,3,false,false,false,false,true],
-['l051',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l052',80,'BPO central PDS',true,4,false,false,false,false,false],
-['l053',80,'BPO central Dentelia',true,4,false,false,false,false,false],
-['l054',80,'BPO central Dentelia',true,4,false,false,false,false,false],
-['l055',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l056',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l057',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l058',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l059',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l060',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l061',80,'BPO central Dentego',true,4,false,false,false,false,false],
-['l062',80,'BPO central Dentelia',true,4,false,false,false,false,false],
-['l063',90,'BPO central IK',true,5,false,false,false,false,false],
-['l064',90,'BPO central IK',true,5,false,false,false,false,false],
-['l065',90,'BPO central IK',true,5,false,false,false,false,false],
-['l066',90,'BPO central IK',true,5,false,false,false,false,false],
-['l067',90,'BPO central IK',true,5,false,false,false,false,false],
-['l068',90,'BPO central IK',true,5,false,false,false,false,false],
-['l069',90,'BPO central IK',true,5,false,false,false,false,false],
-['l070',90,'BPO central IK',true,5,false,false,false,false,false],
-['l071',90,'BPO central IK',true,5,false,false,false,false,false],
-['l072',90,'BPO central IK',true,5,false,false,false,false,false],
-['l073',90,'BPO central IK',true,5,false,false,false,false,false],
-['l074',90,'BPO central IK',true,5,false,false,false,false,false],
-['l075',90,'BPO central IK',true,5,false,false,false,false,false],
-['l076',90,'BPO central IK',true,5,false,false,false,false,false],
-['l077',90,'BPO central IK',true,5,false,false,false,false,false],
-['l078',90,'BPO central IK',true,5,false,false,false,false,false],
-['l079',80,'BPO présumé Dentylis',true,4,false,false,false,false,false],
-['l080',40,'',true,4,false,false,false,false,false],
-['l081',50,'BPO premium présumé',false,3,false,false,false,false,false],
-['l082',50,'BPO concierge présumé',false,3,false,false,false,false,false],
-['l083',40,'',true,4,false,false,false,false,false],
-['l084',80,'BPO central PDS',true,4,false,false,false,false,false],
-['l085',25,'',false,10,false,false,false,false,true],
-['l086',90,'BPO quasi-certain Côté Kiné',true,11,false,false,false,false,false],
-['l087',50,'',true,5,false,false,false,false,false],
-['l088',90,'BPO quasi-certain Lyonosteo',true,11,false,false,false,false,false],
-['l089',40,'BPO présumé',false,2,false,false,false,false,false],
-['l090',40,'BPO présumé',false,2,false,false,false,false,false],
-['l091',40,'Permanence ext. quasi-certaine',false,2,false,false,false,false,false],
-['l092',50,'BPO quasi-systématique (implants)',false,3,false,false,false,false,false],
-['l093',15,'',false,3,false,false,false,false,true],
-['l094',15,'',false,3,false,false,false,false,true],
-['l095',0,'',false,2,false,false,false,false,false],
-['l096',0,'',false,2,false,false,false,false,false],
-['l097',15,'',false,4,false,false,false,false,true],
-['l098',15,'',false,4,false,false,false,false,true],
-['l099',15,'',false,3,false,false,false,false,true],
-['l100',5,'',false,null,false,false,false,false,true],
-['l101',25,'',false,5,false,false,false,false,true],
-['l102',40,'',true,3,false,false,false,false,false],
-['l103',25,'',false,5,false,false,false,false,true],
-['l104',30,'',true,2,false,false,false,false,false],
-['l105',15,'',false,4,false,false,false,false,true],
-['l106',15,'',false,3,false,false,false,false,true],
-['l107',0,'',false,2,false,false,false,false,false],
-['l108',15,'',false,3,false,false,false,false,true],
-['l109',10,'',false,3,false,false,false,false,false],
-['l110',15,'',false,3,false,false,false,false,true],
-['l111',15,'',false,3,false,false,false,false,true],
-['l112',0,'',false,2,false,false,false,false,false],
-['l113',0,'',false,2,false,false,false,false,false],
-['l114',0,'',false,2,false,false,false,false,false],
-['l115',0,'',false,2,false,false,false,false,false],
-['l116',0,'',false,2,false,false,false,false,false],
-['l117',10,'',false,3,false,false,false,false,false],
-['l118',0,'',false,2,false,false,false,false,false],
-['l119',0,'',false,1,false,false,false,false,false],
-['l120',0,'',false,2,false,false,false,false,false],
-['l121',0,'',false,2,false,false,false,false,false],
-['l122',0,'',false,1,false,false,false,false,false],
-['l123',10,'',false,3,false,false,false,false,false],
-['l124',5,'',false,null,false,false,false,false,true],
-['l125',0,'',false,1,false,false,false,false,false],
-['l126',0,'',false,1,false,false,false,false,false],
-['l127',0,'',false,1,false,false,false,false,false],
-['l128',0,'',false,2,false,false,false,false,false],
-['l129',0,'',false,1,false,false,false,false,false],
-['l130',0,'',false,1,false,false,false,false,false],
-['l131',0,'',false,1,false,false,false,false,false],
-['l132',0,'',false,2,false,false,false,false,false],
-['l133',0,'',false,1,false,false,false,false,false],
-['l134',0,'',false,1,false,false,false,false,false],
-['l135',0,'',false,1,false,false,false,false,false],
-['l136',0,'',false,1,false,false,false,false,false],
-['l137',0,'',false,1,false,false,false,false,false],
-['l138',0,'',false,1,false,false,false,false,false],
-['l139',0,'',false,1,false,false,false,false,false],
-['l140',0,'',false,1,false,false,false,false,false],
-['l141',0,'',false,1,false,false,false,false,false],
-['l142',0,'',false,null,false,false,false,false,false],
-['l143',0,'',false,null,false,false,false,false,false],
-['l144',0,'',false,null,false,false,false,false,false],
-['l145',0,'',false,null,false,false,false,false,false],
-['l146',0,'',false,null,false,false,false,false,false],
-['l147',0,'',false,null,false,false,false,false,false],
-['l148',0,'',false,null,false,false,false,false,false],
-['l149',0,'',false,null,false,false,false,false,false],
-['l150',0,'',false,null,false,false,false,false,false],
-['l151',70,'BPO partiel présumé',true,null,false,false,false,false,false],
-['l152',70,'BPO partiel interne',true,null,false,false,false,false,false],
-['l153',30,'',true,null,false,false,false,false,false],
-['l154',70,'BPO débordement présumé',true,null,false,false,false,false,false],
-['l155',30,'',true,null,false,false,false,false,false],
-['l156',70,'BPO débordement présumé',true,null,false,false,false,false,false],
-['l157',30,'',true,null,false,false,false,false,false],
-['l158',70,'Interne SNCF',true,null,false,false,false,false,false],
-['l159',70,'Centre relation client',true,null,false,false,false,false,false],
-['l160',70,'Service client structuré',true,null,false,false,false,false,false],
-['l161',70,'Centre multicanal',true,null,false,false,false,false,false],
-['l162',70,'Relation client structurée',true,null,false,false,false,false,false],
-['l163',30,'',true,null,false,false,false,false,false],
-['l164',70,'Standard Action Logement',true,null,false,false,false,false,false],
-['l165',30,'',true,null,false,false,false,false,false],
-['l166',70,'Téléconseillères CAF',true,null,false,false,false,false,false],
-['l167',70,'BPO débordement systématique',true,null,false,false,false,false,false],
-['l168',30,'',true,null,false,false,false,false,false],
-['l169',70,'Centre relation interne',true,null,false,false,false,false,false],
-['l170',30,'',true,null,false,false,false,false,false],
-['l171',30,'',true,null,false,false,false,false,false],
-['l172',30,'',true,null,false,false,false,false,false],
-['l173',30,'',true,null,false,false,false,false,false],
-['l174',70,'Standard 24/7 présumé',true,null,false,false,false,false,false],
-['l175',30,'',true,null,false,false,false,false,false],
-['l176',30,'',true,null,false,false,false,false,false],
-['l177',70,'Centre donateurs interne',true,null,false,false,false,false,false],
-['l178',30,'',true,null,false,false,false,false,false],
-['l179',30,'',true,null,false,false,false,false,false],
-['l180',70,'Centre donateurs interne',true,null,false,false,false,false,false]
-];
-    _E.forEach(function(e){
-        var l=d.leads.find(function(x){return x.id===e[0];});
-        if(!l)return;
-        l.score=e[1];l.operateur=e[2];l.multisite=e[3];l.praticiens=e[4];
-        l.specialiteFlux=e[5];l.desertMedical=e[6];l.accessibiliteNegative=e[7];
-        l.doctolibSansRDV=e[8];l.secretariatInterneLimite=e[9];
-        l.groupe=getGroupe(e[1]);
+    d.leads = [{"id":"l181","nom":"Metaline IT","structure":"Metaline IT (groupe Metaline Corp)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"a.sebban@metaline.fr","tel":"","score":78,"notes":"Nanterre (92) | ESN infogérance 850+ pers, ~60M€ CA | Décideur : Alexandre Sebban DG Ops (a.sebban@metaline.fr, 75%) + Samuel Amiet Président (LinkedIn confirmé) | Signal fort : 75+ offres helpdesk actives mai 2026 + 1,8M appels/an | Actionnaire PE LFPI depuis 2023 | Aucune filiale offshore | Fallback : alexandre.sebban@metaline.fr"},{"id":"l182","nom":"Oxxodata","structure":"Oxxodata","niche":"helpdesk-it-esn","canal":"LinkedIn","statut":"nouveau","dateContact":"","email":"contact@oxxodata.com","tel":"","score":71,"notes":"Meyzieu (69) | ESN micro-structure 2-10 pers | Décideur : Hichem Boulahbel Président-Fondateur (LinkedIn actif) | Signal unique : vend déjà infogérance helpdesk en marque blanche — propose une couche humaine BPO | LinkedIn-first recommandé (profil actif, posts infogérance) | Email basse confiance : hichem.boulahbel@oxxodata.com, fallback contact@oxxodata.com"},{"id":"l183","nom":"Infodis IT / Tenexa","structure":"Infodis IT (Tenexa)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"eric.forestier@tenexa.fr","tel":"","score":74,"notes":"Roissy-en-France (95) | ESN 1000 pers, ~100M€ CA | Décideur : Eric Forestier DG depuis fév. 2026 (fenêtre écoute favorable) | Signal : 18 offres helpdesk CDI IDF + Amiens actives | Modèle 'made in France' affiché, aucune filiale offshore | Fonds HLD actionnaire | Fallback : e.forestier@tenexa.fr — Backup : stephane.clement@tenexa.fr (Président)"},{"id":"l184","nom":"Cyllene","structure":"Groupe Cyllene (Cyllenco SAS)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"","tel":"","score":67,"notes":"Nanterre (92) | MSP 450 pers, ~80M€ CA | CIBLE n°1 = Directeur Delivery / Resp. Centre de Services À IDENTIFIER sur LinkedIn (pas le Président — 450 pers., décision opérationnelle) | Sponsor n°2 : Olivier Poelaert Président (olivier.poelaert@groupe-cyllene.com, valide le partenariat) | Allié n°3 : Aymar de Vaissière DGA Finances (TCO) | Signal : offre managée 24/7 sur 15 sites + recrutements helpdesk actifs | Actionnaire Amundi PE + SGCP + UI | 12 acquisitions = culture build | ACTION BLOQUANTE : trouver le Directeur Delivery avant tout E1 | Aucune filiale offshore"},{"id":"l185","nom":"Kincy","structure":"Kincy SAS (fusion Vokto + Kalyst)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"k.sani@kincy.fr","tel":"","score":75,"notes":"Paris + Marseille + Papeete | MSP 65 pers, ~6-8M€ CA | Décideur : Karim Sani Président (LinkedIn actif) | Signal fort : offre emploi 'technicien helpdesk profil expatrié' active mars 2026 | Modèle follow-the-sun Papeete UTC-10 = déjà à l'aise travail distant | Salverys UTC+3 couvre le créneau matin 7h-9h France non couvert par Papeete | Email confiance moyenne, vérifier avant envoi | Fallback : contact@kincy.com"},{"id":"l186","nom":"Izencia","structure":"Izencia (anciennement Quantic Support)","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"r.idiart@izencia.com","tel":"01 85 33 01 30","score":68,"notes":"Ivry-sur-Seine (94) | ESN 92 pers, 7,3M€ CA | Décideur : Roger Idiart Président fondateur (r.idiart@izencia.com, haute confiance, LinkedIn +500 rel.) | Spécialiste mise à disposition techniciens support IT = même métier que Salverys | Signal : recrutement continu techniciens IDF + régions | Approche différenciée obligatoire : extension horaire (nuit/week-end), pas substitution | Filiale Izencia Insights + Coaching365 | Risque : concurrent indirect"},{"id":"l190","nom":"NowServiceDesk (groupe NowBrains)","structure":"NowServiceDesk — groupe NowBrains","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"","tel":"","score":80,"notes":"Filiale helpdesk autonome du groupe NowBrains (≠ NowTeam). VEND déjà du service desk en marque blanche aux partenaires. 17 agences FR/Suisse/Belgique. Recrute un Service Delivery Manager = tension capacité documentée. Angle : couche humaine francophone UTC+3 derrière NowServiceDesk — vous vendez, on opère. Double entrée : Maxime Chevalier (Resp. Opérationnel de Compte, linkedin.com/in/maxime-chevalier-b94a2b141) + Christophe A. DG filiale (noms complets à confirmer). Pattern email probable prenom.nom@nowbrains.com. [Session 2026-06-02]"},{"id":"l191","nom":"Apixit (groupe Bechtle)","structure":"Apixit — groupe Bechtle","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"olivier.deniau@apixit.fr","tel":"01 64 86 97 97","score":72,"notes":"ESN 345 pers, 9 sites, filiale Bechtle. Centre de services managés 24/7 (Les Ulis + Rennes, 100+ pers, ISO 27001). Recrute un SDM aux Ulis = tension capacité. Angle : couvrir le 7h-9h francophone UTC+3 vs astreinte FR +35%. DÉCIDEUR : Olivier Deniau — Responsable pôle Services Managés & Support (oct. 2021, theorg.com confirmé). NE PAS cibler Nicolas Servage (Président = piège DG). Backup : Nicolas Isoard (Dir. Services Clients). Fallback : information@apixit.fr. [Session 2026-06-02]"},{"id":"l192","nom":"ReeVo France","structure":"ReeVo Cloud & Cyber Security France","niche":"helpdesk-it-esn","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":65,"notes":"Cloud + cybersécu (groupe italien ReeVo, rachat ESN Abbana 2024). Stratégie 100% INDIRECTE FR : 20-25 partenaires MSP/MSSP visés. Angle PARTENARIAT : couche humaine francophone derrière la console MSP-Ready. 1 deal = 20 MSP ouverts. DÉCIDEUR : Arnaud Lefebvre (Dir. Commercial & Marketing France). Backup : Brice Leffe (Head of Channel). InMail LinkedIn en premier. [Session 2026-06-02]"},{"id":"l193","nom":"Partner Proximity","structure":"Partner Proximity","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"contact@partner-proximity.com","tel":"","score":55,"notes":"Centre Outsourcing de Services IT France — vend du helpdesk en marque blanche aux ESN/intégrateurs (ITIL, ITSM, monitoring). À QUALIFIER AVANT ENVOI : dirigeant non identifié publiquement. [Session 2026-06-02]"},{"id":"l194","nom":"Inforsud Technologies","structure":"Inforsud Technologies","niche":"helpdesk-it-esn","canal":"Email","statut":"nouveau","dateContact":"","email":"","tel":"","score":50,"notes":"ESN régionale Bozouls/Rodez/Toulouse, ~70 pers. Clients PME/ETI/collectivités. Décideur à confirmer (Duprat ou Girmens — contradictoire). [Session 2026-06-02]"},{"id":"l195","nom":"Cheops Technology","structure":"Cheops Technology","niche":"helpdesk-it-esn","canal":"Autre","statut":"nouveau","dateContact":"","email":"","tel":"","score":50,"notes":"ETI cloud + infogérance Bordeaux. RÉSERVE Q3 : aucun signal RH fort. Identifier décideur Delivery avant contact. [Session 2026-06-02]"}];
+    // Leads médicaux (telemed, telesec-mb) et Bailleurs & grandes structures (l151-l180)
+    // archivés le 2026-10-30 : 99-Archives-Medical/crm/ et 99-Archives-Bailleurs/crm/.
+    d.leads.forEach(function(l){
+        if(l.groupe===undefined)l.groupe=getGroupe(l.score);
         if(!l.decideur)l.decideur={statut:'',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''};
         if(!l.decideur2)l.decideur2={statut:'',nom:'',titre:'',linkedin:'',emailPro:'',sourceUrl:''};
     });
-    // ── Enrichissement décideurs top Groupe 1 ──────────────────
-    // Sources: mentions légales, LinkedIn, sites officiels
-    // Jérôme Auger (IK fondateur) : LinkedIn ambigu → 2 profils trouvés, DGE Charlotte retenue
-    var _dik={statut:'trouvé',nom:'Charlotte de Mourgues-de Rivière',titre:'Directrice Générale',
-        linkedin:'https://www.linkedin.com/in/charlotte-de-mourgues-de-rivi%C3%A8re-62146620/',
-        emailPro:'',anciennete:'DGE depuis ~2020 ; fondateur Jérôme Auger (LinkedIn ambigu : /in/jeromeauger ou /in/jerome-auger-kinesitherapeutedusportparis)',
-        signauxAchat:'30+ centres IK Île-de-France, BPO centralisé quasi-certain, réseau en forte expansion',
-        sourceUrl:'https://www.linkedin.com/in/charlotte-de-mourgues-de-rivi%C3%A8re-62146620/'};
-    ['l063','l064','l065','l066','l067','l068','l069','l070','l071','l072','l073','l074','l075','l076','l077','l078'].forEach(function(id){
-        var l=d.leads.find(function(x){return x.id===id;});if(!l)return;l.decideur=JSON.parse(JSON.stringify(_dik));
-    });
-    (function(){var l=d.leads.find(function(x){return x.id==='l086';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Nicolas Cardonne',titre:'Co-fondateur / Dirigeant',linkedin:'',
-        emailPro:'',anciennete:'Co-fondateur 2011 (avec Thibault Biason, sorti 2022)',
-        signauxAchat:'11 kinés 3 pôles Toulouse, amplitude horaire étendue, BPO quasi-certain',
-        sourceUrl:'https://www.cotekine.com'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l088';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Damien Zivanovic',titre:'Fondateur / Directeur',
-        linkedin:'https://www.linkedin.com/in/damien-zivanovic-ab723868/',
-        emailPro:'',anciennete:'Fondateur (ancienneté exacte non précisée)',
-        signauxAchat:'4 centres Lyon (1, 6, 7, Villeurbanne), 11 ostéos, réseau structuré - télésec quasi-certain',
-        sourceUrl:'https://www.linkedin.com/in/damien-zivanovic-ab723868/'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l005';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Dr Catherine Marchetti',titre:'Co-gérante & Responsable de publication (SELARL IMRO)',
-        linkedin:'',emailPro:'',anciennete:'SELARL immatriculée ~2015 (SIREN 824311039)',
-        signauxAchat:'8 radiologues 2 sites Rennes, BPO radiologie quasi-systématique en radiologie multi-sites',
-        sourceUrl:'https://www.imro-radiologie-rennes.fr/mentions-l%C3%A9gales/'};})();
-    // ── Enrichissement décideurs Groupe 2 ──────────────────────
-    (function(){var l=d.leads.find(function(x){return x.id==='l082';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Dr Ari Elhyani',titre:'Chirurgien-Dentiste / Fondateur',
-        linkedin:'',emailPro:'',anciennete:'Fondateur Elone Clinic (chirurgien-dentiste, non chirurgien plasticien)',
-        signauxAchat:'Clinique dentisterie esthétique / implantologie premium Paris 16 — BPO télésec quasi-certain',
-        sourceUrl:'https://www.elone-clinic.com'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l151';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Olivier Rico',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'DG Action Logement Services',
-        signauxAchat:'Groupe Action Logement - 1M+ dossiers salariés/an, BPO débordement structurel',
-        sourceUrl:'https://groupe.actionlogement.fr/notre-organisation'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l152';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Eric Balci',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'DG in\'li (ancienneté non précisée)',
-        signauxAchat:'in\'li (Action Logement) - 55 000+ logements IDF, relation locataires centralisée - BPO débordement',
-        sourceUrl:'https://www.inli.fr/mentions-legales/'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l154';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Clément Lecuivre',titre:'Président du Directoire',
-        linkedin:'',emailPro:'',anciennete:'Président Directoire CDC Habitat',
-        signauxAchat:'CDC Habitat - 540 000 logements France entière, BPO débordement présumé',
-        sourceUrl:'https://groupe-cdc-habitat.com/groupe/gouvernance/cdc-habitat/'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l158';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Romain Dubois',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'Nommé DG 2019',
-        signauxAchat:'ICF Habitat SNCF - 95 000 logements, infrastructure centre d\'appels existante (SNCF)',
-        sourceUrl:'https://fr.wikipedia.org/wiki/ICF_Habitat'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l160';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Francis Stéphan',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'DG Domofrance (ancienneté non précisée)',
-        signauxAchat:'Domofrance (Groupe Action Logement) - 50 000 logements Nouvelle-Aquitaine, service client structuré',
-        sourceUrl:'https://www.domofrance.fr/a-propos/qui-sommes-nous'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l161';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Philippe Rémignon',titre:'Président du Directoire',
-        linkedin:'',emailPro:'',anciennete:'Président Directoire Vilogia (dossier presse 2026)',
-        signauxAchat:'Vilogia - 92 000 logements Hauts-de-France+, centre multicanal locataires - BPO débordement',
-        sourceUrl:'https://www.vilogia.fr/sites/default/files/2026-04/dossier-presse-vilogia-2026_compressed.pdf'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l162';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Frédéric Lavergne',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'DG Erilia (ancienneté non précisée)',
-        signauxAchat:'Erilia (Groupe Action Logement) - 55 000 logements PACA, relation client structurée',
-        sourceUrl:'https://www.erilia.fr/decouvrir-erilia/notre-gouvernance'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l166';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Constance Bensussan',titre:'Directrice Générale',
-        linkedin:'',emailPro:'',anciennete:'DG CNAF depuis 2026',
-        signauxAchat:'CNAF - 11M allocataires France, téléconseillères CAF - BPO débordement systématique',
-        sourceUrl:'https://fr.wikipedia.org/wiki/Caisse_nationale_des_allocations_familiales'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l167';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Thibaut Guilluy',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'DG France Travail (ex-Pôle emploi, depuis 2024)',
-        signauxAchat:'France Travail - 55 000 agents, BPO débordement systématique demandeurs emploi/entreprises',
-        sourceUrl:'https://fr.wikipedia.org/wiki/France_Travail'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l169';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Dr Caroline Cross',titre:'Directrice Générale',
-        linkedin:'',emailPro:'',anciennete:'DG Croix-Rouge française (directrice de publication)',
-        signauxAchat:'Croix-Rouge - 18 000 salariés, 635 établissements santé/médico-social, BPO probable',
-        sourceUrl:'https://www.croix-rouge.fr/mentions-legales'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l174';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Lotfi Ouanezar',titre:'Directeur Général',
-        linkedin:'',emailPro:'',anciennete:'DG Emmaüs Solidarité (ancienneté non précisée)',
-        signauxAchat:'Emmaüs Solidarité - 350 salariés, 3 000 bénévoles, accueil/insertion IDF - BPO présumé',
-        sourceUrl:'https://emmaus-solidarite.org/qui-sommes-nous/organisation'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l177';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Christophe Robert',titre:'Délégué Général',
-        linkedin:'',emailPro:'',anciennete:'Délégué Général Fondation pour le Logement des Défavorisés (ex-Fondation Abbé Pierre)',
-        signauxAchat:'Fondation logement défavorisés - 9 agences régionales, accompagnement mal-logés - BPO présumé',
-        sourceUrl:'https://fr.wikipedia.org/wiki/Fondation_Abb%C3%A9_Pierre'};})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l180';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Helena Ranchal',titre:'Directrice Générale par intérim',
-        linkedin:'',emailPro:'',anciennete:'DG par intérim Médecins du Monde (2024-)',
-        signauxAchat:'MdM - 6 000 bénévoles, présence 40+ pays, coordination médicale internationale - BPO présumé',
-        sourceUrl:'https://www.medecinsdumonde.org/medecins-du-monde/notre-organisation/'};})();
-    // ── Décideurs non trouvés Groupe 2 ─────────────────────────
-    (function(){var l=d.leads.find(function(x){return x.id==='l081';});if(!l)return;
-        l.decideur.statut='non_trouvé';})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l087';});if(!l)return;
-        l.decideur.statut='non_trouvé';})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l092';});if(!l)return;
-        l.decideur.statut='non_trouvé';})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l156';});if(!l)return;
-        l.decideur.statut='non_trouvé';})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l159';});if(!l)return;
-        l.decideur.statut='non_trouvé';})();
-    (function(){var l=d.leads.find(function(x){return x.id==='l164';});if(!l)return;
-        l.decideur.statut='non_trouvé';})();
-    // ── Decideur2 Groupe 2 ──────────────────────────────────────
-    // Clinique médicale G2 : pas de 2e décideur (fondateur seul)
-    (function(){var l=d.leads.find(function(x){return x.id==='l082';});if(!l)return;
-        l.decideur2={statut:'N/A',nom:'',titre:'',linkedin:'',emailPro:'',sourceUrl:''};})();
-    // Fondation pour le logement des défavorisés
-    (function(){var l=d.leads.find(function(x){return x.id==='l177';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'Sonia Hurcet',titre:'Déléguée Générale Adjointe',
-        linkedin:'',emailPro:'',sourceUrl:'https://fr.wikipedia.org/wiki/Fondation_Abb%C3%A9_Pierre'};})();
-    // Action Logement Services
-    (function(){var l=d.leads.find(function(x){return x.id==='l151';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'David Delage',titre:'Directeur Général Délégué',
-        linkedin:'',emailPro:'',sourceUrl:'https://groupe.actionlogement.fr/notre-organisation'};})();
-    // CDC Habitat
-    (function(){var l=d.leads.find(function(x){return x.id==='l154';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'Brigitte Laurent',titre:'Directrice clients, gestion locative et ventes',
-        linkedin:'',emailPro:'',sourceUrl:'https://groupe-cdc-habitat.com/groupe/gouvernance/cdc-habitat/'};})();
-    // Domofrance
-    (function(){var l=d.leads.find(function(x){return x.id==='l160';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'Jean-Baptiste Desanlis',titre:'Directeur Général Délégué territoires et clients',
-        linkedin:'',emailPro:'',sourceUrl:'https://www.domofrance.fr/a-propos/qui-sommes-nous'};})();
-    // Erilia
-    (function(){var l=d.leads.find(function(x){return x.id==='l162';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'Antoine Jeandet',titre:'Directeur Général Délégué aux Territoires et aux Clients',
-        linkedin:'',emailPro:'',sourceUrl:'https://www.erilia.fr/decouvrir-erilia/notre-gouvernance'};})();
-    // Emmaüs Solidarité
-    (function(){var l=d.leads.find(function(x){return x.id==='l174';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'Sophie Lascombe',titre:'Directrice Générale Adjointe',
-        linkedin:'',emailPro:'',sourceUrl:'https://emmaus-solidarite.org/qui-sommes-nous/organisation'};})();
-    // Médecins du Monde
-    (function(){var l=d.leads.find(function(x){return x.id==='l180';});if(!l)return;
-        l.decideur2={statut:'trouvé',nom:'Sophie Rhodes',titre:'Secrétaire Générale',
-        linkedin:'',emailPro:'',sourceUrl:'https://www.medecinsdumonde.org/medecins-du-monde/notre-organisation/'};})();
-    // Décideurs 2 non trouvés (site indisponible / organigramme non publié)
-    (function(){['l152','l158','l161','l166','l167','l169'].forEach(function(id){
-        var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-        if(l.decideur2.statut==='')l.decideur2.statut='non_trouvé';
-    });})();
-    // ── Décideurs Groupe 1 — Chaînes dentaires ─────────────────
-    // Dentego (8 centres) : Caroline Baert (Directrice Exploitation) — correction 2026-05-28
-    // ⚠️ James Cohen (co-fondateur) = figurehead, pas le bon interlocuteur.
-    // ⚠️ CONFLIT : Adental Groupe (filiale Dentego) gère le télésecrétariat en interne → approcher en débordement uniquement.
-    (function(){
-        var _d={statut:'trouvé',nom:'Caroline Baert',titre:'Directrice Exploitation',linkedin:'',emailPro:'',
-            anciennete:'Directrice Exploitation Adental Groupe (structure opérationnelle Dentego)',
-            signauxAchat:"⚠️ CONFLIT COMMERCIAL : Adental Groupe (filiale Dentego) dispose déjà d'un télésecrétariat internalisé. Angle = débordement/overflow uniquement. 80+ centres Dentego France.",
-            sourceUrl:''};
-        ['l051','l055','l056','l057','l058','l059','l060','l061'].forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            l.decideur=JSON.parse(JSON.stringify(_d));
-        });
-    })();
-    // Paris Dental Studios (2 centres) : Mathias Bensimon (Fondateur)
-    (function(){
-        var _d={statut:'trouvé',nom:'Mathias Bensimon',titre:'Fondateur / Dirigeant',linkedin:'',emailPro:'',
-            anciennete:'Fondateur Paris Dental Studios (France Dental Services, SIREN 950865550, créé 2020)',
-            signauxAchat:'3 centres Paris/Lyon/Aix — dentisterie esthétique premium — BPO/concierge certain',
-            sourceUrl:'https://parisdentalstudios.com/mentions-legales-paris-dental-studios/'};
-        ['l052','l084'].forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            l.decideur=JSON.parse(JSON.stringify(_d));
-        });
-    })();
-    // Dentelia / Colosseum France : Cyrille Duboc (DG France) — correction 2026-05-28
-    // Claude Streit = CEO principalement UK, pas le décideur opérationnel France.
-    (function(){
-        var _d={statut:'trouvé',nom:'Cyrille Duboc',titre:'Directeur Général France',linkedin:'',emailPro:'',
-            anciennete:'Managing Director / DG France Colosseum Dental (Dentelia)',
-            signauxAchat:'Colosseum Dental France (Dentelia) — réseau en croissance — BPO centralisé certain. Claude Streit = CEO UK (non opérationnel France — à éviter).',
-            sourceUrl:'https://www.colosseumdental.com/who-we-are/meet-our-team'};
-        ['l053','l054','l062'].forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            l.decideur=JSON.parse(JSON.stringify(_d));
-        });
-    })();
-    // Dentylis : Jean-Jacques Israël (Fondateur) — correction 2026-05-28 (titre DG incorrect)
-    (function(){var l=d.leads.find(function(x){return x.id==='l079';});if(!l)return;
-        l.decideur={statut:'trouvé',nom:'Jean-Jacques Israël',titre:'Fondateur',linkedin:'',emailPro:'',
-        anciennete:'Fondateur Dentylis — directeur de publication (RCS PARIS B 453 987 976). DG opérationnel non confirmé.',
-        signauxAchat:'40+ centres de santé pluridisciplinaires France entière — BPO centralisé certain',
-        sourceUrl:'https://dentylis.fr/informations-legales/'};})();
-    // ── Décideurs Groupe 3 — Bailleurs sociaux ─────────────────
-    (function(){
-        var _g3=[
-            {id:'l155',d:{statut:'trouvé',nom:'Emmanuel Ballu',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Adoma (filiale Action Logement)',
-                signauxAchat:'Adoma - 70 000 logements foyers/résidences, pensionnaires travail migrant - BPO relation résidents probable',
-                sourceUrl:'https://www.adoma.fr'}},
-            {id:'l157',d:{statut:'trouvé',nom:'Johnny Huat',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Plurial Novilia (ancienneté non précisée)',
-                signauxAchat:'Plurial Novilia - 43 000 logements Grand-Est, relation locataires structurée - BPO débordement probable',
-                sourceUrl:'https://www.plurialnovilia.fr'}},
-            {id:'l163',d:{statut:'trouvé',nom:'Thierry Heyvang',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Aiguillon Construction (directeur de la publication)',
-                signauxAchat:'Aiguillon Construction - 37 000 logements Bretagne/Pays de la Loire - BPO relation locataires probable',
-                sourceUrl:'https://www.aiguillon-construction.fr'}},
-            {id:'l165',d:{statut:'trouvé',nom:'Eric Gimer',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Habitat 76 (directeur de la publication)',
-                signauxAchat:'Habitat 76 - 25 000 logements Seine-Maritime, relation locataires actif - BPO débordement probable',
-                sourceUrl:'https://www.habitat76.fr'}},
-            {id:'l153',d:{statut:'trouvé',nom:'Olivier Rico',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Action Logement Services (directeur de publication alin.immo)',
-                signauxAchat:"AL'in - plateforme digitale Action Logement, gestion candidatures logement - BPO helpdesk présumé",
-                sourceUrl:'https://www.actionlogement.fr/mentions-legales'}},
-        ];
-        _g3.forEach(function(entry){
-            var l=d.leads.find(function(x){return x.id===entry.id;});if(!l)return;
-            if(!l.decideur||!l.decideur.nom){l.decideur=JSON.parse(JSON.stringify(entry.d));}
-        });
-    })();
-    // ── Décideurs Groupe 3 — Associations humanitaires/sociales ─
-    (function(){
-        var _g3h=[
-            {id:'l170',d:{statut:'trouvé',nom:'Didier Duriez',titre:'Président national',linkedin:'',emailPro:'',
-                anciennete:'Président national Secours Catholique — Caritas France',
-                signauxAchat:'Secours Catholique - 70 000 bénévoles, 740 équipes locales, accueil en précarité - BPO présumé',
-                sourceUrl:'https://www.secours-catholique.org'}},
-            {id:'l171',d:{statut:'trouvé',nom:'Henriette Steinberg',titre:'Secrétaire générale',linkedin:'',emailPro:'',
-                anciennete:'Secrétaire générale Secours Populaire Français',
-                signauxAchat:'Secours Populaire - 1M+ bénéficiaires/an, 70 000 bénévoles, réseau national - BPO présumé',
-                sourceUrl:'https://www.secourspopulaire.fr'}},
-            {id:'l172',d:{statut:'trouvé',nom:'Jean-Michel Richard',titre:'Président',linkedin:'',emailPro:'',
-                anciennete:"Président des Restos du Cœur (Restaurants du Cœur — Les Relais du Cœur)",
-                signauxAchat:"Restos du Cœur - 1M+ bénéficiaires/an, 70 000 bénévoles, réseau national - BPO présumé",
-                sourceUrl:'https://www.restosducoeur.org'}},
-            {id:'l173',d:{statut:'trouvé',nom:'Tarek Daher',titre:'Délégué général',linkedin:'',emailPro:'',
-                anciennete:'Délégué général Emmaüs France',
-                signauxAchat:"Emmaüs France - fédération 120+ associations, 10 000 compagnons - BPO présumé",
-                sourceUrl:'https://emmaus-france.org'}},
-            {id:'l175',d:{statut:'trouvé',nom:'Florian Guyot',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Association Aurore',
-                signauxAchat:'Aurore - 80+ établissements hébergement/insertion/soin, 5 000 résidents - BPO présumé',
-                sourceUrl:'https://www.aurore-asso.fr'}},
-            {id:'l176',d:{statut:'trouvé',nom:'Hubert Valade',titre:'Président',linkedin:'',emailPro:'',
-                anciennete:'Président France Horizon (ancienneté non précisée)',
-                signauxAchat:'France Horizon - 9 000 personnes accueillies/an, CHRS/foyers/réfugiés - BPO présumé',
-                sourceUrl:'https://www.france-horizon.org'}},
-            {id:'l168',d:{statut:'trouvé',nom:'Yann-Gaël Amghar',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG URSSAF Caisse Nationale depuis juin 2022 (décret de nomination)',
-                signauxAchat:'URSSAF - 9M+ cotisants, 600 M€ collectés/j, helpdesk entreprises - BPO helpdesk certain',
-                sourceUrl:'https://www.urssaf.org'}},
-            {id:'l178',d:{statut:'trouvé',nom:'Pascal Isoard-Thomas',titre:'Directeur Général',linkedin:'',emailPro:'',
-                anciennete:'DG Fédération Habitat et Humanisme (Directoire)',
-                signauxAchat:'Habitat et Humanisme - 14 000+ logements accompagnés, réseau national - BPO support-N1 probable',
-                sourceUrl:'https://www.habitat-humanisme.org/gouvernance/'}},
-            {id:'l179',d:{statut:'trouvé',nom:'Marianne Auffret',titre:'Directrice générale',linkedin:'',emailPro:'',
-                anciennete:'Directrice de la publication UNHAJ',
-                signauxAchat:'UNHAJ - 220 structures Habitat Jeunes France entière, accueil 18-30 ans - BPO support présumé',
-                sourceUrl:'https://www.unhaj.org/mentions-legales'}},
-        ];
-        _g3h.forEach(function(entry){
-            var l=d.leads.find(function(x){return x.id===entry.id;});if(!l)return;
-            if(!l.decideur||!l.decideur.nom){l.decideur=JSON.parse(JSON.stringify(entry.d));}
-        });
-    })();
-    // ── Décideurs Groupe 3 — Petites cliniques dentaires/ostéo ──
-    (function(){
-        var _g3c=[
-            {id:'l083',d:{statut:'trouvé',nom:'Loïc Ballongue',titre:'Gérant (CDBN)',linkedin:'',emailPro:'',
-                anciennete:'Gérant CDBN - Cabinet Dentaire Bordeaux Nord (SIREN via SIRENE)',
-                signauxAchat:'CDBN Bordeaux Nord - cabinet dentaire multi-praticiens, 7j/7 - BPO télésec présumé',
-                sourceUrl:'https://recherche-entreprises.api.gouv.fr'}},
-            {id:'l089',d:{statut:'trouvé',nom:'Dr Kods Mahdhaoui',titre:'Chirurgien-Dentiste / Propriétaire',linkedin:'',emailPro:'',
-                anciennete:'Praticien titulaire Cabinet Dentaire Paris Monceau',
-                signauxAchat:'Cabinet Paris 17 / Monceau - dentisterie générale, amplitude horaire - BPO télésec présumé',
-                sourceUrl:''}},
-            {id:'l080',d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-            {id:'l090',d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-            {id:'l091',d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-            {id:'l102',d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-        ];
-        _g3c.forEach(function(entry){
-            var l=d.leads.find(function(x){return x.id===entry.id;});if(!l)return;
-            if(!l.decideur||!l.decideur.nom){l.decideur=JSON.parse(JSON.stringify(entry.d));}
-        });
-    })();
     d.tp = [];
     d.to = [];
     save(d);
@@ -1305,530 +818,17 @@ function uid() { return Date.now().toString(36) + Math.random().toString(36).sli
             changed = true;
         }
     });
-    // Patch statut pour leads connus — uniquement si encore vide (non modifié manuellement)
-    var _found = ['l063','l064','l065','l066','l067','l068','l069','l070','l071','l072','l073','l074','l075','l076','l077','l078',
-        'l086','l088','l005',
-        'l082','l151','l152','l154','l158','l160','l161','l162','l166','l167','l169','l174','l177','l180',
-        'l051','l052','l053','l054','l055','l056','l057','l058','l059','l060','l061','l062','l079','l084',
-        // G3 bailleurs + humanitaires + cliniques (v4)
-        'l155','l157','l163','l165','l153','l170','l171','l172','l173','l175','l176','l168','l178','l179','l083','l089'];
-    var _nf = ['l081','l087','l092','l156','l159','l164','l080','l090','l091','l102'];
-    _found.forEach(function(id) {
-        var l = d.leads.find(function(x){return x.id===id;});
-        if (!l) return;
-        if (l.decideur.statut === '') { l.decideur.statut = 'trouvé'; changed = true; }
-    });
-    _nf.forEach(function(id) {
-        var l = d.leads.find(function(x){return x.id===id;});
-        if (!l) return;
-        if (l.decideur.statut === '') { l.decideur.statut = 'non_trouvé'; changed = true; }
-    });
-    // Decideur2 patches connus
-    (function(){var l=d.leads.find(function(x){return x.id==='l082';});if(!l)return;
-        if(l.decideur2.statut===''){l.decideur2.statut='N/A';changed=true;}})();
-    var _d2 = [
-        {id:'l177',nom:'Sonia Hurcet',titre:'Déléguée Générale Adjointe',src:'https://fr.wikipedia.org/wiki/Fondation_Abb%C3%A9_Pierre'},
-        {id:'l151',nom:'David Delage',titre:'Directeur Général Délégué',src:'https://groupe.actionlogement.fr/notre-organisation'},
-        {id:'l154',nom:'Brigitte Laurent',titre:'Directrice clients, gestion locative et ventes',src:'https://groupe-cdc-habitat.com/groupe/gouvernance/cdc-habitat/'},
-        {id:'l160',nom:'Jean-Baptiste Desanlis',titre:'Directeur Général Délégué territoires et clients',src:'https://www.domofrance.fr/a-propos/qui-sommes-nous'},
-        {id:'l162',nom:'Antoine Jeandet',titre:'Directeur Général Délégué aux Territoires et aux Clients',src:'https://www.erilia.fr/decouvrir-erilia/notre-gouvernance'},
-        {id:'l174',nom:'Sophie Lascombe',titre:'Directrice Générale Adjointe',src:'https://emmaus-solidarite.org/qui-sommes-nous/organisation'},
-        {id:'l180',nom:'Sophie Rhodes',titre:'Secrétaire Générale',src:'https://www.medecinsdumonde.org/medecins-du-monde/notre-organisation/'}
-    ];
-    _d2.forEach(function(p){
-        var l=d.leads.find(function(x){return x.id===p.id;});if(!l)return;
-        if(l.decideur2.statut===''){l.decideur2={statut:'trouvé',nom:p.nom,titre:p.titre,linkedin:'',emailPro:'',sourceUrl:p.src};changed=true;}
-    });
-    ['l152','l158','l161','l166','l167','l169'].forEach(function(id){
-        var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-        if(l.decideur2.statut===''){l.decideur2.statut='non_trouvé';changed=true;}
-    });
-    if (changed) save(d);
-})();
-
-// ─── MIGRATION DÉCIDEURS v3 ────────────────────────────────────
-// v3: adds G1 dental chains (Dentego, PDS, Dentelia, Dentylis)
-(function migrateDecideurs_v2() {
-    if (localStorage.getItem('salverys_dec_v') === '3') return;
-    var d = load();
-    if (!d.leads || d.leads.length === 0) { localStorage.setItem('salverys_dec_v','3'); return; }
-    var changed = false;
-    var _IK = {statut:'trouvé',nom:'Charlotte de Mourgues-de Rivière',titre:'Directrice Générale',
-        linkedin:'https://www.linkedin.com/in/charlotte-de-mourgues-de-rivi%C3%A8re-62146620/',
-        emailPro:'',anciennete:'DGE depuis ~2020',
-        signauxAchat:'30+ centres IK Île-de-France, BPO centralisé quasi-certain',
-        sourceUrl:'https://www.linkedin.com/in/charlotte-de-mourgues-de-rivi%C3%A8re-62146620/'};
-    var _d1=[
-        {ids:['l063','l064','l065','l066','l067','l068','l069','l070','l071','l072','l073','l074','l075','l076','l077','l078'],d:_IK},
-        {ids:['l086'],d:{statut:'trouvé',nom:'Nicolas Cardonne',titre:'Co-fondateur / Dirigeant',linkedin:'',emailPro:'',
-            anciennete:'Co-fondateur 2011 (avec Thibault Biason, sorti 2022)',
-            signauxAchat:'11 kinés 3 pôles Toulouse, amplitude horaire étendue, BPO quasi-certain',
-            sourceUrl:'https://www.cotekine.com'}},
-        {ids:['l088'],d:{statut:'trouvé',nom:'Damien Zivanovic',titre:'Fondateur / Directeur',
-            linkedin:'https://www.linkedin.com/in/damien-zivanovic-ab723868/',emailPro:'',
-            anciennete:'Fondateur (ancienneté exacte non précisée)',
-            signauxAchat:'4 centres Lyon (1, 6, 7, Villeurbanne), 11 ostéos, réseau structuré - télésec quasi-certain',
-            sourceUrl:'https://www.linkedin.com/in/damien-zivanovic-ab723868/'}},
-        {ids:['l005'],d:{statut:'trouvé',nom:'Dr Catherine Marchetti',titre:'Co-gérante & Responsable de publication (SELARL IMRO)',
-            linkedin:'',emailPro:'',anciennete:'SELARL immatriculée ~2015 (SIREN 824311039)',
-            signauxAchat:'8 radiologues 2 sites Rennes, BPO radiologie quasi-systématique en radiologie multi-sites',
-            sourceUrl:'https://www.imro-radiologie-rennes.fr/mentions-l%C3%A9gales/'}},
-        {ids:['l082'],d:{statut:'trouvé',nom:'Dr Ari Elhyani',titre:'Chirurgien-Dentiste / Fondateur',linkedin:'',emailPro:'',
-            anciennete:'Fondateur Elone Clinic (chirurgien-dentiste, non chirurgien plasticien)',
-            signauxAchat:'Clinique dentisterie esthétique / implantologie premium Paris 16 — BPO télésec quasi-certain',
-            sourceUrl:'https://www.elone-clinic.com'}},
-        {ids:['l151'],d:{statut:'trouvé',nom:'Olivier Rico',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Action Logement Services',
-            signauxAchat:'Groupe Action Logement - 1M+ dossiers salariés/an, BPO débordement structurel',
-            sourceUrl:'https://groupe.actionlogement.fr/notre-organisation'}},
-        {ids:['l152'],d:{statut:'trouvé',nom:'Eric Balci',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:"DG in'li (ancienneté non précisée)",
-            signauxAchat:"in'li (Action Logement) - 55 000+ logements IDF, relation locataires centralisée - BPO débordement",
-            sourceUrl:'https://www.inli.fr/mentions-legales/'}},
-        {ids:['l154'],d:{statut:'trouvé',nom:'Clément Lecuivre',titre:'Président du Directoire',linkedin:'',emailPro:'',
-            anciennete:'Président Directoire CDC Habitat',
-            signauxAchat:'CDC Habitat - 540 000 logements France entière, BPO débordement présumé',
-            sourceUrl:'https://groupe-cdc-habitat.com/groupe/gouvernance/cdc-habitat/'}},
-        {ids:['l158'],d:{statut:'trouvé',nom:'Romain Dubois',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'Nommé DG 2019',
-            signauxAchat:"ICF Habitat SNCF - 95 000 logements, infrastructure centre d'appels existante (SNCF)",
-            sourceUrl:'https://fr.wikipedia.org/wiki/ICF_Habitat'}},
-        {ids:['l160'],d:{statut:'trouvé',nom:'Francis Stéphan',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Domofrance (ancienneté non précisée)',
-            signauxAchat:'Domofrance (Groupe Action Logement) - 50 000 logements Nouvelle-Aquitaine, service client structuré',
-            sourceUrl:'https://www.domofrance.fr/a-propos/qui-sommes-nous'}},
-        {ids:['l161'],d:{statut:'trouvé',nom:'Philippe Rémignon',titre:'Président du Directoire',linkedin:'',emailPro:'',
-            anciennete:'Président Directoire Vilogia (dossier presse 2026)',
-            signauxAchat:'Vilogia - 92 000 logements Hauts-de-France+, centre multicanal locataires - BPO débordement',
-            sourceUrl:'https://www.vilogia.fr/sites/default/files/2026-04/dossier-presse-vilogia-2026_compressed.pdf'}},
-        {ids:['l162'],d:{statut:'trouvé',nom:'Frédéric Lavergne',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Erilia (ancienneté non précisée)',
-            signauxAchat:'Erilia (Groupe Action Logement) - 55 000 logements PACA, relation client structurée',
-            sourceUrl:'https://www.erilia.fr/decouvrir-erilia/notre-gouvernance'}},
-        {ids:['l166'],d:{statut:'trouvé',nom:'Constance Bensussan',titre:'Directrice Générale',linkedin:'',emailPro:'',
-            anciennete:'DG CNAF depuis 2026',
-            signauxAchat:'CNAF - 11M allocataires France, téléconseillères CAF - BPO débordement systématique',
-            sourceUrl:'https://fr.wikipedia.org/wiki/Caisse_nationale_des_allocations_familiales'}},
-        {ids:['l167'],d:{statut:'trouvé',nom:'Thibaut Guilluy',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG France Travail (ex-Pôle emploi, depuis 2024)',
-            signauxAchat:'France Travail - 55 000 agents, BPO débordement systématique demandeurs emploi/entreprises',
-            sourceUrl:'https://fr.wikipedia.org/wiki/France_Travail'}},
-        {ids:['l169'],d:{statut:'trouvé',nom:'Dr Caroline Cross',titre:'Directrice Générale',linkedin:'',emailPro:'',
-            anciennete:'DG Croix-Rouge française (directrice de publication)',
-            signauxAchat:'Croix-Rouge - 18 000 salariés, 635 établissements santé/médico-social, BPO probable',
-            sourceUrl:'https://www.croix-rouge.fr/mentions-legales'}},
-        {ids:['l174'],d:{statut:'trouvé',nom:'Lotfi Ouanezar',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Emmaüs Solidarité (ancienneté non précisée)',
-            signauxAchat:'Emmaüs Solidarité - 350 salariés, 3 000 bénévoles, accueil/insertion IDF - BPO présumé',
-            sourceUrl:'https://emmaus-solidarite.org/qui-sommes-nous/organisation'}},
-        {ids:['l177'],d:{statut:'trouvé',nom:'Christophe Robert',titre:'Délégué Général',linkedin:'',emailPro:'',
-            anciennete:'Délégué Général Fondation pour le Logement des Défavorisés (ex-Fondation Abbé Pierre)',
-            signauxAchat:'Fondation logement défavorisés - 9 agences régionales, accompagnement mal-logés - BPO présumé',
-            sourceUrl:'https://fr.wikipedia.org/wiki/Fondation_Abb%C3%A9_Pierre'}},
-        {ids:['l180'],d:{statut:'trouvé',nom:'Helena Ranchal',titre:'Directrice Générale par intérim',linkedin:'',emailPro:'',
-            anciennete:'DG par intérim Médecins du Monde (2024-)',
-            signauxAchat:'MdM - 6 000 bénévoles, présence 40+ pays, coordination médicale internationale - BPO présumé',
-            sourceUrl:'https://www.medecinsdumonde.org/medecins-du-monde/notre-organisation/'}},
-        // ── G1 chaînes dentaires (v3) ──
-        {ids:['l051','l055','l056','l057','l058','l059','l060','l061'],d:{statut:'trouvé',nom:'Caroline Baert',titre:'Directrice Exploitation',
-            linkedin:'',emailPro:'',
-            anciennete:'Directrice Exploitation Adental Groupe (structure opérationnelle Dentego)',
-            signauxAchat:"⚠️ CONFLIT COMMERCIAL : Adental Groupe (filiale Dentego) dispose déjà d'un télésecrétariat internalisé. Angle = débordement/overflow uniquement. 80+ centres Dentego France.",
-            sourceUrl:''}},
-        {ids:['l052','l084'],d:{statut:'trouvé',nom:'Mathias Bensimon',titre:'Fondateur / Dirigeant',
-            linkedin:'',emailPro:'',
-            anciennete:'Fondateur Paris Dental Studios (France Dental Services, SIREN 950865550, créé 2020)',
-            signauxAchat:'3 centres Paris/Lyon/Aix — dentisterie esthétique premium — BPO/concierge certain',
-            sourceUrl:'https://parisdentalstudios.com/mentions-legales-paris-dental-studios/'}},
-        {ids:['l053','l054','l062'],d:{statut:'trouvé',nom:'Cyrille Duboc',titre:'Directeur Général France',
-            linkedin:'',emailPro:'',
-            anciennete:'Managing Director / DG France Colosseum Dental (Dentelia)',
-            signauxAchat:'Colosseum Dental France (Dentelia) — réseau en croissance — BPO centralisé certain. Claude Streit = CEO UK (non opérationnel France — à éviter).',
-            sourceUrl:'https://www.colosseumdental.com/who-we-are/meet-our-team'}},
-        {ids:['l079'],d:{statut:'trouvé',nom:'Jean-Jacques Israël',titre:'Fondateur',
-            linkedin:'',emailPro:'',
-            anciennete:'Fondateur Dentylis — directeur de publication (RCS PARIS B 453 987 976). DG opérationnel non confirmé.',
-            signauxAchat:'40+ centres de santé pluridisciplinaires France entière — BPO centralisé certain',
-            sourceUrl:'https://dentylis.fr/informations-legales/'}}
-    ];
-    _d1.forEach(function(entry){
-        entry.ids.forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            if(!l.decideur||!l.decideur.nom){l.decideur=JSON.parse(JSON.stringify(entry.d));changed=true;}
-        });
-    });
-    if(changed)save(d);
-    localStorage.setItem('salverys_dec_v','3');
-})();
-
-// ─── MIGRATION DÉCIDEURS v4 ────────────────────────────────────
-// v4: adds G3 bailleurs (Adoma, Plurial Novilia, Aiguillon, Habitat 76, AL'in)
-//     + associations humanitaires (Secours Catholique, Populaire, Restos, Emmaüs France, Aurore, France Horizon, URSSAF, Habitat & Humanisme, UNHAJ)
-//     + petites cliniques G3 (CDBN, Dr Mahdhaoui)
-(function migrateDecideurs_v4() {
-    if (localStorage.getItem('salverys_dec_v') === '4') return;
-    var d = load();
-    if (!d.leads || d.leads.length === 0) { localStorage.setItem('salverys_dec_v','4'); return; }
-    var changed = false;
-    var _d4=[
-        {ids:['l155'],d:{statut:'trouvé',nom:'Emmanuel Ballu',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Adoma (filiale Action Logement)',
-            signauxAchat:'Adoma - 70 000 logements foyers/résidences, pensionnaires travail migrant - BPO relation résidents probable',
-            sourceUrl:'https://www.adoma.fr'}},
-        {ids:['l157'],d:{statut:'trouvé',nom:'Johnny Huat',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Plurial Novilia (ancienneté non précisée)',
-            signauxAchat:'Plurial Novilia - 43 000 logements Grand-Est, relation locataires structurée - BPO débordement probable',
-            sourceUrl:'https://www.plurialnovilia.fr'}},
-        {ids:['l163'],d:{statut:'trouvé',nom:'Thierry Heyvang',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Aiguillon Construction (directeur de la publication)',
-            signauxAchat:'Aiguillon Construction - 37 000 logements Bretagne/Pays de la Loire - BPO relation locataires probable',
-            sourceUrl:'https://www.aiguillon-construction.fr'}},
-        {ids:['l165'],d:{statut:'trouvé',nom:'Eric Gimer',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Habitat 76 (directeur de la publication)',
-            signauxAchat:'Habitat 76 - 25 000 logements Seine-Maritime, relation locataires actif - BPO débordement probable',
-            sourceUrl:'https://www.habitat76.fr'}},
-        {ids:['l153'],d:{statut:'trouvé',nom:'Olivier Rico',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Action Logement Services (directeur de publication alin.immo)',
-            signauxAchat:"AL'in - plateforme digitale Action Logement, gestion candidatures logement - BPO helpdesk présumé",
-            sourceUrl:'https://www.actionlogement.fr/mentions-legales'}},
-        {ids:['l170'],d:{statut:'trouvé',nom:'Didier Duriez',titre:'Président national',linkedin:'',emailPro:'',
-            anciennete:'Président national Secours Catholique — Caritas France',
-            signauxAchat:'Secours Catholique - 70 000 bénévoles, 740 équipes locales, accueil en précarité - BPO présumé',
-            sourceUrl:'https://www.secours-catholique.org'}},
-        {ids:['l171'],d:{statut:'trouvé',nom:'Henriette Steinberg',titre:'Secrétaire générale',linkedin:'',emailPro:'',
-            anciennete:'Secrétaire générale Secours Populaire Français',
-            signauxAchat:'Secours Populaire - 1M+ bénéficiaires/an, 70 000 bénévoles, réseau national - BPO présumé',
-            sourceUrl:'https://www.secourspopulaire.fr'}},
-        {ids:['l172'],d:{statut:'trouvé',nom:'Jean-Michel Richard',titre:'Président',linkedin:'',emailPro:'',
-            anciennete:"Président des Restos du Cœur (Restaurants du Cœur — Les Relais du Cœur)",
-            signauxAchat:"Restos du Cœur - 1M+ bénéficiaires/an, 70 000 bénévoles, réseau national - BPO présumé",
-            sourceUrl:'https://www.restosducoeur.org'}},
-        {ids:['l173'],d:{statut:'trouvé',nom:'Tarek Daher',titre:'Délégué général',linkedin:'',emailPro:'',
-            anciennete:'Délégué général Emmaüs France',
-            signauxAchat:"Emmaüs France - fédération 120+ associations, 10 000 compagnons - BPO présumé",
-            sourceUrl:'https://emmaus-france.org'}},
-        {ids:['l175'],d:{statut:'trouvé',nom:'Florian Guyot',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Association Aurore',
-            signauxAchat:'Aurore - 80+ établissements hébergement/insertion/soin, 5 000 résidents - BPO présumé',
-            sourceUrl:'https://www.aurore-asso.fr'}},
-        {ids:['l176'],d:{statut:'trouvé',nom:'Hubert Valade',titre:'Président',linkedin:'',emailPro:'',
-            anciennete:'Président France Horizon (ancienneté non précisée)',
-            signauxAchat:'France Horizon - 9 000 personnes accueillies/an, CHRS/foyers/réfugiés - BPO présumé',
-            sourceUrl:'https://www.france-horizon.org'}},
-        {ids:['l168'],d:{statut:'trouvé',nom:'Yann-Gaël Amghar',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG URSSAF Caisse Nationale depuis juin 2022 (décret de nomination)',
-            signauxAchat:'URSSAF - 9M+ cotisants, 600 M€ collectés/j, helpdesk entreprises - BPO helpdesk certain',
-            sourceUrl:'https://www.urssaf.org'}},
-        {ids:['l178'],d:{statut:'trouvé',nom:'Pascal Isoard-Thomas',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Fédération Habitat et Humanisme (Directoire)',
-            signauxAchat:'Habitat et Humanisme - 14 000+ logements accompagnés, réseau national - BPO support-N1 probable',
-            sourceUrl:'https://www.habitat-humanisme.org/gouvernance/'}},
-        {ids:['l179'],d:{statut:'trouvé',nom:'Marianne Auffret',titre:'Directrice générale',linkedin:'',emailPro:'',
-            anciennete:'Directrice de la publication UNHAJ',
-            signauxAchat:'UNHAJ - 220 structures Habitat Jeunes France entière, accueil 18-30 ans - BPO support présumé',
-            sourceUrl:'https://www.unhaj.org/mentions-legales'}},
-        {ids:['l083'],d:{statut:'trouvé',nom:'Loïc Ballongue',titre:'Gérant (CDBN)',linkedin:'',emailPro:'',
-            anciennete:'Gérant CDBN - Cabinet Dentaire Bordeaux Nord (SIREN via SIRENE)',
-            signauxAchat:'CDBN Bordeaux Nord - cabinet dentaire multi-praticiens, 7j/7 - BPO télésec présumé',
-            sourceUrl:'https://recherche-entreprises.api.gouv.fr'}},
-        {ids:['l089'],d:{statut:'trouvé',nom:'Dr Mahdhaoui',titre:'Chirurgien-Dentiste / Propriétaire',linkedin:'',emailPro:'',
-            anciennete:'Praticien titulaire Cabinet Dentaire Paris Monceau',
-            signauxAchat:'Cabinet Paris 17 / Monceau - dentisterie générale, amplitude horaire - BPO télésec présumé',
-            sourceUrl:''}},
-        {ids:['l080'],d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-        {ids:['l090'],d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-        {ids:['l091'],d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-        {ids:['l102'],d:{statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''}},
-    ];
-    _d4.forEach(function(entry){
-        entry.ids.forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            if(!l.decideur||!l.decideur.nom){l.decideur=JSON.parse(JSON.stringify(entry.d));changed=true;}
-        });
-    });
-    if(changed)save(d);
-    localStorage.setItem('salverys_dec_v','4');
-})();
-
-// ─── MIGRATION DÉCIDEURS v5 ────────────────────────────────────
-// v5 (2026-05-29) : corrections vérifiées — FORCE overwrite (une seule fois via flag).
-//   Nécessaire car les migrations précédentes sont conditionnelles (n'écrasent pas
-//   un décideur déjà saisi) et seedIfEmpty ne tourne que sur stockage vide.
-//   Médical/dentaire : Dentego→Caroline Baert (+conflit Adental Groupe), Dentelia→Cyrille Duboc,
-//     Dentylis titre Fondateur, Elone dentisterie esthétique (pas chirurgie), Monceau→Dr Kods Mahdhaoui.
-//   Bailleurs : viser le décideur RELATION CLIENT/LOCATAIRES, pas le DG (decideur2 = DG en escalade).
-//     CDC Habitat→Brigitte Laurent, Erilia→Antoine Jeandet, Domofrance→J-B Desanlis,
-//     Vilogia→Gaëlle Velay, Plurial Novilia→Laurent Monclin, ICF Habitat→Olivier Sicard,
-//     Aiguillon→Mickaël Lehardy, 1001 Vies Habitat→Claude Knapik.
-//     Solendi (l164) déqualifié : collecteur Action Logement, sans parc locatif.
-(function migrateDecideurs_v5() {
-    if (localStorage.getItem('salverys_dec_v') === '5') return;
-    var d = load();
-    if (!d.leads || d.leads.length === 0) { localStorage.setItem('salverys_dec_v','5'); return; }
-    var changed = false;
-    var _fix=[
-        // ── Médical / dentaire ──
-        {ids:['l051','l055','l056','l057','l058','l059','l060','l061'],
-         d:{statut:'trouvé',nom:'Caroline Baert',titre:'Directrice Exploitation',linkedin:'',emailPro:'',
-            anciennete:'Directrice Exploitation Adental Groupe (structure opérationnelle Dentego)',
-            signauxAchat:'⚠️ CONFLIT : Adental Groupe (filiale Dentego) gère déjà le télésecrétariat en interne. Angle = débordement/overflow uniquement. 80+ centres. James Cohen (co-fondateur) = figurehead, pas le bon interlocuteur.',
-            sourceUrl:''}},
-        {ids:['l053','l054','l062'],
-         d:{statut:'trouvé',nom:'Cyrille Duboc',titre:'Directeur Général France',linkedin:'',emailPro:'',
-            anciennete:'Managing Director / DG France Colosseum Dental (Dentelia)',
-            signauxAchat:'Colosseum Dental France (Dentelia) — réseau en croissance. Claude Streit = CEO UK (non opérationnel France — à éviter).',
-            sourceUrl:'https://www.colosseumdental.com/who-we-are/meet-our-team'}},
-        {ids:['l079'],
-         d:{statut:'trouvé',nom:'Jean-Jacques Israël',titre:'Fondateur',linkedin:'',emailPro:'',
-            anciennete:'Fondateur Dentylis — directeur de publication (RCS PARIS B 453 987 976). DG opérationnel non confirmé.',
-            signauxAchat:'40+ centres de santé pluridisciplinaires France entière — centralisation certaine.',
-            sourceUrl:'https://dentylis.fr/informations-legales/'}},
-        {ids:['l082'],
-         d:{statut:'trouvé',nom:'Dr Ari Elhyani',titre:'Chirurgien-Dentiste / Fondateur',linkedin:'',emailPro:'',
-            anciennete:'Fondateur Elone Clinic (chirurgien-dentiste, non chirurgien plasticien)',
-            signauxAchat:'Clinique dentisterie esthétique / implantologie premium Paris 16 — télésec quasi-certain.',
-            sourceUrl:'https://www.elone-clinic.com'}},
-        {ids:['l089'],
-         d:{statut:'trouvé',nom:'Dr Kods Mahdhaoui',titre:'Chirurgien-Dentiste / Propriétaire',linkedin:'',emailPro:'',
-            anciennete:'Praticien titulaire Cabinet Dentaire Paris Monceau',
-            signauxAchat:'Cabinet Paris 8 / Monceau — dentisterie générale, amplitude horaire — télésec présumé.',
-            sourceUrl:''}},
-        // ── Bailleurs : décideur RELATION CLIENT/LOCATAIRES (decideur2 = DG en escalade) ──
-        {ids:['l154'],
-         d:{statut:'trouvé',nom:'Brigitte Laurent',titre:'Directrice Clients, Gestion Locative et Numérique',linkedin:'https://fr.linkedin.com/in/brigitte-laurent-a6a80449',emailPro:'',
-            anciennete:'Nommée avr. 2023 — périmètre clients + gestion locative (CDC Habitat)',
-            signauxAchat:'CDC Habitat 540 000 logements. Décideur opérationnel relation client le plus pertinent. À confirmer toujours en poste.',
-            sourceUrl:'https://acteurspublics.fr/nomination/brigitte-laurent-rejoint-cdc-habitat'},
-         d2:{statut:'trouvé',nom:'Clément Lecuivre',titre:'Président du Directoire (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://groupe-cdc-habitat.com/groupe/gouvernance/cdc-habitat/'}},
-        {ids:['l162'],
-         d:{statut:'trouvé',nom:'Antoine Jeandet',titre:'Directeur Général Délégué Territoires et Clients',linkedin:'https://fr.linkedin.com/in/antoine-jeandet-65b412a4',emailPro:'',
-            anciennete:'DGD Territoires et Clients Erilia (ex-DGA relation client depuis 2019)',
-            signauxAchat:'Erilia ~55 000 logements PACA/Occitanie. LE décideur clients du groupe (confirmé).',
-            sourceUrl:'https://gomet.net/antoine-jeandet-direction-derilia/'},
-         d2:{statut:'trouvé',nom:'Frédéric Lavergne',titre:'Directeur Général (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://www.erilia.fr/decouvrir-erilia/notre-gouvernance'}},
-        {ids:['l160'],
-         d:{statut:'trouvé',nom:'Jean-Baptiste Desanlis',titre:'Directeur Général Délégué Territoires et Clients',linkedin:'',emailPro:'',
-            anciennete:'DGD Territoires et Clients Domofrance',
-            signauxAchat:'Domofrance ~50 000 logements N-Aquitaine. CRC "Domo@Contact" (Pau) — identifier le Responsable du CRC sous Desanlis pour l\'opérationnel.',
-            sourceUrl:'https://www.domofrance.fr/Nos-actus/Domofrance-inaugure-son-Centre-de-Relation-Client-a-Pau'},
-         d2:{statut:'trouvé',nom:'Francis Stéphan',titre:'Directeur Général (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://www.domofrance.fr/a-propos/qui-sommes-nous'}},
-        {ids:['l161'],
-         d:{statut:'trouvé',nom:'Gaëlle Velay',titre:'Directrice Opérationnelle (parcours client)',linkedin:'',emailPro:'',
-            anciennete:'Nommée Directrice Opérationnelle Vilogia 06/01/2025 (parcours client + politiques sociales)',
-            signauxAchat:'Vilogia ~92 000 logements. CRC à Villeneuve-d\'Ascq (~50 pers., 300 000 appels/an). ⚠️ David Loy (ex-Dir. Relation Clients) parti diriger le territoire IDF — ne plus le cibler.',
-            sourceUrl:'https://www.vilogia.fr/gaelle-velay-est-nommee-directrice-operationnelle-de-vilogia'},
-         d2:{statut:'trouvé',nom:'Philippe Rémignon',titre:'Président du Directoire (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://www.vilogia.fr'}},
-        {ids:['l157'],
-         d:{statut:'trouvé',nom:'Laurent Monclin',titre:'Directeur Adjoint Relation Clientèle (offre locative)',linkedin:'https://www.linkedin.com/in/laurent-monclin-80306114b/',emailPro:'',
-            anciennete:'Chez Plurial Novilia depuis 2010 (source : LinkedIn, à confirmer)',
-            signauxAchat:'Plurial Novilia ~43 000 logements Grand Est. Le Directeur titulaire (N+1 des adjoints) non identifié publiquement — à chercher.',
-            sourceUrl:'https://www.plurial-novilia.fr/metiers-la-relation-clients-et-la-proximite/'},
-         d2:{statut:'trouvé',nom:'Johnny Huat',titre:'Directeur Général (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://www.plurialnovilia.fr'}},
-        {ids:['l158'],
-         d:{statut:'trouvé',nom:'Olivier Sicard',titre:'Responsable du Centre de Relation Clients',linkedin:'https://fr.linkedin.com/in/olivier-sicard-25964b26',emailPro:'',
-            anciennete:'Responsable CRC ICF Habitat La Sablière (cité dans com. officielle, recert. AFNOR)',
-            signauxAchat:'ICF Habitat (SNCF) ~95 000 logements. Contact opérationnel CRC. N+1 = Mathilde Jourdan (Dir. Gestion Locative Groupe).',
-            sourceUrl:'https://www.icfhabitat.fr/groupe/le-centre-de-relation-clients-dicf-habitat-la-sabliere-nouveau-recompense-pour-son-ecoute-et'},
-         d2:{statut:'trouvé',nom:'Mathilde Jourdan',titre:'Directrice de la Gestion Locative Groupe (validation/escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://www.icfhabitat.fr'}},
-        {ids:['l163'],
-         d:{statut:'trouvé',nom:'Mickaël Lehardy',titre:'DGA Gestion Locative et Sociale / Dir. adjoint Relation Client',linkedin:'https://www.linkedin.com/in/micka%C3%ABl-lehardy-110902167/',emailPro:'',
-            anciennete:'Gestion locative + relation client + prévention impayés (Aiguillon Construction)',
-            signauxAchat:'Aiguillon Construction ~37 000 logements Grand Ouest. Meilleur contact opérationnel. Titre exact à confirmer.',
-            sourceUrl:'https://www.aiguillon-construction.fr'},
-         d2:{statut:'trouvé',nom:'Thierry Heyvang',titre:'Directeur Général (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://www.aiguillon-construction.fr'}},
-        {ids:['l156'],
-         d:{statut:'trouvé',nom:'Claude Knapik',titre:'Président du Directoire',linkedin:'',emailPro:'',
-            anciennete:'Président du Directoire 1001 Vies Habitat depuis le 01/01/2026',
-            signauxAchat:'1001 Vies Habitat (Action Logement Immobilier). Réorg post-fusion : décideur relation locataires non public — point d\'entrée régional possible Stéphane Boubennec (Dir. IDF).',
-            sourceUrl:'https://www.1001vieshabitat.fr/claude-knapik-nouveau-president-du-directoire-de-1001-vies-habitat/'}},
-        // ── Bailleurs : DG conservé + note (décideur opérationnel non identifié publiquement) ──
-        {ids:['l151'],
-         d:{statut:'trouvé',nom:'Olivier Rico',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Action Logement Services',
-            signauxAchat:'⚠️ DG = mauvais interlocuteur direct. Décideur CRC non identifié publiquement. Point d\'entrée opérationnel = David Delage (DGA, en decideur2). Chercher "Responsable CRC" via offres d\'emploi/standard.',
-            sourceUrl:'https://groupe.actionlogement.fr/notre-organisation'}},
-        {ids:['l152'],
-         d:{statut:'trouvé',nom:'Eric Balci',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG in\'li',
-            signauxAchat:'⚠️ DG = mauvais interlocuteur. Dir. Relation Locataires non identifié publiquement. Chercher "Responsable Service Relation Client in\'li" (LinkedIn/standard).',
-            sourceUrl:'https://www.inli.com/en/inli/gouvernance'}},
-        {ids:['l153'],
-         d:{statut:'trouvé',nom:'Olivier Rico',titre:'Directeur Général (Action Logement Services)',linkedin:'',emailPro:'',
-            anciennete:'AL\'in = plateforme digitale opérée par ALS (pas d\'entité autonome)',
-            signauxAchat:'⚠️ Pas de direction propre. Remonter via David Delage (DGA ALS) et demander qui pilote la relation usagers de la plateforme.',
-            sourceUrl:'https://al-in.fr/'}},
-        {ids:['l155'],
-         d:{statut:'trouvé',nom:'Emmanuel Ballu',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Adoma (filiale CDC Habitat)',
-            signauxAchat:'⚠️ Structure très décentralisée (6 DI régionales). Relation clients portée au niveau groupe CDC Habitat (Brigitte Laurent). Piste : appel d\'offres BOAMP/UGAP "centre d\'appels Adoma".',
-            sourceUrl:'https://www.adoma.cdc-habitat.fr/adoma/notre-gouvernance/'}},
-        {ids:['l165'],
-         d:{statut:'trouvé',nom:'Eric Gimer',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Habitat 76 (OPH Seine-Maritime)',
-            signauxAchat:'⚠️ DG = repli. "Service Gestion de la Relation Locataires" interne structuré (CRM Coheris) mais responsable non public. Chercher offre "Responsable Relation Locataires Habitat 76".',
-            sourceUrl:'https://habitat76.fr'}},
-    ];
-    _fix.forEach(function(e){
-        if(!e.d||!e.d.nom)return; // skip placeholder
-        e.ids.forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            l.decideur=JSON.parse(JSON.stringify(e.d));changed=true;
-            if(e.d2){
-                if(!l.decideur2)l.decideur2={};
-                l.decideur2=JSON.parse(JSON.stringify(e.d2));
-            }
-        });
-    });
-    // Solendi (l164) : déqualifié — pas un bailleur (collecteur Action Logement, sans parc locatif)
-    (function(){var l=d.leads.find(function(x){return x.id==='l164';});if(!l)return;
-        if(l.notes.indexOf('DÉQUALIFIÉ')===-1){
-            l.notes='⚠️ DÉQUALIFIÉ : Solendi n\'est pas un bailleur (collecteur Action Logement fusionné dans AL Services, sans parc locatif) — aucun centre de relation locataires à externaliser. | '+l.notes;
-            changed=true;}
-        l.decideur={statut:'non_trouvé',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',
-            signauxAchat:'Hors cible "relation locataires". Re-qualifier sur services salariés/entreprises ou retirer du pipeline.',sourceUrl:''};})();
-    if(changed)save(d);
-    localStorage.setItem('salverys_dec_v','5');
-})();
-
-// ─── MIGRATION DÉCIDEURS v6 ────────────────────────────────────
-// v6 (2026-05-29) : contacts vérifiés par agents de recherche — FORCE overwrite.
-//   MSP médicaux : Laurence Foschia (l006), Lionel Cervera (l037), Dr Michaël Loeb (l039).
-//   Dentaire/ostéo non_trouvés : Shana Aiach (l081), Pierre de Chauvigny (l087, ⚠️ sorti ~2020),
-//     Dr Antoine Leuret (l090), Romain Sevignac (l091), Jeanne-Marie Serot (l092), Matthieu Denquin (l102).
-//   Associations humanitaires — corrections dirigeants :
-//     Secours Pop.→Thierry Robert (l171), Aurore→Marie Degrand-Guillaud (l175),
-//     France Horizon→Nabil Neffati (l176), Fondation Abbé Pierre→Michel Raynaud (l177, 🏆 meilleure cible),
-//     Médecins du Monde→Joël Weiler (l180).
-//   Organismes publics — contacts opérationnels + 🚫 NO-GO (marchés publics, volumes hors capacité) :
-//     CNAF→Nicolas Grivel (l166), France Travail→Thibault Romatet (l167), URSSAF→Julie Aubertie (l168).
-//   Annuaires/ordres (l142-l150) : marqués N/A — sources de prospection, non leads.
-(function migrateDecideurs_v6() {
-    if (localStorage.getItem('salverys_dec_v') === '6') return;
-    var d = load();
-    if (!d.leads || d.leads.length === 0) { localStorage.setItem('salverys_dec_v','6'); return; }
-    var changed = false;
-    var _fix6=[
-        // ── MSP médicaux — contacts coordinateurs ──
-        {ids:['l006'],
-         d:{statut:'trouvé',nom:'Laurence Foschia',titre:'Coordinatrice administrative',linkedin:'',emailPro:'',
-            anciennete:'Coordinatrice Centre de Santé La Roseraie — Anjou Accompagnement (Angers)',
-            signauxAchat:'Centre santé associatif pluridisciplinaire — secrétariat centralisé, BPO débordement probable',
-            sourceUrl:'https://www.anjouaccompagnement.fr'}},
-        {ids:['l037'],
-         d:{statut:'trouvé',nom:'Lionel Cervera',titre:'Coordinateur médecin',linkedin:'',emailPro:'',
-            anciennete:'Coordinateur MSP Toulouse Constellation (Route de Bayonne)',
-            signauxAchat:'MSP multi-médecins Toulouse — secrétariat partagé large amplitude — BPO probable',
-            sourceUrl:'https://annuaire.sante.fr'}},
-        {ids:['l039'],
-         d:{statut:'trouvé',nom:'Dr Michaël Loeb',titre:'Médecin coordinateur',linkedin:'',emailPro:'',
-            anciennete:'Médecin coordinateur Centre Médical Toulouse (4 médecins : Bilfeld, Lartiguevieille, Martin, Thomas)',
-            signauxAchat:'Centre 4 médecins Toulouse — infrastructure secrétariat, BPO débordement probable',
-            sourceUrl:'https://annuaire.sante.fr'}},
-        // ── Dentaire / ostéo — contacts trouvés ──
-        {ids:['l081'],
-         d:{statut:'trouvé',nom:'Shana Aiach',titre:'Co-fondatrice & Directrice Générale',
-            linkedin:'https://www.linkedin.com/in/shana-aiach/',emailPro:'',
-            anciennete:'Co-fondatrice Sana Oris Paris (Paris 8, centre dentaire premium international)',
-            signauxAchat:'Centre dentaire premium multilangue Paris 8 — clientèle internationale — BPO/concierge quasi-certain',
-            sourceUrl:'https://www.linkedin.com/in/shana-aiach/'}},
-        {ids:['l087'],
-         d:{statut:'trouvé',nom:'Pierre de Chauvigny',titre:'Fondateur',linkedin:'',emailPro:'',
-            anciennete:'Fondateur Clinic Osteo — sorti ~2020 (direction actuelle non identifiée publiquement)',
-            signauxAchat:"⚠️ Contact incertain : fondateur sorti ~2020. Chaîne multi-sites Paris/Lyon — BPO central quasi-certain si direction active. Vérifier direction actuelle via standard avant contact.",
-            sourceUrl:'https://www.clinicosteo.fr'}},
-        {ids:['l090'],
-         d:{statut:'trouvé',nom:'Dr Antoine Leuret',titre:'Chirurgien-Dentiste / Responsable',linkedin:'',emailPro:'',
-            anciennete:'Clinique Esthétique Dentaire Bordeaux (05 47 74 29 90)',
-            signauxAchat:'Clinique esthétique dentaire Bordeaux — BPO télésec quasi-certain',
-            sourceUrl:'https://annuaire.sante.fr'}},
-        {ids:['l091'],
-         d:{statut:'trouvé',nom:'Romain Sevignac',titre:'Ostéopathe / Co-fondateur',linkedin:'',emailPro:'',
-            anciennete:'Co-fondateur Cabinet Ostéopathie des Arènes Toulouse (3 ostéos, amplitude 7h-21h)',
-            signauxAchat:'Amplitude 7h-21h — permanence téléphonique externe quasi-certaine',
-            sourceUrl:'https://www.arenes-osteopathie.fr'}},
-        {ids:['l092'],
-         d:{statut:'trouvé',nom:'Jeanne-Marie Serot',titre:'Co-gérante',linkedin:'',emailPro:'',
-            anciennete:"Co-gérante Cabinet Dentaire Tête d'Or Lyon (avec Yasmine Kedous et J-F Costemale-Lacoste)",
-            signauxAchat:"Cabinet implantologie/chirurgie Lyon Tête d'Or — flux RDV élevé, télésec quasi-certain",
-            sourceUrl:'https://annuaire.sante.fr'}},
-        {ids:['l102'],
-         d:{statut:'trouvé',nom:'Matthieu Denquin',titre:'Ostéopathe / Responsable',linkedin:'',emailPro:'',
-            anciennete:'Responsable Cabinet Capitole Toulouse (ostéo + psy + thérapies, 2 sites : Rémusat + Mirepoix)',
-            signauxAchat:'Cabinet pluri 2 sites Toulouse — secrétariat centralisé probable, BPO possible',
-            sourceUrl:'https://annuaire.sante.fr'}},
-        // ── Associations humanitaires — corrections dirigeants ──
-        {ids:['l171'],
-         d:{statut:'trouvé',nom:'Thierry Robert',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Secours Populaire Français (remplace Henriette Steinberg, Secrétaire générale)',
-            signauxAchat:'Secours Populaire - 1M+ bénéficiaires/an. Cible FAIBLE : modèle bénévole, accueil présentiel, budget serré — BPO non prioritaire.',
-            sourceUrl:'https://www.secourspopulaire.fr'}},
-        {ids:['l175'],
-         d:{statut:'trouvé',nom:'Marie Degrand-Guillaud',titre:'Directrice Générale',linkedin:'',emailPro:'',
-            anciennete:'DG Association Aurore depuis 14/02/2026 (remplace Florian Guyot)',
-            signauxAchat:'Aurore - 80+ établissements hébergement/insertion. Cible MOYENNE : standard accueil structuré, BPO sur débordement possible.',
-            sourceUrl:'https://www.aurore-asso.fr'}},
-        {ids:['l176'],
-         d:{statut:'trouvé',nom:'Nabil Neffati',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG France Horizon (remplace Hubert Valade, Président)',
-            signauxAchat:'France Horizon - 9 000 personnes/an accueillies. Cible FAIBLE : CHRS/réfugiés, accueil primaire, budget associatif contraint.',
-            sourceUrl:'https://www.france-horizon.org'}},
-        {ids:['l177'],
-         d:{statut:'trouvé',nom:'Michel Raynaud',titre:'Directeur Développement Ressources et Donateurs',linkedin:'',emailPro:'',
-            anciennete:'Dir. Développement Ressources et Donateurs — Fondation pour le Logement des Défavorisés (Fondation Abbé Pierre)',
-            signauxAchat:"🏆 MEILLEURE CIBLE asso. : centre relation donateurs structuré — BPO/télésec quasi-certain. Interlocuteur direct : Michel Raynaud. Christophe Robert (DG délégué) = escalade uniquement.",
-            sourceUrl:'https://www.fondation-abbe-pierre.fr'},
-         d2:{statut:'trouvé',nom:'Christophe Robert',titre:'Délégué Général (escalade)',linkedin:'',emailPro:'',
-            sourceUrl:'https://fr.wikipedia.org/wiki/Fondation_Abb%C3%A9_Pierre'}},
-        {ids:['l180'],
-         d:{statut:'trouvé',nom:'Joël Weiler',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG Médecins du Monde France (remplace Helena Ranchal, DG par intérim)',
-            signauxAchat:'MdM - ONG internationale. Cible FAIBLE : coordination terrain bénévole, modèle humanitaire, budget dédié terrain — BPO non prioritaire.',
-            sourceUrl:'https://www.medecinsdumonde.org/medecins-du-monde/notre-organisation/'}},
-        // ── Organismes publics — contacts opérationnels + flag NO-GO ──
-        {ids:['l166'],
-         d:{statut:'trouvé',nom:'Nicolas Grivel',titre:'Directeur Général',linkedin:'',emailPro:'',
-            anciennete:'DG CNAF (remplace Constance Bensussan). Contact opérationnel helpdesk non identifié publiquement.',
-            signauxAchat:"🚫 NO-GO : Marchés publics obligatoires (BOAMP). Budget helpdesk CNAF réservé aux grands opérateurs nationaux. Volumes exigent 200+ positions. Retirer du pipeline actif.",
-            sourceUrl:'https://www.caf.fr/partenaires/cnaf/notre-organisation'}},
-        {ids:['l167'],
-         d:{statut:'trouvé',nom:'Thibault Romatet',titre:'DGA Stratégie, Innovation et Expérience Usagers',linkedin:'',emailPro:'',
-            anciennete:'DGA France Travail — périmètre expérience usagers (contact plus pertinent que DG pour un BPO)',
-            signauxAchat:"🚫 NO-GO : Appels d'offres UGAP/BOAMP obligatoires. 55 000 agents France Travail, volumes exigent 200+ positions BPO. Hors capacité Salverys (10 agents). Retirer du pipeline actif.",
-            sourceUrl:'https://www.francetravail.fr/nous-connaitre/qui-sommes-nous/gouvernance/'}},
-        {ids:['l168'],
-         d:{statut:'trouvé',nom:'Julie Aubertie',titre:'Directrice des Usagers',linkedin:'',emailPro:'',
-            anciennete:'Directrice des Usagers URSSAF Caisse Nationale (contact le plus pertinent côté relation client)',
-            signauxAchat:"🚫 NO-GO : Marchés publics obligatoires. Helpdesk URSSAF passé en appels d'offres BOAMP, volumes nécessitent 100+ agents. Hors capacité Salverys. Retirer du pipeline actif.",
-            sourceUrl:'https://www.urssaf.org/portail/home/nous-connaitre/nos-engagements/notre-organisation.html'}},
-    ];
-    _fix6.forEach(function(e){
-        if(!e.d||!e.d.nom)return;
-        e.ids.forEach(function(id){
-            var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-            l.decideur=JSON.parse(JSON.stringify(e.d));changed=true;
-            if(e.d2){
-                if(!l.decideur2)l.decideur2={};
-                l.decideur2=JSON.parse(JSON.stringify(e.d2));
-            }
-        });
-    });
-    // ── Annuaires / ordres — marquer N/A (sources prospection, non leads) ──
-    ['l142','l143','l144','l145','l146','l147','l148','l149','l150'].forEach(function(id){
-        var l=d.leads.find(function(x){return x.id===id;});if(!l)return;
-        if(!l.decideur)l.decideur={};
-        if(l.decideur.statut!=='N/A'){
-            l.decideur={statut:'N/A',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',
-                signauxAchat:'Source de prospection (annuaire/ordre professionnel) — ne pas prospecter directement. Utiliser comme source de leads cabinets.',sourceUrl:''};
-            changed=true;
-        }
-    });
+    // ── Archivage 2026-10-30 : offre médicale abandonnée + segment Bailleurs archivé ──
+    // Les leads concernés quittent la base active ; ils sont conservés (pas supprimés)
+    // dans localStorage sous la clé salverys_archive_2026_10_v1.
+    var _isArch = function(l){ return l.niche==='telemed' || l.niche==='telesec-mb' || /^l1(5[1-9]|6\d|7\d|80)$/.test(l.id); };
+    var _arch = d.leads.filter(_isArch);
+    if (_arch.length) {
+        var _prev = JSON.parse(localStorage.getItem('salverys_archive_2026_10_v1') || '[]');
+        localStorage.setItem('salverys_archive_2026_10_v1', JSON.stringify(_prev.concat(_arch)));
+        d.leads = d.leads.filter(function(l){ return !_isArch(l); });
+        changed = true;
+    }
     if(changed)save(d);
     localStorage.setItem('salverys_dec_v','6');
 })();
@@ -2345,12 +1345,6 @@ function saveLead(e) {
         notes:       document.getElementById('f-notes').value,
         operateur:   (document.getElementById('f-operateur')?.value || '').trim(),
         multisite:   existing.multisite || false,
-        praticiens:  existing.praticiens || null,
-        specialiteFlux: existing.specialiteFlux || false,
-        desertMedical: existing.desertMedical || false,
-        accessibiliteNegative: existing.accessibiliteNegative || false,
-        doctolibSansRDV: existing.doctolibSansRDV || false,
-        secretariatInterneLimite: existing.secretariatInterneLimite || false,
         decideur:  existing.decideur  || {statut:'',nom:'',titre:'',linkedin:'',emailPro:'',anciennete:'',signauxAchat:'',sourceUrl:''},
         decideur2: existing.decideur2 || {statut:'',nom:'',titre:'',linkedin:'',emailPro:'',sourceUrl:''}
     };
@@ -2642,26 +1636,6 @@ const CALL_STEPS = [
 ];
 
 const CALL_SCRIPTS = {
-    'telemed': {
-        opening: {
-            script: `Bonjour, <strong>{prenom}</strong> ? Je m'appelle Valérien, je suis directeur chez Salverys, on travaille avec des cabinets médicaux comme le vôtre sur la gestion des appels patients.\n\n<strong>Vous avez 2 minutes ?</strong> Je vous appelle parce qu'on aide les cabinets à ne plus rater d'appels pendant les consultations — je voulais vous demander : ça vous parle, ou c'est déjà résolu chez vous ?`,
-            tip: `Ne dis JAMAIS "je sais que vous êtes occupé". Affirme la valeur en 1 phrase, puis demande la permission de continuer.`,
-            danger: `Ne pitche pas. La 1re phrase doit être courte et ouvrir une question.`
-        },
-        qualif: {
-            script: `Concrètement chez {structure} :\n\n• Combien d'appels patients par jour environ ?\n• Sur ces appels, combien finissent en répondeur ou sans réponse pendant les consultations ?\n• Vous utilisez Doctolib, Maiia, Médistory… ?\n• La secrétaire qui gère les appels aujourd'hui, c'est en interne, en libéral, ou personne ?`,
-            tip: `Pose UNE question à la fois. Note les réponses. Reformule avant de continuer : "Si je comprends bien, vous perdez environ X appels par jour, c'est ça ?"`
-        },
-        pitch: {
-            script: `Ce qu'on propose c'est simple : <strong>une télésecrétaire médicale francophone dédiée à {structure}</strong>, formée à votre logiciel, qui prend vos appels de 8h à 20h, sans congés, sans arrêt maladie.\n\nLa différence avec une secrétaire classique : on est à Madagascar, donc le tarif est environ 40 % inférieur à un prestataire en France — sans perte de qualité, le français est langue maternelle ici.\n\nForfait à partir de 350€/mois, <strong>1er mois à -50 %</strong> pour qu'on prouve la valeur avant que vous vous engagiez. Et une fois en régime, on s'engage sur le décroché : sous 90 % d'appels pris sur un mois, vous avez 20 % d'avoir le mois suivant.`,
-            tip: `Termine TOUJOURS par une question fermée : "Est-ce que cet ordre de grandeur vous semble cohérent par rapport à ce que vous payez aujourd'hui ?"`
-        },
-        objection: 'OBJECTIONS_TELEMED',
-        closing: {
-            script: `Très bien {prenom}. Je vous propose qu'on fasse les choses dans l'ordre :\n\n<strong>Étape 1</strong> — je vous envoie aujourd'hui un mémo de 2 pages : ce qu'on fait exactement, prix, conditions, contrat type.\n\n<strong>Étape 2</strong> — on se reparle <strong>jeudi à 14h ou vendredi à 11h</strong> pour décider de lancer l'offre 1er mois à -50 %. Lequel des deux vous arrange ?`,
-            tip: `Donne TOUJOURS deux options fermées de RDV. Jamais "quand êtes-vous dispo ?" → c'est une porte de sortie.`
-        }
-    },
     'support-n1': {
         opening: {
             script: `Bonjour {prenom}, Valérien de Salverys. Je m'occupe d'équipes support N1 pour des éditeurs SaaS français — on est basés à Madagascar mais l'équipe est francophone native.\n\n<strong>Vous avez 2 minutes ?</strong> Je vous appelle parce que je vois que {structure} grandit côté produit — et c'est en général là que la file d'attente sur le N1 explose. C'est encore gérable chez vous, ou ça commence à tirer ?`,
@@ -2701,49 +1675,6 @@ const CALL_SCRIPTS = {
         }
     }
 };
-
-const OBJECTIONS_TELEMED = [
-    {
-        q: "On a déjà une secrétaire physique au cabinet.",
-        a: "<strong>Parfait, ce n'est pas l'un ou l'autre.</strong> La plupart de nos cabinets gardent leur secrétaire physique et nous délèguent uniquement les pics d'appels et les heures creuses où elle est en consultation avec vous. Combien d'appels votre secrétaire ne peut pas prendre aujourd'hui pendant les rendez-vous ?",
-        branches: [
-            { resp: "Si \"presque aucun\" →", act: "\"OK très bien. Et le midi entre 12h et 14h ?\" — creuse pour trouver un trou." },
-            { resp: "Si \"pas mal en fait\" →", act: "\"C'est exactement notre cas d'usage. On prend le relais uniquement sur ces moments-là, avec un forfait mensuel calé sur votre volume.\"" }
-        ]
-    },
-    {
-        q: "Vous êtes à Madagascar, l'accent ça va poser problème aux patients âgés.",
-        a: "<strong>C'est la question qu'on entend le plus.</strong> Le français est ma langue maternelle, comme pour toutes nos télésecrétaires. <strong>Je vous propose le 1er mois à -50 %</strong> : vos patients sont accueillis pour de vrai, vous jugez sur vos propres appels, et vous me dites. Si un seul patient se plaint de l'accent, on arrête, sans engagement.",
-        branches: [
-            { resp: "Si \"OK pour tester\" →", act: "Passe au closing → fixe RDV pour démarrer le pilote." },
-            { resp: "Si \"même comme ça non\" →", act: "\"Je comprends. Acceptez juste un appel téléphonique avec une de nos secrétaires pour vous faire votre opinion. 5 minutes.\"" }
-        ]
-    },
-    {
-        q: "C'est trop cher pour un cabinet de notre taille.",
-        a: "<strong>Vous payez aujourd'hui combien pour gérer vos appels — y compris le coût des rendez-vous manqués ?</strong> Un patient qui ne peut pas vous joindre, en moyenne, c'est 30€ de consultation perdue. Si on évite 15 appels manqués par mois, on est déjà à 450€. Notre forfait commence à 350€.",
-        branches: [
-            { resp: "Si silence ou \"je n'ai jamais calculé\" →", act: "\"Je vous propose de regarder ça ensemble. Sur le mois pilote à -50 %, on chiffre exactement.\"" },
-            { resp: "Si \"pas tant de manqués que ça\" →", act: "\"Alors le plus petit forfait suffit largement — et le 1er mois à -50 % vous le confirme sans engagement.\"" }
-        ]
-    },
-    {
-        q: "Envoyez-moi un email, je regarderai.",
-        a: "<strong>Bien sûr je l'envoie aujourd'hui.</strong> Pour qu'il vous soit utile : je vous le fais sur-mesure pour votre cas, mais j'ai besoin de 5 minutes maintenant pour comprendre votre volume. Sinon je vais vous envoyer un truc générique que vous allez supprimer en 30 secondes. <strong>5 minutes là, ça marche ?</strong>",
-        branches: [
-            { resp: "Si OK →", act: "Repasse en qualif rapide → 3 questions max → puis closing." },
-            { resp: "Si toujours \"envoyez quand même\" →", act: "\"OK je vous envoie. Je vous rappelle vendredi à 11h pour en discuter ?\" — bloque le RDV maintenant." }
-        ]
-    },
-    {
-        q: "Ce n'est pas moi qui décide, c'est mon associé.",
-        a: "<strong>Très bien, c'est important qu'il soit dans la boucle.</strong> Du coup je vous propose qu'on fixe directement une visio à 3 — vous, lui et moi — 20 minutes maximum. Plutôt jeudi ou vendredi cette semaine ?",
-        branches: [
-            { resp: "Si OK →", act: "Pose immédiatement les 2 créneaux." },
-            { resp: "Si \"je vais lui en parler d'abord\" →", act: "\"OK je vous laisse mes coordonnées. Je vous relance lundi à 10h, ça vous va ?\"" }
-        ]
-    }
-];
 
 const OBJECTIONS_SUPPORT = [
     {
@@ -2832,12 +1763,11 @@ const OBJECTIONS_HELPDESK = [
 ];
 
 const OBJECTIONS_MAP = {
-    'OBJECTIONS_TELEMED': OBJECTIONS_TELEMED,
     'OBJECTIONS_SUPPORT': OBJECTIONS_SUPPORT,
     'OBJECTIONS_HELPDESK': OBJECTIONS_HELPDESK
 };
 
-let _callNiche = 'telemed';
+let _callNiche = 'helpdesk-n1';
 let _callStep = 'opening';
 let _trainMode = false;
 
