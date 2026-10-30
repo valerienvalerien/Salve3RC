@@ -6,18 +6,21 @@
 
 ---
 
-## 1. Espaces partenaires (3 pages chiffrées) — prix MB protégés
+## 1. Espaces partenaires (2 pages chiffrées) — prix MB protégés
 
 ### Architecture
-`espace-client.html` est une simple **page d'aiguillage** (aucun prix) vers 3 espaces
-chiffrés, **un par niche, chacun avec son propre mot de passe** — un télésecrétariat ne
-voit jamais la rate card IT, et inversement :
+`espace-client.html` est une simple **page d'aiguillage** (aucun prix) vers 2 espaces
+chiffrés, **un par offre, chacun avec son propre mot de passe** — un partenaire helpdesk
+ne voit jamais la rate card support applicatif, et inversement :
 
 | Espace | Page | Source en clair | Contenu (PRICING.md) |
 |---|---|---|---|
-| Télésecrétariat médical | `espace-client-medical.html` | `tools/espace-contenu-medical.html` | grille à l'appel par créneau (§1.b) |
-| Support N1 SaaS | `espace-client-support.html` | `tools/espace-contenu-support.html` | rate card 1 700/1 500/1 350 (§3) |
 | Helpdesk IT N1 | `espace-client-helpdesk.html` | `tools/espace-contenu-helpdesk.html` | rate card 2 000/1 750/1 550 (§3) |
+| Support applicatif N1 | `espace-client-support.html` | `tools/espace-contenu-support.html` | rate card 1 700/1 500/1 350 (§3) |
+
+> L'espace **télésecrétariat médical** (`espace-client-medical.html` + sa source) a été
+> retiré du site et archivé le 2026-10-30 dans `99-Archives-Medical/site/` (offre
+> abandonnée). L'ancienne URL redirige vers `espace-client.html` (`netlify.toml`).
 
 ### Comment ça marche
 Le contenu est **chiffré AES-256-GCM** dans chaque page, clé dérivée du mot de passe par
@@ -34,10 +37,10 @@ ouverte le temps de l'onglet (sessionStorage, clé distincte par espace). Bouton
 
 ### Rotation d'un mot de passe (à chaque départ de partenaire, ou trimestriellement)
 ```bash
-node tools/espace-client-build.mjs medical "Nouveau-Mot-De-Passe-Fort" --verify
-git add espace-client-medical.html && git commit -m "Rotation accès espace médical" && git push
+node tools/espace-client-build.mjs helpdesk "Nouveau-Mot-De-Passe-Fort" --verify
+git add espace-client-helpdesk.html && git commit -m "Rotation accès espace helpdesk" && git push
 ```
-(Idem avec `support` ou `helpdesk` — chaque espace tourne indépendamment.)
+(Idem avec `support` — chaque espace tourne indépendamment.)
 
 ### Mettre à jour les prix / le contenu
 1. Modifier `tools/espace-contenu-<espace>.html` (et d'abord `PRICING.md`, qui fait foi).
@@ -86,7 +89,7 @@ git add espace-client-medical.html && git commit -m "Rotation accès espace méd
 ## 3. Déploiement Netlify
 
 - `netlify.toml` : build = `bash tools/build-site.sh`, publish = `_site/`.
-- Pages servies : index, 3 simulateurs, espace-client, espace-candidat,
+- Pages servies : index, 2 simulateurs (helpdesk IT, support applicatif), espace-client, espace-candidat,
   suivi-candidature + `assets/`. **Tout le reste est exclu** (le script échoue si un .md
   ou `tools/` se retrouve dans `_site/`).
 - En-têtes : `espace-client.html` servi en `noindex` + `Cache-Control: no-store`.
@@ -96,6 +99,6 @@ git add espace-client-medical.html && git commit -m "Rotation accès espace méd
 1. ☐ Brancher le dépôt sur Netlify (build auto via `netlify.toml`).
 2. ☐ **Passer le dépôt GitHub en privé.**
 3. ☐ Activer la notification email Netlify Forms → contact@salverys.fr.
-4. ☐ Tester les 3 espaces partenaires en HTTPS, chacun avec son mot de passe.
+4. ☐ Tester les 2 espaces partenaires en HTTPS, chacun avec son mot de passe.
 5. ☐ Faire un dépôt de candidature test + vérifier la réception + le suivi.
 6. ☐ Retirer `SLV-DEMO1` de `assets/candidatures-statuts.json`.

@@ -10,3 +10,15 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
     Cache-Control = "no-store"
+
+# Offre médicale abandonnée (2026-10-30) : pages retirées du site, archivées dans
+# 99-Archives-Medical/. Les anciennes URL renvoient vers les pages actives.
+[[redirects]]
+  from = "/simulateur-salverys.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/espace-client-medical.html"
+  to = "/espace-client.html"
+  status = 301

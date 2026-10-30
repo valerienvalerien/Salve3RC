@@ -7,13 +7,11 @@ cd "$(dirname "$0")/.."
 
 PUBLIC_PAGES=(
   index.html
-  simulateur-salverys.html
-  simulateur-informatique.html
   simulateur-helpdesk-it.html
+  simulateur-informatique.html
   espace-client.html
-  espace-client-medical.html
-  espace-client-support.html
   espace-client-helpdesk.html
+  espace-client-support.html
   espace-candidat.html
   suivi-candidature.html
 )

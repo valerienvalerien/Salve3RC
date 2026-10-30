@@ -5,9 +5,10 @@
  * et injecte le payload dans tools/espace-client-template.html.
  *
  * Usage :
- *   node tools/espace-client-build.mjs medical  "mot-de-passe"           # génère
- *   node tools/espace-client-build.mjs support  "mot-de-passe" --verify  # génère + vérifie
- *   node tools/espace-client-build.mjs helpdesk "mot-de-passe" --verify
+ *   node tools/espace-client-build.mjs helpdesk "mot-de-passe" --verify  # génère + vérifie
+ *   node tools/espace-client-build.mjs support  "mot-de-passe" --verify
+ *
+ * (L'espace « medical » a été archivé le 2026-10-30 : 99-Archives-Medical/site/.)
  *
  * Chaque espace a son propre mot de passe. Aucun mot de passe n'est écrit sur
  * disque. Rotation : relancer avec le nouveau mot de passe et recommitter la
@@ -22,30 +23,24 @@ const ITER = 310000;
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const SPACES = {
-  medical: {
-    contenu: 'tools/espace-contenu-medical.html',
-    out: 'espace-client-medical.html',
-    titre: 'Espace partenaire — Télésecrétariat médical',
-    probes: ['0,90', '1,20'], // prix MB §1.b qui doivent être dans le contenu déchiffré
-  },
-  support: {
-    contenu: 'tools/espace-contenu-support.html',
-    out: 'espace-client-support.html',
-    titre: 'Espace partenaire — Support N1 SaaS',
-    probes: ['1 700', '1 350'], // rate card MB §3
-  },
   helpdesk: {
     contenu: 'tools/espace-contenu-helpdesk.html',
     out: 'espace-client-helpdesk.html',
     titre: 'Espace partenaire — Helpdesk IT N1',
     probes: ['2 000', '1 550'], // rate card MB §3
   },
+  support: {
+    contenu: 'tools/espace-contenu-support.html',
+    out: 'espace-client-support.html',
+    titre: 'Espace partenaire — Support applicatif N1',
+    probes: ['1 700', '1 350'], // rate card MB §3
+  },
 };
 
 const [, , spaceName, password] = process.argv;
 const space = SPACES[spaceName];
 if (!space || !password || password.length < 12) {
-  console.error('Usage : node tools/espace-client-build.mjs <medical|support|helpdesk> "mot-de-passe (12+ caractères)" [--verify]');
+  console.error('Usage : node tools/espace-client-build.mjs <helpdesk|support> "mot-de-passe (12+ caractères)" [--verify]');
   process.exit(1);
 }
 
